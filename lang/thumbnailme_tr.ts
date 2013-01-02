@@ -1,0 +1,1246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="tr_TR">
+<context>
+    <name>About</name>
+    <message>
+        <location filename="../About.cpp" line="117"/>
+        <source>About</source>
+        <translation type="unfinished">Hakkında</translation>
+    </message>
+</context>
+<context>
+    <name>CopyableLineEdit</name>
+    <message>
+        <location filename="../copyablelineedit.ui" line="84"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished">Panoya Kopyala</translation>
+    </message>
+</context>
+<context>
+    <name>DockConf</name>
+    <message>
+        <location filename="../DockConf.cpp" line="361"/>
+        <location filename="../DockConf.cpp" line="362"/>
+        <source>Configuration</source>
+        <translation type="unfinished">Yapılandırma</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="363"/>
+        <source>Output Format</source>
+        <translation type="unfinished">Kayıt Formatı</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="364"/>
+        <source>Columns</source>
+        <translation type="unfinished">Sütunlar</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="365"/>
+        <source>Rows</source>
+        <translation type="unfinished">Satırlar</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="366"/>
+        <source>Width</source>
+        <translation type="unfinished">Genişlik</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="367"/>
+        <source>Gap</source>
+        <translation type="unfinished">Aralık</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="368"/>
+        <source>Quality</source>
+        <translation type="unfinished">Kalite</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="369"/>
+        <source>Blank skip</source>
+        <translation type="unfinished">Boşluk Atlama</translation>
+    </message>
+    <message>
+        <location filename="../DockConf.cpp" line="370"/>
+        <source>Edge detection</source>
+        <translation type="unfinished">Kenar Algılama</translation>
+    </message>
+</context>
+<context>
+    <name>DockInputOutput</name>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="57"/>
+        <location filename="../DockInputOutput.cpp" line="453"/>
+        <source>Path Output</source>
+        <translation type="unfinished">Kayıt Dizini</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="73"/>
+        <source>Same folder output as source</source>
+        <translation type="unfinished">Medya Dizinine Kaydet</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="277"/>
+        <source>You must select a file to remove it from the list</source>
+        <translation type="unfinished">Listeden Kaldırmak için Bir Dosya Seçmelisiniz</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="404"/>
+        <source>Media list is already empty</source>
+        <translation type="unfinished">Medya Listesi Zaten Boş</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="448"/>
+        <source>Input and Output</source>
+        <translation type="unfinished">Medya Seçimi ve Kayıt Dizini</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="449"/>
+        <source>Load</source>
+        <translation type="unfinished">Yükle</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="450"/>
+        <source>Reset</source>
+        <translation type="unfinished">Sıfırla</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="451"/>
+        <source>Start Batch</source>
+        <translation type="unfinished">Başlat</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="452"/>
+        <source>Delete Selection</source>
+        <translation type="unfinished">Seçileni Sil</translation>
+    </message>
+    <message>
+        <location filename="../DockInputOutput.cpp" line="454"/>
+        <source>Preview selection file</source>
+        <translation type="unfinished">Kaydetmeden Önizle</translation>
+    </message>
+</context>
+<context>
+    <name>DockStyles</name>
+    <message>
+        <location filename="../DockStyles.cpp" line="527"/>
+        <location filename="../DockStyles.cpp" line="528"/>
+        <source>Styles</source>
+        <translation type="unfinished">Stiller</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="529"/>
+        <source>Generated by Thumbnail me</source>
+        <translation type="unfinished">Thumbnail me Tarafından Üretilmiştir</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="530"/>
+        <source>Info Text</source>
+        <translation type="unfinished">Bilgi Metni</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="531"/>
+        <source>Timestamp</source>
+        <translation type="unfinished">Süre Damgası</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="535"/>
+        <location filename="../DockStyles.cpp" line="536"/>
+        <source>Building Font Cache...</source>
+        <translation type="unfinished">Yazı Tipi Önbelleği Oluşturma</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="539"/>
+        <source>Lower Left</source>
+        <translation type="unfinished">Sol Altta</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="539"/>
+        <source>Lower Right</source>
+        <translation type="unfinished">Sağ Altta</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="539"/>
+        <source>Upper Right</source>
+        <translation type="unfinished">Sağ Üstte</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="539"/>
+        <source>Upper Left</source>
+        <translation type="unfinished">Sol Üstte</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="532"/>
+        <source>Additional Title</source>
+        <translation type="unfinished">Ek Başlık</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="533"/>
+        <source>Background Color</source>
+        <translation type="unfinished">Arkaplan Rengi</translation>
+    </message>
+    <message>
+        <location filename="../DockStyles.cpp" line="534"/>
+        <source>Shadow Color</source>
+        <translation type="unfinished">Gölge Rengi</translation>
+    </message>
+</context>
+<context>
+    <name>DockTimeLine</name>
+    <message>
+        <location filename="../DockTimeLine.cpp" line="78"/>
+        <location filename="../DockTimeLine.cpp" line="156"/>
+        <location filename="../DockTimeLine.cpp" line="157"/>
+        <source>TimeLine</source>
+        <translation type="unfinished">Süre Çizgisi</translation>
+    </message>
+    <message>
+        <location filename="../DockTimeLine.cpp" line="106"/>
+        <location filename="../DockTimeLine.cpp" line="158"/>
+        <source>From</source>
+        <translation type="unfinished">Başlangıç</translation>
+    </message>
+    <message>
+        <location filename="../DockTimeLine.cpp" line="110"/>
+        <location filename="../DockTimeLine.cpp" line="159"/>
+        <source>To</source>
+        <translation type="unfinished">Bitiş</translation>
+    </message>
+    <message>
+        <location filename="../DockTimeLine.cpp" line="80"/>
+        <location filename="../DockTimeLine.cpp" line="160"/>
+        <source>Total duration</source>
+        <translation type="unfinished">Toplam Süre</translation>
+    </message>
+    <message>
+        <location filename="../DockTimeLine.cpp" line="94"/>
+        <source>TimeLine (Not available) | Media isn&apos;t fully supported</source>
+        <translation type="unfinished">Süre Çizgisi (Kullanıamaz) | Medya Tam Olarak Desteklenmiyor</translation>
+    </message>
+</context>
+<context>
+    <name>FenPrincipale</name>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="541"/>
+        <source>File</source>
+        <translation type="unfinished">Dosya</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="542"/>
+        <source>Edition</source>
+        <translation>Edition</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="543"/>
+        <source>View</source>
+        <translation type="unfinished">Görünüm</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="544"/>
+        <source>Predefined Configuration</source>
+        <translation type="unfinished">Öntanımlı Yapılandırma</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="545"/>
+        <location filename="../FenPrincipale.cpp" line="561"/>
+        <source>About</source>
+        <translation type="unfinished">Hakkında</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="549"/>
+        <source>Import a configuration file</source>
+        <translation type="unfinished">Yapılandırma Dosyası Aç</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="550"/>
+        <source>Import a recent configuration file</source>
+        <translation type="unfinished">En Son Kullanılan Yapılandırma Dsoyasını Aç</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="551"/>
+        <source>Save my current configuration</source>
+        <translation type="unfinished">Şimdiki Yapılandırmamı Kaydet</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="552"/>
+        <source>Save my current configuration as</source>
+        <translation type="unfinished">Şimdiki Yapılandırmamı Farklı Kaydet</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="553"/>
+        <source>Print</source>
+        <translation type="unfinished">Yazdır</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="554"/>
+        <source>Exit</source>
+        <translation type="unfinished">Çıkış</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="555"/>
+        <source>Settings</source>
+        <translation type="unfinished">Ayarlar</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="556"/>
+        <source>Zoom in</source>
+        <translation type="unfinished">Yakınlaştır</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="557"/>
+        <source>Zoom out</source>
+        <translation type="unfinished">Uzaklaştır</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="558"/>
+        <source>Clear all</source>
+        <translation type="unfinished">Tümünü Temizle</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="559"/>
+        <source>Fullscreen</source>
+        <translation type="unfinished">Tam Ekran</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="560"/>
+        <source>Help</source>
+        <translation type="unfinished">Yardım</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="562"/>
+        <source>About QT</source>
+        <translation type="unfinished">QT Hakkında</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="563"/>
+        <source>Donate</source>
+        <translation type="unfinished">Bağış Yap</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="564"/>
+        <source>Website</source>
+        <translation type="unfinished">İnternet Sitesi</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="475"/>
+        <source>contains no truetype fonts files. Please choose another fonts folder in Settings Menu.</source>
+        <translation type="unfinished">True Type Dosyası Bulunamadı. Lütfen Ayarlar Menüsünden Farklı Bir Klasör Seçiniz</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="539"/>
+        <source>Toolbar</source>
+        <translation type="unfinished">Araç Çubuğu</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="548"/>
+        <source>Open</source>
+        <translation type="unfinished">Aç</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="567"/>
+        <source>Configuration</source>
+        <translation type="unfinished">Yapılandırma</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="282"/>
+        <source>Last configuration file cannot be opened. The configuration layout will be reset.</source>
+        <translation type="unfinished">Son Yapılandırma Dosyası Açılamıyor.Yapılandırma Dosyası Sıfırlanacaktır</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="377"/>
+        <source>Would you like save current configuration before exit Thumbnail me?</source>
+        <translation type="unfinished">Thumbnail me Programından Çıkmadan Önce Geçerli Yapılandırmanızı Kaydetmek İster Misiniz ?</translation>
+    </message>
+    <message>
+        <location filename="../FenPrincipale.cpp" line="381"/>
+        <source>saved successfully</source>
+        <translation type="unfinished">Başarıyla Kaydedildi</translation>
+    </message>
+</context>
+<context>
+    <name>FontMapComboBox</name>
+    <message>
+        <location filename="../FontMapComboBox.cpp" line="132"/>
+        <source>No fonts defined</source>
+        <translation type="unfinished">Tanımlanmış Yazı Tipi Bulunamadı</translation>
+    </message>
+</context>
+<context>
+    <name>FontsSettingsTab</name>
+    <message>
+        <location filename="../FontsSettingsTab.cpp" line="182"/>
+        <source>Add</source>
+        <translation type="unfinished">Ekle</translation>
+    </message>
+    <message>
+        <location filename="../FontsSettingsTab.cpp" line="183"/>
+        <source>Remove</source>
+        <translation type="unfinished">Kaldır</translation>
+    </message>
+    <message>
+        <location filename="../FontsSettingsTab.cpp" line="84"/>
+        <source>No fonts found in this folder</source>
+        <translation type="unfinished">Bu Klasörde Yazı Tipi Bulunamadı</translation>
+    </message>
+    <message>
+        <location filename="../FontsSettingsTab.cpp" line="78"/>
+        <source>Select a font folder</source>
+        <translation type="unfinished">Yazı Tipi Klasörü Seç</translation>
+    </message>
+    <message>
+        <location filename="../FontsSettingsTab.cpp" line="93"/>
+        <source>You must select a path to remove it from the list</source>
+        <translation type="unfinished">Listeden Kaldırılması için Dizin Seçmelisiniz</translation>
+    </message>
+</context>
+<context>
+    <name>GeneralSettingsTab</name>
+    <message>
+        <location filename="../GeneralSettingsTab.cpp" line="239"/>
+        <source>Never ask me to save my configuration on exit</source>
+        <translation type="unfinished">Çıkarken Yapılandırma Kaydedilsinmi Diye Sorma</translation>
+    </message>
+    <message>
+        <location filename="../GeneralSettingsTab.cpp" line="240"/>
+        <source>Don&apos;t load the last configuration on startup</source>
+        <translation type="unfinished">Açılışta Son Yapılandırmayı Yüklemeyi Sorma</translation>
+    </message>
+    <message>
+        <location filename="../GeneralSettingsTab.cpp" line="241"/>
+        <source>Background color of preview window</source>
+        <translation type="unfinished">Önizleme Penceresi Arkaplan Rengi</translation>
+    </message>
+    <message>
+        <location filename="../GeneralSettingsTab.cpp" line="242"/>
+        <source>Output suffix:</source>
+        <translation type="unfinished">Kayıt Soneki :</translation>
+    </message>
+    <message>
+        <location filename="../GeneralSettingsTab.cpp" line="49"/>
+        <location filename="../GeneralSettingsTab.cpp" line="243"/>
+        <source>Activate openGL to preview thumbnails</source>
+        <translation type="unfinished">Küçük Resimlerin Önizlemesi için OpenGL&apos;yi Etkinleştir</translation>
+    </message>
+    <message>
+        <location filename="../GeneralSettingsTab.cpp" line="52"/>
+        <location filename="../GeneralSettingsTab.cpp" line="244"/>
+        <source>Animate pixmap while rendering</source>
+        <translation type="unfinished">Sunarken Pixmap ile Canlandır</translation>
+    </message>
+    <message>
+        <location filename="../GeneralSettingsTab.cpp" line="238"/>
+        <source>General Settings</source>
+        <translation type="unfinished">Genel Ayarlar</translation>
+    </message>
+</context>
+<context>
+    <name>HelpWidget</name>
+    <message>
+        <location filename="../HelpWidget.cpp" line="110"/>
+        <source>Help</source>
+        <translation type="unfinished">Yardım</translation>
+    </message>
+</context>
+<context>
+    <name>ImageShackLoginWidget</name>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="341"/>
+        <source>Password</source>
+        <translation type="unfinished">Şifreniz</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="342"/>
+        <source>Remember Password</source>
+        <translation type="unfinished">Şifremi Unuttum</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="55"/>
+        <location filename="../ImageShackLoginWidget.cpp" line="344"/>
+        <source>Login</source>
+        <translation type="unfinished">Giriş Yap</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="87"/>
+        <location filename="../ImageShackLoginWidget.cpp" line="345"/>
+        <source>Login in progress...</source>
+        <translation type="unfinished">Giriş Yapılıyor ....</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="89"/>
+        <location filename="../ImageShackLoginWidget.cpp" line="347"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Vazcay</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="102"/>
+        <location filename="../ImageShackLoginWidget.cpp" line="346"/>
+        <source>Logout</source>
+        <translation type="unfinished">Çıkış Yap</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="224"/>
+        <source>Authentication failed. Check your username and password.</source>
+        <translation type="unfinished">Kimlik Doğrulama Başarısız Oldu. Kullanıcı Adınızı ve Şifrenizi Kontrol Ediniz</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="252"/>
+        <source>Login as</source>
+        <translation type="unfinished">Giriş Yapılan Kullanıcı :</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="340"/>
+        <source>Username/E-mail</source>
+        <translation type="unfinished">Kullanıcı Adı/E-Posta</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackLoginWidget.cpp" line="343"/>
+        <source>Autologin</source>
+        <translation type="unfinished">Otomatik Giriş</translation>
+    </message>
+</context>
+<context>
+    <name>ImageShackResultWidget</name>
+    <message>
+        <location filename="../ImageShackResultWidget.ui" line="20"/>
+        <source>Uploaded files</source>
+        <translation type="unfinished">Yüklenen Dosyalarınız</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.ui" line="109"/>
+        <source>File 1 of 1</source>
+        <translation type="unfinished">1 Dosyanın 1&apos;i Yüklendi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.ui" line="334"/>
+        <source>Close</source>
+        <translation type="unfinished">Kapat</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="179"/>
+        <source>Direct link</source>
+        <translation type="unfinished">Doğrudan Bağlantı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="180"/>
+        <source>Short link</source>
+        <translation type="unfinished">Kısa Bağlantı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="181"/>
+        <source>Hotlink for web</source>
+        <translation type="unfinished">Web için Hotlink</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="182"/>
+        <source>Thumbnail for web</source>
+        <translation type="unfinished">Web için Küçük Resim</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="183"/>
+        <source>Thumbnail for forums 1</source>
+        <translation type="unfinished">Forum için Küçük Resim 1</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="184"/>
+        <source>Thumbnail for forums 2</source>
+        <translation type="unfinished">Forum için Küçük Resim 2</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="185"/>
+        <source>Hotlink for forums 1</source>
+        <translation type="unfinished">Forum için Hotlink 1</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="186"/>
+        <source>Hotlink for forums 2</source>
+        <translation type="unfinished">Forum için Hotlink 2</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackResultWidget.cpp" line="101"/>
+        <source>File %1 of %2</source>
+        <translation type="unfinished">%1 Dosyanın %2 Tanesi Yüklendi</translation>
+    </message>
+</context>
+<context>
+    <name>ImageShackUploadWidget</name>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="30"/>
+        <source>Log in to use this features</source>
+        <translation type="unfinished">Bu Özellikleri Kullanmak için Giriş Yapın</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="136"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Upload mode: &lt;/span&gt;&lt;span style=&quot; font-size:8pt; color:#ff0000;&quot;&gt;anonymous&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Yükleme Modu: &lt;/span&gt;&lt;span style=&quot; font-size:8pt; color:#ff0000;&quot;&gt;Anonim&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="215"/>
+        <location filename="../ImageShackUploadWidget.cpp" line="247"/>
+        <source>File loaded: %1</source>
+        <translation type="unfinished">%1 Dosya Yüklendi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="299"/>
+        <source>&lt;b&gt;Image resize:&lt;/b&gt;</source>
+        <translation type="unfinished">&lt;b&gt;Resmi Yeniden Boyutlandır :&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="310"/>
+        <source>Do not resize</source>
+        <translation type="unfinished">Yeniden Boyutlandırma</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="315"/>
+        <source>100x100 (avatar)</source>
+        <translation type="unfinished">100 x 100 (Avatar)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="320"/>
+        <source>150x150 (thumbnail)</source>
+        <translation type="unfinished">150 x 150 (Küçük Resim)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="325"/>
+        <source>320x320 (for websites and email)</source>
+        <translation type="unfinished">320 x 320 (Web Site ve E-Posta için)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="330"/>
+        <source>640x640 (for message boards)</source>
+        <translation type="unfinished">640 x 640 (Mesaj Panoları için)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="335"/>
+        <source>800x800 (12-inch monitor)</source>
+        <translation type="unfinished">800 x 800 (12 İnç Monitör için)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="340"/>
+        <source>1024x1024 (15-inch monitor)</source>
+        <translation type="unfinished">1024 x 1024 (15 İnç Monitör için)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="345"/>
+        <source>1280x1280 (19-inch monitor)</source>
+        <translation type="unfinished">1280 x 1280 (19 İnç Monitör için)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="350"/>
+        <source>1600x1600 (21-inch monitor)</source>
+        <translation type="unfinished">1600 x 1600 (21 İnç Monitör için)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="361"/>
+        <source>&lt;b&gt;Privacy:&lt;/b&gt;</source>
+        <translation type="unfinished">&lt;b&gt;Gizlilik :&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="371"/>
+        <source>Private</source>
+        <translation type="unfinished">Özel</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="381"/>
+        <source>Public</source>
+        <translation type="unfinished">Herkeze Açık</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="394"/>
+        <source>&lt;b&gt;Tags:&lt;/b&gt;</source>
+        <translation type="unfinished">&lt;b&gt;Etiketler :&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="423"/>
+        <source>Comma separated list</source>
+        <translation type="unfinished">Virgülle Ayırınız</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="459"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Authentication required to set Privacy and Tags on your thumbnail&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://my.imageshack.us/registration&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#0000ff;&quot;&gt;Sign in&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Yüklenen Resimde Gizlilik  ve Etiket Ayarlamak için Giriş Yapmalısınız&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://my.imageshack.us/registration&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#0000ff;&quot;&gt;Giriş Yap&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="552"/>
+        <source>Upload now</source>
+        <translation type="unfinished">Şimdi Yükle</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="640"/>
+        <source>Upload in progress...</source>
+        <translation type="unfinished">Yükleniyor ....</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="647"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Vazcay</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="685"/>
+        <source>File upload progress:</source>
+        <translation type="unfinished">Dosya Yükleme İlerlemesi :</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.ui" line="709"/>
+        <source>Total upload progress:</source>
+        <translation type="unfinished">Toplam Yükleme İlerlemesi :</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="146"/>
+        <source>File(s) loaded: %1</source>
+        <translation type="unfinished">Yüklenen Dosyalar : %1</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="203"/>
+        <location filename="../ImageShackUploadWidget.cpp" line="210"/>
+        <source>Upload mode:</source>
+        <translation type="unfinished">Yükleme Modu :</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="203"/>
+        <source>login</source>
+        <translation type="unfinished">Giriş Yap</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="210"/>
+        <source>anonymous</source>
+        <translation type="unfinished">Anonim</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="212"/>
+        <source>Log in to use these features</source>
+        <translation type="unfinished">Bu Özellikleri Kullanmak için Giriş Yapınız</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="229"/>
+        <location filename="../ImageShackUploadWidget.cpp" line="272"/>
+        <source>Processing file %1 of %2</source>
+        <translation type="unfinished">%1 Dosyanın %2 Tanesi Yüklendi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="359"/>
+        <source>Connection refused</source>
+        <translation type="unfinished">Bağlantı Reddedildi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="360"/>
+        <source>Remote host closed</source>
+        <translation type="unfinished">Uzak Sunucu Kapatıldı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="361"/>
+        <source>Host not found</source>
+        <translation type="unfinished">Sunucu Bulunamadı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="362"/>
+        <source>Timeout</source>
+        <translation type="unfinished">Zaman Aşımı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="363"/>
+        <source>Operation canceled</source>
+        <translation type="unfinished">İşlemden Vazcayıldı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="364"/>
+        <source>SSL handshake failed</source>
+        <translation type="unfinished">SSL Karşılaması Başarısız Oldu</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="365"/>
+        <source>Proxy connection refused</source>
+        <translation type="unfinished">Vekil (Proxy) Bağlantısını Reddedildi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="366"/>
+        <source>Proxy connection closed</source>
+        <translation type="unfinished">Vekil (Proxy) Bağlantısı Kapatıldı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="367"/>
+        <source>Proxy not found</source>
+        <translation type="unfinished">Vekil (Proxy) Bulunamadı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="368"/>
+        <source>Proxy timeout</source>
+        <translation type="unfinished">Vekil (Proxy) Zaman Aşımı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="369"/>
+        <source>Proxy authentication required</source>
+        <translation type="unfinished">Vekil (Proxy) Kimlik Doğrulaması Gerekli</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="370"/>
+        <source>Content access denied</source>
+        <translation type="unfinished">İçeriğe Erişim Engellendi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="371"/>
+        <source>Content operation not permitted</source>
+        <translation type="unfinished">İçerik İşlemeye İzin Verilmedi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="372"/>
+        <source>Content not found</source>
+        <translation type="unfinished">İçerik Bulunamadı</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="373"/>
+        <source>Authentication required</source>
+        <translation type="unfinished">Kimlik Doğrulama Gerekli</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="374"/>
+        <source>Protocol unknown</source>
+        <translation type="unfinished">Protokol Bilinmiyor</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="375"/>
+        <source>Protocol invalid operation</source>
+        <translation type="unfinished">Geçersiz Protokol İşlemi</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="376"/>
+        <source>Unknown network</source>
+        <translation type="unfinished">Bilinmeyen Ağ</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="377"/>
+        <source>Unknown proxy</source>
+        <translation type="unfinished">Biinmeyen Vekil (Proxy)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="378"/>
+        <source>Unknown content</source>
+        <translation type="unfinished">Bilinmeyen İçerik</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="379"/>
+        <source>Protocol failure</source>
+        <translation type="unfinished">Protokol Hatası</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="380"/>
+        <source>Content resend</source>
+        <translation type="unfinished">İçeriği Yeniden Gönder</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="381"/>
+        <source>Temporary network failure</source>
+        <translation type="unfinished">Geçici Ağ Hatası</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="382"/>
+        <source>Unknown error</source>
+        <translation type="unfinished">Bilinmeyen Hata</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="383"/>
+        <source>Failed to open the file</source>
+        <translation type="unfinished">Dosyanın Aılması Başarısız Oldu</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="384"/>
+        <source>Max Size Reached (5 Mb)</source>
+        <translation type="unfinished">En Fazla Boyuta Ulaştınız (5 MB)</translation>
+    </message>
+    <message>
+        <location filename="../ImageShackUploadWidget.cpp" line="391"/>
+        <source>Upload Error:</source>
+        <translation type="unfinished">Yükleme Hatası :</translation>
+    </message>
+</context>
+<context>
+    <name>IniManager</name>
+    <message>
+        <location filename="../IniManager.cpp" line="51"/>
+        <location filename="../IniManager.cpp" line="53"/>
+        <source>Open Configuration File</source>
+        <translation type="unfinished">Yapılandırma Dosyasını Aç</translation>
+    </message>
+    <message>
+        <location filename="../IniManager.cpp" line="51"/>
+        <location filename="../IniManager.cpp" line="53"/>
+        <location filename="../IniManager.cpp" line="199"/>
+        <location filename="../IniManager.cpp" line="201"/>
+        <source>Configuration file(*.ini)</source>
+        <translation type="unfinished">Yapılandırma Dosyası (*.ini)</translation>
+    </message>
+    <message>
+        <location filename="../IniManager.cpp" line="82"/>
+        <location filename="../IniManager.cpp" line="219"/>
+        <location filename="../IniManager.cpp" line="230"/>
+        <location filename="../IniManager.cpp" line="241"/>
+        <location filename="../IniManager.cpp" line="252"/>
+        <location filename="../IniManager.cpp" line="335"/>
+        <source>Configuration file loaded</source>
+        <translation type="unfinished">Yüklenen Yapılandırma Dosyası</translation>
+    </message>
+    <message>
+        <location filename="../IniManager.cpp" line="85"/>
+        <source>Incorrect settings file</source>
+        <translation type="unfinished">Hatalı Yapılandırma Dosyası</translation>
+    </message>
+    <message>
+        <location filename="../IniManager.cpp" line="187"/>
+        <source>Configuration file</source>
+        <translation type="unfinished">Yapılandırma Dosyası</translation>
+    </message>
+    <message>
+        <location filename="../IniManager.cpp" line="187"/>
+        <source> saved successfully</source>
+        <translation type="unfinished">Başarıyla Kaydedildi</translation>
+    </message>
+    <message>
+        <location filename="../IniManager.cpp" line="199"/>
+        <location filename="../IniManager.cpp" line="201"/>
+        <source>Save Configuration File</source>
+        <translation type="unfinished">Yapılandırma Dosyası Kaydet</translation>
+    </message>
+    <message>
+        <location filename="../IniManager.cpp" line="274"/>
+        <source>Not recent files</source>
+        <translation type="unfinished">Son Kullanılan Dosyalar Bulunamadı</translation>
+    </message>
+</context>
+<context>
+    <name>LanguagesSettingsTab</name>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="209"/>
+        <source>English</source>
+        <translation type="unfinished">İngilizce</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="210"/>
+        <source>French</source>
+        <translation type="unfinished">Fransızca</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="211"/>
+        <source>Spanish</source>
+        <translation type="unfinished">İspanyolca</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="212"/>
+        <source>German</source>
+        <translation type="unfinished">Almanca</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="213"/>
+        <source>Dutch</source>
+        <translation type="unfinished">Hollandaca</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="214"/>
+        <source>Italian</source>
+        <translation type="unfinished">İtalyanca</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="215"/>
+        <source>Czech</source>
+        <translation type="unfinished">Çekçe</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="216"/>
+        <source>Hungarian</source>
+        <translation type="unfinished">Macarca</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="217"/>
+        <source>Croatian</source>
+        <translation type="unfinished">Hırvatça</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="218"/>
+        <source>Portugese</source>
+        <translation type="unfinished">Portekizce</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="208"/>
+        <source>Select a language</source>
+        <translation type="unfinished">Lütfen Bir Dil Seçiniz</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="101"/>
+        <source>Can&apos;t see your language in this list?</source>
+        <comment>Don&apos;t translate this sentence</comment>
+        <translation type="unfinished">Yukarıdaki Listede Dilinizi Göremiyor Musunuz ?</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="102"/>
+        <source>Help us to translate</source>
+        <comment>Don&apos;t translate this sentence</comment>
+        <translation type="unfinished">Dil Çevirileri için Bize Yardum Edebiirsiniz</translation>
+    </message>
+    <message>
+        <location filename="../LanguagesSettingsTab.cpp" line="103"/>
+        <source>More information at</source>
+        <comment>Don&apos;t translate this sentence</comment>
+        <translation type="unfinished">Daha Fazla Bilgi için :</translation>
+    </message>
+</context>
+<context>
+    <name>NetworkSettingsTab</name>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="302"/>
+        <source>Network Connection</source>
+        <translation type="unfinished">Ağ Bağlantısı</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="303"/>
+        <source>Direct connection</source>
+        <translation type="unfinished">Doğrudan Bağlantı</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="304"/>
+        <source>Use proxy server</source>
+        <translation type="unfinished">Vekil (Proxy) Sunucusu Kullan</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="305"/>
+        <source>Hostname</source>
+        <translation type="unfinished">Sunucu Adı</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="306"/>
+        <source>Port</source>
+        <translation type="unfinished">Bağlantı Noktası (Port)</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="307"/>
+        <source>Type</source>
+        <translation type="unfinished">Bağlantı Şekli</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="308"/>
+        <source>Authentication</source>
+        <translation type="unfinished">Kimlik Doğrulaması Kullan</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="309"/>
+        <source>Username</source>
+        <translation type="unfinished">Kullanıcı Adınız</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="310"/>
+        <source>Password</source>
+        <translation type="unfinished">Şifreniz</translation>
+    </message>
+    <message>
+        <location filename="../NetworkSettingsTab.cpp" line="311"/>
+        <source>Proxy Settings</source>
+        <translation type="unfinished">Vekil (Proxy) Ayarları</translation>
+    </message>
+</context>
+<context>
+    <name>PreviewGraphicView</name>
+    <message>
+        <location filename="../PreviewGraphicView.cpp" line="372"/>
+        <source>Open to my default picture viewer</source>
+        <translation type="unfinished">Varsayılan Resim Görüntüleyici ile Aç</translation>
+    </message>
+    <message>
+        <location filename="../PreviewGraphicView.cpp" line="373"/>
+        <source>Save As</source>
+        <translation type="unfinished">Farklı Kaydet</translation>
+    </message>
+    <message>
+        <location filename="../PreviewGraphicView.cpp" line="374"/>
+        <source>Copy to clipboard</source>
+        <translation type="unfinished">Panoya Kopyala</translation>
+    </message>
+    <message>
+        <location filename="../PreviewGraphicView.cpp" line="241"/>
+        <source>failed to open this file in your default image viewer.</source>
+        <translation type="unfinished">Varsayılan Resim Görüntüleyici Bu Dosyayı Açamadı</translation>
+    </message>
+    <message>
+        <location filename="../PreviewGraphicView.cpp" line="258"/>
+        <source>Save File</source>
+        <translation type="unfinished">Dosyayı Kaydet</translation>
+    </message>
+    <message>
+        <location filename="../PreviewGraphicView.cpp" line="284"/>
+        <source>Saving the file failed</source>
+        <translation type="unfinished">Dosya Kaydetme Başarısız Oldu</translation>
+    </message>
+</context>
+<context>
+    <name>ProcessingStatusBar</name>
+    <message>
+        <location filename="../ProcessingStatusBar.cpp" line="94"/>
+        <source>Progression:</source>
+        <translation type="unfinished">Yükleme :</translation>
+    </message>
+    <message>
+        <location filename="../ProcessingStatusBar.cpp" line="73"/>
+        <source>Processing file %1 of %2: %3</source>
+        <translation type="unfinished">%2 Dosyadan %1 Tanesi : %3</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../main.cpp" line="92"/>
+        <source>Initialisation</source>
+        <translation type="unfinished">Başlatılıyor</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="97"/>
+        <source>Widgets initialisation</source>
+        <translation type="unfinished">Eklenti Araçları Yükleniyor</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="102"/>
+        <source>Preferences reading</source>
+        <translation type="unfinished">Tercihler Okunuyor</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="107"/>
+        <source>Starting...</source>
+        <translation type="unfinished">Program Başlatılıyor</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsWidget</name>
+    <message>
+        <location filename="../SettingsWidget.cpp" line="227"/>
+        <source>OpenGL version 3.0 or higher is not present on your system. It will be disabled.</source>
+        <translation type="unfinished">OpenGL 3.0 Sürümü veya Daha Üstü Sisteminizde Yüklü Değil. Bu Özellik Devre Dışı Bırakılacaktır</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWidget.cpp" line="233"/>
+        <source>openGL not detected on your system. It will be disabled.</source>
+        <translation type="unfinished">OpenGL Sisteminizde Algılanamadı. Bu Özellik Devre Dışı Bırakılacaktır</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWidget.cpp" line="340"/>
+        <source>Settings</source>
+        <translation type="unfinished">Ayarlar</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWidget.cpp" line="341"/>
+        <source>General</source>
+        <translation type="unfinished">Genel</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWidget.cpp" line="342"/>
+        <source>Fonts</source>
+        <translation type="unfinished">Yazı Tipleri</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWidget.cpp" line="343"/>
+        <source>Languages</source>
+        <translation type="unfinished">Diller</translation>
+    </message>
+    <message>
+        <location filename="../SettingsWidget.cpp" line="344"/>
+        <source>Network</source>
+        <translation type="unfinished">Ağ</translation>
+    </message>
+</context>
+<context>
+    <name>SuccessDialog</name>
+    <message>
+        <location filename="../SuccessDialog.cpp" line="134"/>
+        <source>&lt;h1&gt;Save file as:&lt;/h1&gt;</source>
+        <translation type="unfinished">&lt;h1&gt;Dosyayı Farklı Kaydet :&lt;/h1&gt;</translation>
+    </message>
+    <message>
+        <location filename="../SuccessDialog.cpp" line="136"/>
+        <source>Upload to ImageShack</source>
+        <translation type="unfinished">ImageShack&apos;a Yükle</translation>
+    </message>
+    <message>
+        <location filename="../SuccessDialog.cpp" line="140"/>
+        <source>&lt;h1&gt;Save file(s) as:&lt;/h1&gt;</source>
+        <translation type="unfinished">&lt;h1&gt;Dosya(ları) Farklı Kaydet :&lt;/h1&gt;</translation>
+    </message>
+    <message>
+        <location filename="../SuccessDialog.cpp" line="142"/>
+        <source>Upload these files to ImageShack</source>
+        <translation type="unfinished">Bu Dosyaları ImageShack&apos;a Yükle</translation>
+    </message>
+    <message>
+        <location filename="../SuccessDialog.cpp" line="204"/>
+        <source>Open Folder</source>
+        <translation type="unfinished">Klasörü Aç</translation>
+    </message>
+    <message>
+        <location filename="../SuccessDialog.cpp" line="205"/>
+        <source>Close</source>
+        <translation type="unfinished">Kapat</translation>
+    </message>
+</context>
+<context>
+    <name>ThumbnailEngine</name>
+    <message>
+        <location filename="../ThumbnailEngine.cpp" line="86"/>
+        <location filename="../ThumbnailEngine.cpp" line="96"/>
+        <location filename="../ThumbnailEngine.cpp" line="109"/>
+        <source>Mtn binary not found. Operation cancelled.</source>
+        <translation type="unfinished">Mtn İkili Bulunamadı. İşlemden Vazcayıldı</translation>
+    </message>
+    <message>
+        <location filename="../ThumbnailEngine.cpp" line="87"/>
+        <location filename="../ThumbnailEngine.cpp" line="97"/>
+        <location filename="../ThumbnailEngine.cpp" line="110"/>
+        <source>No fonts defined</source>
+        <translation type="unfinished">Yazı Tipi Belirlenmemiş</translation>
+    </message>
+    <message>
+        <location filename="../ThumbnailEngine.cpp" line="88"/>
+        <source>Output path does not exist</source>
+        <translation type="unfinished">Kayıt Dizini Bulunamadı</translation>
+    </message>
+    <message>
+        <location filename="../ThumbnailEngine.cpp" line="89"/>
+        <source>Select an output folder, please</source>
+        <translation type="unfinished">Lütfen Kayıt Dizini Belirtiniz</translation>
+    </message>
+    <message>
+        <location filename="../ThumbnailEngine.cpp" line="100"/>
+        <source>No file(s) loaded</source>
+        <translation type="unfinished">Dosya(lar) Yüklenemedi</translation>
+    </message>
+    <message>
+        <location filename="../ThumbnailEngine.cpp" line="111"/>
+        <source>No file selected</source>
+        <translation type="unfinished">Dosya Seçilmedi</translation>
+    </message>
+</context>
+<context>
+    <name>VerboseWindow</name>
+    <message>
+        <location filename="../VerboseWindow.cpp" line="132"/>
+        <source>Logs</source>
+        <translation type="unfinished">İşlem Kaydı</translation>
+    </message>
+    <message>
+        <location filename="../VerboseWindow.cpp" line="37"/>
+        <location filename="../VerboseWindow.cpp" line="133"/>
+        <source>Clear all</source>
+        <translation type="unfinished">Tümünü Temizle</translation>
+    </message>
+</context>
+</TS>
