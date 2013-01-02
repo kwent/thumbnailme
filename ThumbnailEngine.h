@@ -76,6 +76,7 @@ class ThumbnailEngine : public QObject
     QByteArray                   F_ts_fontnameArray;
     QByteArray                   f_fontnameArray;
     QByteArray                   o_suffixArray;
+    QByteArray                   O_outdir;
     QByteArray                   T_textArray;
     params                       *toto;
 

@@ -203,8 +203,11 @@ void ThumbnailEngine::process_item(ThumbnailItem *item)
 
     //o_suffixArray = DEFAULT_TMP_EXTENSION.toLocal8Bit();
     //parameters.gb_o_suffix = o_suffixArray.data();
-    //parameters.gb_O_outdir = QString("C:\\Users\\kwent\\Pictures").toLatin1().data();
-    //parameters.gb_O_outdir = const_cast<char*> (QDir::tempPath().toStdString().c_str());
+    if(!main_window->mpDockInputOutput->isSameSourceChecked())
+    {
+        O_outdir = main_window->mpDockInputOutput->getPathOutput().toLocal8Bit();
+        parameters.gb_O_outdir = O_outdir.data();
+    }
 
     if(main_window->mpDockStyles->isInfoTextChecked() == false)
         parameters.gb_i_info = 1;
@@ -225,8 +228,7 @@ void ThumbnailEngine::process_item(ThumbnailItem *item)
     //qDebug() << "outdir :" << parameters.gb_O_outdir;
     qDebug() << "blank_skip :" << parameters.gb_b_blank;
     qDebug() << "title :" << parameters.gb_T_text;
-    //qDebug() << "end :" << parameters.gb_E_end;
-
+    qDebug() << "output :" << parameters.gb_O_outdir;
 
     process_file();
 
