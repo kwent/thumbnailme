@@ -31,6 +31,7 @@ class DockInputOutput;
 class DockConf;
 class DockStyles;
 class DockTimeLine;
+class DockThreadsPool;
 class ImageShackLoginWidget;
 class IniManager;
 class PreviewGraphicView;
@@ -145,6 +146,7 @@ class MainWindow : public QMainWindow
     DockConf                *mpDockConf;
     DockStyles              *mpDockStyles;
     DockTimeLine            *mpDockTimeline;
+    DockThreadsPool         *mpDockThreadsPool;
     ImageShackLoginWidget   *mpImageShackLoginWidget;
     HelpWidget              *mpHelpWidget;
     IniManager              *mpIniManager;

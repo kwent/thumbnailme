@@ -26,19 +26,11 @@
 #include <QProcess>
 #include <QSignalMapper>
 #include <QLinkedList>
+#include <QThreadPool>
 
 class MainWindow;
 class ThumbnailItem;
 
-#include "mtn/mtn.h"
-
-#ifdef __cplusplus
-extern "C"
- {
- extern struct params parameters; // params data & info
- extern int process_file();
- }
-#endif
 
 class ThumbnailEngine : public QObject
 {
@@ -64,24 +56,16 @@ class ThumbnailEngine : public QObject
     QSettings	  *settings;
 
     QLinkedList <ThumbnailItem*> listInputFile;
+    QThreadPool *pool;
     QProcess                     *process;
     QImage                       *img;
-   // QStringList                  parameters;
     QStringList                  currentOutput;
     ThumbnailItem                *currentItem;
     int                          current;
     QSignalMapper                *convertSignalMapper;
     Mode                         modeConversion;
-    QByteArray                   argv0Array;
-    QByteArray                   F_ts_fontnameArray;
-    QByteArray                   f_fontnameArray;
-    QByteArray                   o_suffixArray;
-    QByteArray                   O_outdir;
-    QByteArray                   T_textArray;
-    params                       *toto;
 
     private:
-    void process_item(ThumbnailItem *item);
     void launchProcess(QLinkedList <ThumbnailItem*> listInputFile);
 
     private slots:

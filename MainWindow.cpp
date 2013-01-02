@@ -28,6 +28,7 @@
 #include "DockConf.h"
 #include "DockStyles.h"
 #include "DockTimeLine.h"
+#include "DockThreadsPool.h"
 #include "HelpWidget.h"
 #include "ImageShackLoginWidget.h"
 #include "IniManager.h"
@@ -35,7 +36,6 @@
 #include "SettingsWidget.h"
 #include "SuccessDialog.h"
 #include "ThumbnailEngine.h"
-#include "VerboseWindow.h"
 #include "QtHelper.h"
 #include "ProcessingStatusBar.h"
 #include "FontMapComboBox.h"
@@ -233,7 +233,8 @@ void MainWindow::createDocks()
     mpDockConf = new DockConf(this);
     mpDockStyles = new DockStyles(this);
     mpDockTimeline = new DockTimeLine(this);
-    mpVerboseWindow = new VerboseWindow(this);
+    //mpVerboseWindow = new VerboseWindow(this);
+    mpDockThreadsPool = new DockThreadsPool(this);
     mpPreviewGraphicView = new PreviewGraphicView(this,zoomInAction,zoomOutAction,clearSceneAction,printAction);
     mpThumbnailEngine = new ThumbnailEngine(this);
     mpDockInputOutput = new DockInputOutput(this,mpThumbnailEngine);
@@ -260,7 +261,7 @@ void MainWindow::createDocks()
 
     this->addDockWidget(Qt::LeftDockWidgetArea,   configurationDockWidget, Qt::Vertical);
     this->addDockWidget(Qt::BottomDockWidgetArea, mpDockInputOutput,       Qt::Horizontal);
-    this->addDockWidget(Qt::BottomDockWidgetArea, mpVerboseWindow,         Qt::Horizontal);
+    this->addDockWidget(Qt::BottomDockWidgetArea, mpDockThreadsPool,       Qt::Horizontal);
     this->setCentralWidget(mpPreviewGraphicView);
 }
 

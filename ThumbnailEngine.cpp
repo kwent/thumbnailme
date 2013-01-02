@@ -25,14 +25,15 @@
 #include "DockStyles.h"
 #include "DockConf.h"
 #include "DockTimeLine.h"
+#include "DockThreadsPool.h"
 #include "ProcessingStatusBar.h"
 #include "SuccessDialog.h"
-#include "VerboseWindow.h"
 #include "PreviewGraphicView.h"
 #include "ThumbnailItem.h"
 #include <QDebug>
 #include "ThumbnailListwidget.h"
-//#include "mtn/mtn.h"
+#include "ThumbnailRunnable.h"
+#include "VerboseWindow.h"
 
 /**
 *@brief Constructeur.
@@ -42,6 +43,8 @@ ThumbnailEngine::ThumbnailEngine(MainWindow *main_window)
 {
     this->main_window = main_window;
     this->currentItem = 0;
+    pool = new QThreadPool(this);
+    pool->setMaxThreadCount(QThread::idealThreadCount ());
     convertSignalMapper = new QSignalMapper(this);
     settings = new QSettings(QSettings::IniFormat,DEFAULT_PATH_INI,APPLICATION_NAME,DEFAULT_FILE_INI,this);
 //    parameters = (params *)malloc(sizeof(params));
@@ -160,114 +163,6 @@ void ThumbnailEngine::run(int mode)
     }
 }
 
-void ThumbnailEngine::process_item(ThumbnailItem *item)
-{
-    QColor c;
-
-    argv0Array = item->getFilePath().toString().toLocal8Bit();
-    parameters.gb_argv0 = argv0Array.data();
-
-    parameters.gb_P_dontpause = 1;
-    parameters.gb_c_column  = main_window->mpDockConf->getColumns();
-
-    parameters.gb_c_column  = main_window->mpDockConf->getColumns();
-    parameters.gb_r_row     = main_window->mpDockConf->getRows();
-    parameters.gb_w_width   = main_window->mpDockConf->getWidth();
-    parameters.gb_g_gap     = main_window->mpDockConf->getGap();
-    parameters.gb_j_quality = 100;
-    parameters.gb_b_blank   = main_window->mpDockConf->getBlankSkip();
-    parameters.gb_D_edge    = main_window->mpDockConf->getEdgeDetect();
-    parameters.gb_L_info_location = main_window->mpDockStyles->getInfoTextLocation();
-    parameters.gb_L_time_location = main_window->mpDockStyles->getTimeStampLocation();
-    c = main_window->mpDockStyles->getColorBackground();
-    parameters.gb_k_bcolor   = (rgb_color) {c.red(), c.green(), c.blue()};
-
-    f_fontnameArray = main_window->mpDockStyles->getFontInfoText(0).toLocal8Bit();
-    parameters.gb_f_fontname = f_fontnameArray.data();
-
-    c = main_window->mpDockStyles->getColorInfoText();
-    parameters.gb_F_info_color = (rgb_color) {c.red(), c.green(), c.blue()};
-    parameters.gb_F_info_font_size = main_window->mpDockStyles->getSizeInfoText();
-
-    if(main_window->mpDockStyles->isTimeStampChecked())
-    {
-         F_ts_fontnameArray = main_window->mpDockStyles->getFontTimeStamp(2).toLocal8Bit();
-         parameters.gb_F_ts_fontname  = F_ts_fontnameArray.data();
-         c = main_window->mpDockStyles->getColorTimeStamp();
-         parameters.gb_F_ts_color     = (rgb_color) {c.red(), c.green(), c.blue()};
-         c = main_window->mpDockStyles->getColorShadow();
-         parameters.gb_F_ts_shadow    = (rgb_color) {c.red(), c.green(), c.blue()};
-         parameters.gb_F_ts_font_size = main_window->mpDockStyles->getSizeTimeStamp();
-    }
-    else parameters.gb_t_timestamp = 0;
-
-    //o_suffixArray = DEFAULT_TMP_EXTENSION.toLocal8Bit();
-    //parameters.gb_o_suffix = o_suffixArray.data();
-    if(!main_window->mpDockInputOutput->isSameSourceChecked())
-    {
-        O_outdir = main_window->mpDockInputOutput->getPathOutput().toLocal8Bit();
-        parameters.gb_O_outdir = O_outdir.data();
-    }
-
-    if(main_window->mpDockStyles->isInfoTextChecked() == false)
-        parameters.gb_i_info = 1;
-
-    if(!main_window->mpDockStyles->getTitleEdit().isEmpty())
-    {
-        T_textArray = main_window->mpDockStyles->getTitleEdit().toLocal8Bit();
-        parameters.gb_T_text = T_textArray.data();
-    }
-
-    if(item->isReadable() && !item->getLowerTime().isNull() && !item->getUpperTime().isNull())
-    {
-        parameters.gb_B_begin = item->getBeginOmmitSecs();
-        parameters.gb_E_end = item->getEndOmmitSecs();
-    }
-
-    qDebug() << "input :" << parameters.gb_argv0;
-    //qDebug() << "outdir :" << parameters.gb_O_outdir;
-    qDebug() << "blank_skip :" << parameters.gb_b_blank;
-    qDebug() << "title :" << parameters.gb_T_text;
-    qDebug() << "output :" << parameters.gb_O_outdir;
-
-    process_file();
-
-//    params << "-P" << "-h 0" <<"-c"
-//    << main_window->mpDockConf->getColumns() << "-r" << main_window->mpDockConf->getRows()
-//    << "-w" << main_window->mpDockConf->getWidth() <<"-g" << main_window->mpDockConf->getGap()
-//    << "-j" << "100" << "-b" << main_window->mpDockConf->getBlankSkip()
-//    << "-D" << main_window->mpDockConf->getEdgeDetect() <<"-L" << main_window->mpDockStyles->getInfoTextLocation()+":"+main_window->mpDockStyles->getTimeStampLocation()
-//    << "-k" << QtHelper::qColor2rgbNoSharp(main_window->mpDockStyles->getColorBackground()) << "-f" << main_window->mpDockStyles->getFontInfoText(0);
-
-//    QString colorFontsInfos = QtHelper::qColor2rgbNoSharp(main_window->mpDockStyles->getColorInfoText()) + ":" + main_window->mpDockStyles->getSizeInfoText();
-
-//    if(main_window->mpDockStyles->isTimeStampChecked())
-//         #if !defined(Q_OS_LINUX)
-//             colorFontsInfos.append(":" + main_window->mpDockStyles->getFontTimeStamp(2) + ":" + QtHelper::qColor2rgbNoSharp(main_window->mpDockStyles->getColorTimeStamp()) + ":" + QtHelper::qColor2rgbNoSharp(main_window->mpDockStyles->getColorShadow()) + ":" + main_window->mpDockStyles->getSizeTimeStamp());
-//         #else
-//             colorFontsInfos.append(":" + main_window->mpDockStyles->getFontTimeStamp(0) + ":" + QtHelper::qColor2rgbNoSharp(main_window->mpDockStyles->getColorTimeStamp()) + ":" + QtHelper::qColor2rgbNoSharp(main_window->mpDockStyles->getColorShadow()) + ":" + main_window->mpDockStyles->getSizeTimeStamp());
-//         #endif
-//     else params << "-t";
-
-//    params << "-F" << colorFontsInfos;
-//    params << "-o" << DEFAULT_TMP_EXTENSION << "-O" << QDir::tempPath();
-
-//    if(main_window->mpDockStyles->isInfoTextChecked() == false) params << "-i";
-//    if(main_window->mpDockStyles->getTitleEdit() != NULL) params << "-T" << main_window->mpDockStyles->getTitleEdit();
-
-
-//    qDebug() << params;
-
-      /*****************/
-     /*Timeline Params*/
-    /*****************/
-//    if(item->isReadable() && !item->getLowerTime().isNull() && !item->getUpperTime().isNull())
-//    {
-//        params << "-B" << item->getBeginOmmitSecs() << "-E" << item->getEndOmmitSecs();
-//    }
-
-}
-
 /**
 *@brief Lance le processus.
 *@param listInputFile    Liste des fichiers à vignetter.
@@ -292,7 +187,22 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
     //Start process
     //start(0,QProcess::NormalExit);
 
-    this->process_item(listInputFile.first());
+
+    main_window->mpDockThreadsPool->listWidget->clear();
+
+    while(!listInputFile.isEmpty())
+    {
+        ThumbnailItem *current = listInputFile.first();
+        ThumbnailRunnable *task = new ThumbnailRunnable(this->main_window,current);
+        task->setAutoDelete(true);
+
+        while(pool->tryStart(task))
+        {
+            main_window->mpDockThreadsPool->setWindowTitle(QString("Threads actifs: %1").arg(pool->activeThreadCount()));
+            main_window->mpDockThreadsPool->listWidget->addItem(current->getFilePath().toString());
+            listInputFile.removeFirst();
+        }
+    }
 }
 
 /**

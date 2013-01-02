@@ -38,6 +38,8 @@ INPUT(
 ./tmp\objects\qxtspanslider.o
 ./tmp\objects\qxtconfigwidget.o
 ./tmp\objects\qxtconfigdialog.o
+./tmp\objects\ThumbnailRunnable.o
+./tmp\objects\DockThreadsPool.o
 ./tmp\objects\qrc_resources.o
 ./tmp\objects\moc_ThumbnailListwidget.o
 ./tmp\objects\moc_clickablelineedit.o
@@ -77,4 +79,5 @@ INPUT(
 ./tmp\objects\moc_qxtconfigwidget.o
 ./tmp\objects\moc_qxtconfigdialog_p.o
 ./tmp\objects\moc_qxtconfigdialog.o
+./tmp\objects\moc_DockThreadsPool.o
 );

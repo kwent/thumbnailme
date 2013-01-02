@@ -72,7 +72,9 @@ HEADERS += ThumbnailListwidget.h \
     Qxt/qxtconfigdialog_p.h \
     Qxt/qxtconfigdialog.h \
     mtn/fake_tchar.h \
-    mtn/mtn.h
+    mtn/mtn.h \
+    ThumbnailRunnable.h \
+    DockThreadsPool.h
 
 SOURCES += mtn/mtn.c \
     ThumbnailListwidget.cpp \
@@ -112,7 +114,9 @@ SOURCES += mtn/mtn.c \
     Qtcolorpicker/qtcolorpicker.cpp \
     Qxt/qxtspanslider.cpp \
     Qxt/qxtconfigwidget.cpp \
-    Qxt/qxtconfigdialog.cpp
+    Qxt/qxtconfigdialog.cpp \
+    ThumbnailRunnable.cpp \
+    DockThreadsPool.cpp
 
 FORMS += ImageShackUploadWidget.ui \
     ImageShackResultWidget.ui \
