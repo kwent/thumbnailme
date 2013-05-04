@@ -54,25 +54,9 @@
 #include <QtCore/QEvent>
 #include <QtGui/QFocusEvent>
 
-#if defined(Q_WS_WIN)
-#  if !defined(QT_QTCOLORPICKER_EXPORT) && !defined(QT_QTCOLORPICKER_IMPORT)
-#    define QT_QTCOLORPICKER_EXPORT
-#  elif defined(QT_QTCOLORPICKER_IMPORT)
-#    if defined(QT_QTCOLORPICKER_EXPORT)
-#      undef QT_QTCOLORPICKER_EXPORT
-#    endif
-#    define QT_QTCOLORPICKER_EXPORT __declspec(dllimport)
-#  elif defined(QT_QTCOLORPICKER_EXPORT)
-#    undef QT_QTCOLORPICKER_EXPORT
-#    define QT_QTCOLORPICKER_EXPORT __declspec(dllexport)
-#  endif
-#else
-#  define QT_QTCOLORPICKER_EXPORT
-#endif
-
 class ColorPickerPopup;
 
-class QT_QTCOLORPICKER_EXPORT QtColorPicker : public QPushButton
+class QtColorPicker : public QPushButton
 {
     Q_OBJECT
 

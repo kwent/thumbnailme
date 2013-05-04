@@ -28,7 +28,28 @@ DockThreadsPool::DockThreadsPool(QWidget *parent) : QDockWidget(parent)
     this->setObjectName("DockThreadsPool");
     this->setWindowTitle("Tasks");
 
-    listWidget = new QListWidget(this);
+    threeWidget = new QTreeWidget(this);
+    threeWidget->setColumnCount(2);
+    threeWidget->setHeaderLabels(QStringList() << "Path" << "State");
+    this->setWidget(threeWidget);
+}
 
-    this->setWidget(listWidget);
+void DockThreadsPool::addThumbnailItem(ThumbnailItem* item)
+{
+    QTreeWidgetItem *three_item = new QTreeWidgetItem();
+    three_item->setText(0,item->getFilePath().toString());
+    three_item->setText(1,tr("QUEUING"));
+    this->threeWidget->addTopLevelItem(three_item);
+}
+
+void DockThreadsPool::threadStarted(ThumbnailItem* item)
+{
+    QList<QTreeWidgetItem*> itemFound = this->threeWidget->findItems(item->getFilePath().toString(),Qt::MatchExactly);
+    itemFound.last()->setText(1,tr("STARTED)");
+}
+
+void DockThreadsPool::threadFinished(ThumbnailItem* item)
+{
+    QList<QTreeWidgetItem*> itemFound = this->threeWidget->findItems(item->getFilePath().toString(),Qt::MatchExactly);
+    itemFound.last()->setText(1,tr("FINISHED"));
 }

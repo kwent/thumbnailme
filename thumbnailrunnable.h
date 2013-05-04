@@ -38,8 +38,10 @@ extern "C"
 class ThumbnailItem;
 class MainWindow;
 
-class ThumbnailRunnable : public QRunnable
+class ThumbnailRunnable : public QObject, public QRunnable
 {
+    Q_OBJECT
+
     public:
     explicit ThumbnailRunnable(MainWindow *main_window, ThumbnailItem *item);
 
@@ -55,6 +57,10 @@ class ThumbnailRunnable : public QRunnable
 
     protected:
     void run();
+
+    signals:
+    void started(ThumbnailItem*);
+    void finished(ThumbnailItem*);
 };
 
 #endif // THUMBNAILRUNNABLE_H

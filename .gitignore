@@ -3,3 +3,6 @@ release/*
 debug/*
 Makefile*
 Thumbnailme.pro.user*
+%SystemDrive%*
+object_script*
+ui_*

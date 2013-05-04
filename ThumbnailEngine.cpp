@@ -188,20 +188,22 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
     //start(0,QProcess::NormalExit);
 
 
-    main_window->mpDockThreadsPool->listWidget->clear();
+    main_window->mpDockThreadsPool->threeWidget->clear();
 
     while(!listInputFile.isEmpty())
     {
-        ThumbnailItem *current = listInputFile.first();
+        ThumbnailItem *current = listInputFile.takeFirst();
         ThumbnailRunnable *task = new ThumbnailRunnable(this->main_window,current);
         task->setAutoDelete(true);
 
         while(pool->tryStart(task))
         {
             main_window->mpDockThreadsPool->setWindowTitle(QString("Threads actifs: %1").arg(pool->activeThreadCount()));
-            main_window->mpDockThreadsPool->listWidget->addItem(current->getFilePath().toString());
-            listInputFile.removeFirst();
+            main_window->mpDockThreadsPool->addThumbnailItem(current);
+            connect(task, SIGNAL(started(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadStarted(ThumbnailItem*)), Qt::QueuedConnection);
+            connect(task, SIGNAL(finished(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadFinished(ThumbnailItem*)), Qt::QueuedConnection);
         }
+        //listInputFile.removeFirst();
     }
 }
 

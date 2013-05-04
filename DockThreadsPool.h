@@ -22,7 +22,8 @@
 #define DOCKTHREADSPOOL_H
 
 #include <QDockWidget>
-#include <QListWidget>
+#include <QTreeWidget>
+#include "ThumbnailItem.h"
 
 class DockThreadsPool : public QDockWidget
 {
@@ -32,11 +33,14 @@ class DockThreadsPool : public QDockWidget
     explicit DockThreadsPool(QWidget *parent = 0);
 
     public:
-    QListWidget *listWidget;
-    
-    signals:
-    
+    void addThumbnailItem(ThumbnailItem* item);
+
+    public:
+    QTreeWidget *threeWidget;
+
     public slots:
+    void threadStarted(ThumbnailItem* item);
+    void threadFinished(ThumbnailItem* item);
     
 };
 

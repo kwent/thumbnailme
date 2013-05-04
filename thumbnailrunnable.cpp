@@ -36,6 +36,8 @@ void ThumbnailRunnable::run()
 {
     qDebug() << "Hello from thread " << QThread::currentThread();
 
+    emit started(this->item);
+
     QColor c;
 
     argv0Array = this->item->getFilePath().toString().toLocal8Bit();
@@ -105,4 +107,6 @@ void ThumbnailRunnable::run()
 //    qDebug() << "output :" << parameters.gb_O_outdir;
 
     process_file();
+
+    emit finished(this->item);
 }
