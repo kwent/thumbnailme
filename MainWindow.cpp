@@ -37,7 +37,6 @@
 #include "SuccessDialog.h"
 #include "ThumbnailEngine.h"
 #include "QtHelper.h"
-#include "ProcessingStatusBar.h"
 #include "FontMapComboBox.h"
 #include "ThumbnailListwidget.h"
 
@@ -89,11 +88,6 @@ void MainWindow::initializeMenuItems()
     viewMenu = menuBar()->addMenu( QString() );
     configurationMenu = menuBar()->addMenu( QString() );
     aboutMenu = menuBar()->addMenu( QString() );
-
-    /*Initialize Status Bar*/
-    processStatusBar = new ProcessingStatusBar();
-    this->setStatusBar(processStatusBar);
-    this->statusBar()->hide();
 }
 
 

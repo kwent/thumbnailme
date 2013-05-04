@@ -38,15 +38,18 @@ extern "C"
 class ThumbnailItem;
 class MainWindow;
 
+#include "ThumbnailEngine.h"
+
 class ThumbnailRunnable : public QObject, public QRunnable
 {
     Q_OBJECT
 
     public:
-    explicit ThumbnailRunnable(MainWindow *main_window, ThumbnailItem *item);
+    explicit ThumbnailRunnable(MainWindow *main_window, ThumbnailItem *item, QString suffix, ThumbnailEngine::Mode mode);
 
     private:
     ThumbnailItem *item;
+    QString        suffix;
     MainWindow    *main_window;
     QByteArray     argv0Array;
     QByteArray     F_ts_fontnameArray;
@@ -54,6 +57,7 @@ class ThumbnailRunnable : public QObject, public QRunnable
     QByteArray     o_suffixArray;
     QByteArray     O_outdir;
     QByteArray     T_textArray;
+    ThumbnailEngine::Mode modeConversion;
 
     protected:
     void run();

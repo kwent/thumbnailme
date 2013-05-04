@@ -31,7 +31,6 @@
 class MainWindow;
 class ThumbnailItem;
 
-
 class ThumbnailEngine : public QObject
 {
     Q_OBJECT
@@ -61,8 +60,8 @@ class ThumbnailEngine : public QObject
     QImage                       *img;
     QStringList                  currentOutput;
     ThumbnailItem                *currentItem;
-    int                          current;
-    QSignalMapper                *convertSignalMapper;
+    //int                          current;
+    //QSignalMapper                *convertSignalMapper;
     Mode                         modeConversion;
 
     private:
@@ -71,8 +70,7 @@ class ThumbnailEngine : public QObject
     private slots:
     void convertToFormat(QObject *o);
     void initSuccessDialog(QLinkedList <ThumbnailItem*> listInputFile);
-    void start(int exitCode, QProcess::ExitStatus exitStatus);
-    void success();
+    void success(ThumbnailItem*item);
 
     public:
     QString  absoluteFilePathOutput(QString pathOutput, QString absoluteOutputPath,QString suffix,QString format = QString());

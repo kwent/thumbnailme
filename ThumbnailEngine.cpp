@@ -26,7 +26,6 @@
 #include "DockConf.h"
 #include "DockTimeLine.h"
 #include "DockThreadsPool.h"
-#include "ProcessingStatusBar.h"
 #include "SuccessDialog.h"
 #include "PreviewGraphicView.h"
 #include "ThumbnailItem.h"
@@ -44,17 +43,8 @@ ThumbnailEngine::ThumbnailEngine(MainWindow *main_window)
     this->main_window = main_window;
     this->currentItem = 0;
     pool = new QThreadPool(this);
-    pool->setMaxThreadCount(QThread::idealThreadCount ());
-    convertSignalMapper = new QSignalMapper(this);
+    pool->setMaxThreadCount(QThread::idealThreadCount());
     settings = new QSettings(QSettings::IniFormat,DEFAULT_PATH_INI,APPLICATION_NAME,DEFAULT_FILE_INI,this);
-//    parameters = (params *)malloc(sizeof(params));
-//    process = new QProcess(this);
-//        process->setProcessChannelMode(QProcess::MergedChannels);
-
-//    connect( process, SIGNAL(readyReadStandardOutput ()), this ,  SLOT(buildOutput()) );
-//    connect( process, SIGNAL(finished(int)), convertSignalMapper, SLOT(map()) );
-//    connect( process, SIGNAL(finished(int)), this,                SLOT(detectShortDuration()) );
-//    connect( convertSignalMapper, SIGNAL(mapped(QObject *)),this, SLOT(convertToFormat(QObject *)) );
 //    connect( this, SIGNAL(itemTooShortDuration (ThumbnailItem *)), this , SLOT(successDialogItemRemove(ThumbnailItem *)) );
 }
 
@@ -66,36 +56,6 @@ ThumbnailEngine::~ThumbnailEngine()
     delete main_window;
     delete img;
     delete currentItem;
-}
-
-/**
-*@brief  Appelle le processus "mtn".
-*/
-void ThumbnailEngine::start(int exitCode, QProcess::ExitStatus exitStatus)
-{
-//    currentOutput.clear();
-
-//    if(!listInputFile.isEmpty())
-//    {
-//        QEventLoop loop;
-//        connect( process, SIGNAL(finished(int)), &loop, SLOT(quit()));
-
-//        current++;
-//        currentItem = this->listInputFile.takeFirst();
-//        main_window->processStatusBar->setStatus(current,currentItem->getFilePath().toString());
-
-//        connect( process,SIGNAL(finished(int, QProcess::ExitStatus)), this,SLOT(start(int, QProcess::ExitStatus)) );
-//        convertSignalMapper->setMapping(process,currentItem);
-
-//        process->start(DEFAULT_PATH_MTN, buildParams(currentItem));
-//        loop.exec();
-//        process->waitForFinished(-1);
-//    }
-//    else
-//    {
-//        this->success();
-//        disconnect( process,SIGNAL(finished(int, QProcess::ExitStatus)), this,SLOT(start(int, QProcess::ExitStatus)) );
-//    }
 }
 
 /**
@@ -175,35 +135,23 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
 
 //    //Init
     this->listInputFile =  QLinkedList <ThumbnailItem*> (listInputFile);
-    this->current = 0;
+//    this->current = 0;
 //    this->initSuccessDialog(QLinkedList<ThumbnailItem*> (this->listInputFile));
-
-//    //disconnect( process, SIGNAL(finished(int)), this, SLOT(success()) );
-
-//    //Affichage de la status bar
-//    this->main_window->processStatusBar->setFilesCount(listInputFile.count());
-//    this->main_window->statusBar()->show();
-
-    //Start process
-    //start(0,QProcess::NormalExit);
-
 
     main_window->mpDockThreadsPool->threeWidget->clear();
 
-    while(!listInputFile.isEmpty())
+    while(!this->listInputFile.isEmpty())
     {
-        ThumbnailItem *current = listInputFile.takeFirst();
-        ThumbnailRunnable *task = new ThumbnailRunnable(this->main_window,current);
+        currentItem = this->listInputFile.takeFirst();
+        ThumbnailRunnable *task = new ThumbnailRunnable(this->main_window, currentItem, settings->value("Extras/outputSuffix").toString() , this->modeConversion);
         task->setAutoDelete(true);
 
-        while(pool->tryStart(task))
-        {
-            main_window->mpDockThreadsPool->setWindowTitle(QString("Threads actifs: %1").arg(pool->activeThreadCount()));
-            main_window->mpDockThreadsPool->addThumbnailItem(current);
-            connect(task, SIGNAL(started(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadStarted(ThumbnailItem*)), Qt::QueuedConnection);
-            connect(task, SIGNAL(finished(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadFinished(ThumbnailItem*)), Qt::QueuedConnection);
-        }
-        //listInputFile.removeFirst();
+        main_window->mpDockThreadsPool->setWindowTitle(QString("Threads actifs: %1").arg(pool->activeThreadCount()));
+        main_window->mpDockThreadsPool->addThumbnailItem(currentItem);
+        connect(task, SIGNAL(started(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadStarted(ThumbnailItem*)), Qt::QueuedConnection);
+        connect(task, SIGNAL(finished(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadFinished(ThumbnailItem*)), Qt::QueuedConnection);
+        connect(task, SIGNAL(finished(ThumbnailItem*)), this, SLOT(success(ThumbnailItem*)), Qt::QueuedConnection);
+        pool->start(task);
     }
 }
 
@@ -286,7 +234,7 @@ void ThumbnailEngine::deleteTemporaryFiles()
 {
     QDir tmpFolder = QDir::tempPath();
     QStringList filters;
-    filters << "*"+DEFAULT_TMP_EXTENSION;
+    filters << "*" + DEFAULT_TMP_EXTENSION;
     tmpFolder.setNameFilters(filters);
 
     QFileInfoList temporaryFiles = tmpFolder.entryInfoList();
@@ -352,28 +300,30 @@ void ThumbnailEngine::successDialogItemRemove(ThumbnailItem * item)
 /**
 *@brief  Envoie une image en preview.
 */
-void ThumbnailEngine::success()
+void ThumbnailEngine::success(ThumbnailItem* item)
 {
-    //1 Hide Status Bar
-        main_window->processStatusBar->hide();
+    qDebug() << "SUCCESS FUNCTION";
 
-    //2 Re Enable Docks
+    if(listInputFile.isEmpty())
+    {
+    //1 Re Enable Docks
         this->main_window->mpDockInputOutput->setEnabled(true);
 
         if(this->main_window->mpDockTimeline->getCurrentItem() != NULL && this->main_window->mpDockTimeline->getCurrentItem()->isReadable())
-        this->main_window->mpDockTimeline->setEnabled(true);
+          this->main_window->mpDockTimeline->setEnabled(true);
 
-    //3 Preview
+    //2 Preview
         QString suffix = settings->value("Extras/outputSuffix").toString();
 
         if (modeConversion == SIMPLEMOD && !main_window->mpDockInputOutput->isSameSourceChecked())
-            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(main_window->mpDockInputOutput->getPathOutput(),currentItem->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
+            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(main_window->mpDockInputOutput->getPathOutput(),item->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
         else if (modeConversion == SIMPLEMOD && main_window->mpDockInputOutput->isSameSourceChecked())
-            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::toNativeSeparators(QFileInfo(currentItem->getFilePath().toString()).canonicalPath()),currentItem->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
+            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::toNativeSeparators(QFileInfo(item->getFilePath().toString()).canonicalPath()),item->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
         else if (modeConversion == PREVIEWMOD)
-            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::tempPath(),currentItem->getFilePath().toString(),DEFAULT_TMP_EXTENSION));
+            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::tempPath(),item->getFilePath().toString(),DEFAULT_TMP_EXTENSION));
 
-    //4 Show SuccessDialog
+    //3 Show SuccessDialog
         if(modeConversion == SIMPLEMOD && main_window->mpSuccessDialog->getListWidget()->count() != 0)
             main_window->mpSuccessDialog->exec();
+    }
 }

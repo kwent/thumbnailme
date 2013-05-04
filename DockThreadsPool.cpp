@@ -45,7 +45,7 @@ void DockThreadsPool::addThumbnailItem(ThumbnailItem* item)
 void DockThreadsPool::threadStarted(ThumbnailItem* item)
 {
     QList<QTreeWidgetItem*> itemFound = this->threeWidget->findItems(item->getFilePath().toString(),Qt::MatchExactly);
-    itemFound.last()->setText(1,tr("STARTED)");
+    itemFound.last()->setText(1,tr("STARTED"));
 }
 
 void DockThreadsPool::threadFinished(ThumbnailItem* item)

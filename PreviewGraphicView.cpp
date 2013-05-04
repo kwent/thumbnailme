@@ -102,6 +102,8 @@ PreviewGraphicView::~PreviewGraphicView()
 */
 void PreviewGraphicView::setPreview(QString absolutePathFile)
 {
+    qDebug() << "PREVIEW PATH" << absolutePathFile;
+
     this->setAttribute(Qt::WA_TransparentForMouseEvents,false);
     this->currentPixmapPathLoaded = absolutePathFile;
 

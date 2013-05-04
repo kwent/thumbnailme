@@ -25,11 +25,14 @@
 #include "DockStyles.h"
 #include "DockConf.h"
 #include "DockTimeLine.h"
+#include "defines.h"
 
-ThumbnailRunnable::ThumbnailRunnable(MainWindow *main_window, ThumbnailItem *item)
+ThumbnailRunnable::ThumbnailRunnable(MainWindow *main_window, ThumbnailItem *item, QString suffix, ThumbnailEngine::Mode mode)
 {
     this->main_window = main_window;
     this->item = item;
+    this->suffix = suffix;
+    this->modeConversion = mode;
 }
 
 void ThumbnailRunnable::run()
@@ -77,12 +80,48 @@ void ThumbnailRunnable::run()
     }
     else parameters.gb_t_timestamp = 0;
 
-    //o_suffixArray = DEFAULT_TMP_EXTENSION.toLocal8Bit();
-    //parameters.gb_o_suffix = o_suffixArray.data();
-    if(!main_window->mpDockInputOutput->isSameSourceChecked())
+    if(this->modeConversion == ThumbnailEngine::SIMPLEMOD && !main_window->mpDockInputOutput->isSameSourceChecked())
     {
+        qDebug() << "SIMPLE";
         O_outdir = main_window->mpDockInputOutput->getPathOutput().toLocal8Bit();
         parameters.gb_O_outdir = O_outdir.data();
+
+        if(!this->suffix.isEmpty())
+        {
+           o_suffixArray = QString(this->suffix + "." + this->main_window->mpDockConf->getFormatFile()).toLocal8Bit();
+           parameters.gb_o_suffix = o_suffixArray.data();
+        }
+        else
+        {
+            o_suffixArray = QString("." + this->main_window->mpDockConf->getFormatFile()).toLocal8Bit();
+            parameters.gb_o_suffix = o_suffixArray.data();
+        }
+    }
+    else if (this->modeConversion == ThumbnailEngine::SIMPLEMOD && main_window->mpDockInputOutput->isSameSourceChecked())
+    {
+        O_outdir = QDir::toNativeSeparators(QFileInfo(item->getFilePath().toString()).canonicalPath()).toLocal8Bit();
+        parameters.gb_O_outdir = O_outdir.data();
+
+        if(!this->suffix.isEmpty())
+        {
+           o_suffixArray = QString(this->suffix + "." + this->main_window->mpDockConf->getFormatFile()).toLocal8Bit();
+           parameters.gb_o_suffix = o_suffixArray.data();
+        }
+        else
+        {
+            o_suffixArray = QString("." + this->main_window->mpDockConf->getFormatFile()).toLocal8Bit();
+            parameters.gb_o_suffix = o_suffixArray.data();
+        }
+
+    }
+    else
+    {
+        qDebug() << "PREVIEW";
+        O_outdir = QDir::tempPath().toLocal8Bit();
+        parameters.gb_O_outdir = O_outdir.data();
+
+        o_suffixArray = DEFAULT_TMP_EXTENSION.toLocal8Bit();
+        parameters.gb_o_suffix = o_suffixArray.data();
     }
 
     if(main_window->mpDockStyles->isInfoTextChecked() == false)
@@ -100,8 +139,8 @@ void ThumbnailRunnable::run()
         parameters.gb_E_end = this->item->getEndOmmitSecs();
     }
 
-      qDebug() << "input :" << parameters.gb_argv0;
-//    //qDebug() << "outdir :" << parameters.gb_O_outdir;
+//    qDebug() << "input :" << parameters.gb_argv0;
+//    qDebug() << "outdir :" << parameters.gb_O_outdir;
 //    qDebug() << "blank_skip :" << parameters.gb_b_blank;
 //    qDebug() << "title :" << parameters.gb_T_text;
 //    qDebug() << "output :" << parameters.gb_O_outdir;

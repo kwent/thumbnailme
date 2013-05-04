@@ -44,7 +44,6 @@ HEADERS += ThumbnailListwidget.h \
     ImageShackLoginWidget.h \
     IniManager.h \
     LanguagesSettingsTab.h \
-    ProcessingStatusBar.h \
     NetworkSettingsTab.h \
     PreviewGraphicView.h \
     SettingsWidget.h \
@@ -92,7 +91,6 @@ SOURCES += mtn/mtn.c \
     ImageShackLoginWidget.cpp \
     IniManager.cpp \
     LanguagesSettingsTab.cpp \
-    ProcessingStatusBar.cpp \
     main.cpp \
     NetworkSettingsTab.cpp \
     PreviewGraphicView.cpp \
