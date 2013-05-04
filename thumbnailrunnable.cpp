@@ -139,12 +139,6 @@ void ThumbnailRunnable::run()
         parameters.gb_E_end = this->item->getEndOmmitSecs();
     }
 
-//    qDebug() << "input :" << parameters.gb_argv0;
-//    qDebug() << "outdir :" << parameters.gb_O_outdir;
-//    qDebug() << "blank_skip :" << parameters.gb_b_blank;
-//    qDebug() << "title :" << parameters.gb_T_text;
-//    qDebug() << "output :" << parameters.gb_O_outdir;
-
     process_file();
 
     emit finished(this->item);

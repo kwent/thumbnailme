@@ -45,7 +45,7 @@ ThumbnailEngine::ThumbnailEngine(MainWindow *main_window)
     pool = new QThreadPool(this);
     pool->setMaxThreadCount(QThread::idealThreadCount());
     settings = new QSettings(QSettings::IniFormat,DEFAULT_PATH_INI,APPLICATION_NAME,DEFAULT_FILE_INI,this);
-//    connect( this, SIGNAL(itemTooShortDuration (ThumbnailItem *)), this , SLOT(successDialogItemRemove(ThumbnailItem *)) );
+    connect( this, SIGNAL(itemTooShortDuration (ThumbnailItem *)), this , SLOT(successDialogItemRemove(ThumbnailItem *)) );
 }
 
 /**
@@ -129,14 +129,13 @@ void ThumbnailEngine::run(int mode)
 */
 void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
 {
-//    //Disable Docks - Security
-//    this->main_window->mpDockInputOutput->setDisabled(true);
-//    this->main_window->mpDockTimeline->setDisabled(true);
+    //Disable Docks - Security
+    this->main_window->mpDockInputOutput->setDisabled(true);
+    this->main_window->mpDockTimeline->setDisabled(true);
 
-//    //Init
+    //Init
     this->listInputFile =  QLinkedList <ThumbnailItem*> (listInputFile);
-//    this->current = 0;
-//    this->initSuccessDialog(QLinkedList<ThumbnailItem*> (this->listInputFile));
+    this->initSuccessDialog(QLinkedList<ThumbnailItem*> (this->listInputFile));
 
     main_window->mpDockThreadsPool->threeWidget->clear();
 
@@ -302,8 +301,6 @@ void ThumbnailEngine::successDialogItemRemove(ThumbnailItem * item)
 */
 void ThumbnailEngine::success(ThumbnailItem* item)
 {
-    qDebug() << "SUCCESS FUNCTION";
-
     if(listInputFile.isEmpty())
     {
     //1 Re Enable Docks
