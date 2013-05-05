@@ -68,13 +68,11 @@ class ThumbnailEngine : public QObject
     void launchProcess(QLinkedList <ThumbnailItem*> listInputFile);
 
     private slots:
-    void convertToFormat(QObject *o);
     void initSuccessDialog(QLinkedList <ThumbnailItem*> listInputFile);
     void success(ThumbnailItem*item);
 
     public:
     QString  absoluteFilePathOutput(QString pathOutput, QString absoluteOutputPath,QString suffix,QString format = QString());
-    bool     isBinaryExists();
     Mode     mode() const;
     void     setMode(Mode mode);
 

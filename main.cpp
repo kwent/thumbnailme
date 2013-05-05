@@ -62,6 +62,7 @@ int main(int argc, char* argv[])
         app.setWindowIcon(QIcon(":sprites/thumbnailer.png"));
         app.setApplicationName(APPLICATION_NAME);
         app.setApplicationVersion(VERSION);
+
     /*Initialisation du fichier de configuration + récupération de la langue*/
     QString lang = initSettings();
 

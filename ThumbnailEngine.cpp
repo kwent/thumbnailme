@@ -59,15 +59,6 @@ ThumbnailEngine::~ThumbnailEngine()
 }
 
 /**
-*@brief  Vérifie si le binaire "mtn" existe bien.
-*@return bool - Vrai ou faux.
-*/
-bool ThumbnailEngine::isBinaryExists()
-{
-    return QFile::exists(DEFAULT_PATH_MTN);
-}
-
-/**
 *@brief Lance le processus de génération de vignette.
 *@param mode    Mode de conversion.
 */
@@ -88,9 +79,7 @@ void ThumbnailEngine::run(int mode)
                 if (!main_window->mpDockInputOutput->getPathOutput().isEmpty())
                     if(QDir(main_window->mpDockInputOutput->getPathOutput()).exists())
                         if(!main_window->mpDockStyles->isNoFontDefined())
-                          //if(isBinaryExists())
-                            launchProcess(main_window->mpDockInputOutput->getThumbnailList());
-                          //else QMessageBox::critical((QWidget *) this->parent(),_ERROR_,tr("Mtn binary not found. Operation cancelled."));
+                          launchProcess(main_window->mpDockInputOutput->getThumbnailList());
                         else QMessageBox::warning(main_window,_WARNING_,tr("No fonts defined"));
                     else QMessageBox::warning(main_window,_ERROR_,tr("Output path does not exist"));
                else QMessageBox::warning(main_window,_WARNING_,tr("Select an output folder, please"));
@@ -98,9 +87,7 @@ void ThumbnailEngine::run(int mode)
             else
             {
                 if(!main_window->mpDockStyles->isNoFontDefined())
-                  //if(isBinaryExists())
-                    launchProcess(main_window->mpDockInputOutput->getThumbnailList());
-                  //else QMessageBox::critical((QWidget *) this->parent(),_ERROR_,tr("Mtn binary not found. Operation cancelled."));
+                  launchProcess(main_window->mpDockInputOutput->getThumbnailList());
                 else QMessageBox::warning(main_window,_WARNING_,tr("No fonts defined"));
             }
         }
@@ -111,13 +98,11 @@ void ThumbnailEngine::run(int mode)
     {
         if (!main_window->mpDockInputOutput->getListWidget()->selectedItems().isEmpty())
             if(!main_window->mpDockStyles->isNoFontDefined())
-                //if(isBinaryExists())
-                {
-                    QLinkedList <ThumbnailItem*> l;
-                    l.append(main_window->mpDockInputOutput->getCurrentItem());
-                    launchProcess(l);
-                }
-                //else QMessageBox::critical((QWidget *) this->parent(),_ERROR_,tr("Mtn binary not found. Operation cancelled."));
+            {
+               QLinkedList <ThumbnailItem*> l;
+               l.append(main_window->mpDockInputOutput->getCurrentItem());
+               launchProcess(l);
+            }
             else QMessageBox::warning(main_window,_WARNING_,tr("No fonts defined"));
         else QMessageBox::warning(main_window,_WARNING_,tr("No file selected"));
     }
@@ -143,7 +128,7 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
     {
         currentItem = this->listInputFile.takeFirst();
         ThumbnailRunnable *task = new ThumbnailRunnable(this->main_window, currentItem, settings->value("Extras/outputSuffix").toString() , this->modeConversion);
-        task->setAutoDelete(true);
+        task->setAutoDelete(false);
 
         main_window->mpDockThreadsPool->setWindowTitle(QString("Threads actifs: %1").arg(pool->activeThreadCount()));
         main_window->mpDockThreadsPool->addThumbnailItem(currentItem);
@@ -201,29 +186,6 @@ void ThumbnailEngine::initSuccessDialog(QLinkedList <ThumbnailItem*> listInputFi
         }
     }
 }
-
-/**
-*@brief Converti le fichier crées temporairement dans le format et la qualité sélectionné par l'utilisateur.
-*@param o   Item à convertir.
-*/
-void ThumbnailEngine::convertToFormat(QObject *o)
-{
-    ThumbnailItem *item = qobject_cast<ThumbnailItem*>(o);
-
-    QString suffix = settings->value("Extras/outputSuffix").toString();
-
-    QString path = absoluteFilePathOutput(QDir::tempPath(),item->getFilePath().toString(),DEFAULT_TMP_EXTENSION);
-
-    QString output;
-    if (modeConversion == SIMPLEMOD && !main_window->mpDockInputOutput->isSameSourceChecked())
-        output = main_window->mpDockInputOutput->getPathOutput() + "/" + QFileInfo(path).completeBaseName() + suffix +"."+ main_window->mpDockConf->getFormatFile();
-    else if (modeConversion == SIMPLEMOD && main_window->mpDockInputOutput->isSameSourceChecked())
-        output = QDir::toNativeSeparators(QFileInfo(currentItem->getFilePath().toString()).canonicalPath() + "/")+ QFileInfo(path).completeBaseName() + suffix + "."+ main_window->mpDockConf->getFormatFile();
-
-    img = new QImage(path);
-        img->save(output,0,main_window->mpDockConf->getQuality());
-}
-
 
 /**
 *@brief   Supprimer les fichiers temporaires générés par le moteur.
@@ -301,6 +263,14 @@ void ThumbnailEngine::successDialogItemRemove(ThumbnailItem * item)
 */
 void ThumbnailEngine::success(ThumbnailItem* item)
 {
+    qDebug() << "SUCCESS";
+    item->logs.truncate(30);
+    qDebug() << "LOG FOR ITEM :" << item->logs;
+
+    QTreeWidgetItem *three_item = new QTreeWidgetItem();
+    three_item->setText(0,item->logs);
+    main_window->mpDockThreadsPool->threeWidget->addTopLevelItem(three_item);
+
     if(listInputFile.isEmpty())
     {
     //1 Re Enable Docks

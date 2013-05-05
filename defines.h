@@ -43,7 +43,6 @@
 #define usleep(ms)            Sleep(ms);
 #define FACTOR_TIME           1
 #define DEFAULT_PATH_FONT     QStandardPaths::writableLocation(QStandardPaths::FontsLocation)
-#define DEFAULT_PATH_MTN      QString("./mtn/mtn.exe")
 #define DEFAULT_PATH_INI      QSettings::UserScope
 #define DEFAULT_FILE_INI      QString("settings")
 #define DEFAULT_PATH_LANG     QString("./lang/")
@@ -55,7 +54,6 @@
 #include <stdlib.h>
 #define FACTOR_TIME           1000
 #define DEFAULT_PATH_FONT     QString("/usr/share/fonts/truetype/freefont")
-#define DEFAULT_PATH_MTN      QString("/usr/bin/mtncore")
 #define DEFAULT_PATH_INI      QSettings::UserScope
 #define DEFAULT_FILE_INI      QString("settings")
 #define DEFAULT_PATH_LANG     QString("./lang/")

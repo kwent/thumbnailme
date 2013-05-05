@@ -139,7 +139,12 @@ void ThumbnailRunnable::run()
         parameters.gb_E_end = this->item->getEndOmmitSecs();
     }
 
-    process_file();
+    const char * toto = process_file();
 
+    this->item->logs = QString::fromLatin1(toto,4096);
+
+    qDebug() << "LOGS OUTPUT RUNNABLE" << this->item->logs;
+
+    //printf("RUNNABLE QPRINTABLE: %s", qPrintable(toto));
     emit finished(this->item);
 }

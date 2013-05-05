@@ -31,7 +31,7 @@
 extern "C"
  {
  extern struct params parameters; // params data & info
- extern int process_file();
+ extern const char* process_file();
  }
 #endif
 

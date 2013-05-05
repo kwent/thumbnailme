@@ -62,6 +62,7 @@
 #include "mtn.h"
 
 /* more global variables */
+char logs[4096];
 char *gb_version = "20121218a(j) copyright (c) 2007-2008 tuit, et al.";
 time_t gb_st_start = 0; // start time of program
 params parameters =
@@ -2285,49 +2286,6 @@ typedef struct {
 extern void __wgetmainargs (int *, wchar_t ***, wchar_t ***, int, _startupinfo *);
 
 char *gb_argv[10240]; // FIXME: global & hopefully noone will use more than this
-/*
-get command line arguments and expand wildcards in utf-8 in windows
-caller needs to free argv[i]
-return 0 if ok
-*/
-int get_windows_argv(int *pargc, char ***pargv)
-{
-#if defined(WIN32) && defined(_UNICODE)
-    // copied & modified from mingw-runtime-3.13's init.c
-    int _argc = 0;
-    wchar_t **_argv = 0;
-    wchar_t **dummy_environ = 0;
-    _startupinfo start_info;
-    start_info.newmode = 0;
-    __wgetmainargs(&_argc, &_argv, &dummy_environ, -1, &start_info);
-
-    //printf("\nafter __wgetmainargs; _argc: %d\n", _argc); // DEBUG
-    int i;
-    for (i = 0; i < _argc; i++) {
-        //wprintf(L"_argv[%d] wc: %s\n", i, _argv[i]); // DEBUG
-        char utf8_buf[UTF8_FILENAME_SIZE] = "";
-        WC_2_UTF8(utf8_buf, _argv[i], UTF8_FILENAME_SIZE);
-        //printf("_argv[%d] utf8: %s\n", i, utf8_buf); // DEBUG
-
-        char *dup = strdup(utf8_buf);
-        if (NULL == dup) {
-            goto error;
-        }
-        gb_argv[i] = dup;
-    }
-    *pargc = _argc;
-    *pargv = gb_argv;
-    return 0;
-
-  error:
-    while (--_argc >= 0) {
-        free(gb_argv[_argc]);
-    }
-    return -1;
-#endif
-
-    return 0;
-}
 
 void usage()
 {
@@ -2397,309 +2355,41 @@ void usage()
     av_log(NULL, AV_LOG_ERROR, "gpl-2.0.txt.\n");
 }
 
-int process_file()
+void my_log_callback(void *ptr, int level, const char *fmt, va_list vl)
 {
-    //parameters.gb_argv0 = path_2_file(parameters.gb_argv0);
+        va_list vl2;
+        char line[1024];
+        static int print_prefix = 1;
+
+        va_copy(vl2, vl);
+        av_log_default_callback(ptr, level, fmt, vl);
+        av_log_format_line(ptr, level, fmt, vl2, line, sizeof(line), &print_prefix);
+        va_end(vl2);
+
+        //WHAT TO DO NOW...
+
+        //fputs(line, report_file);
+        //fflush(report_file);
+        sprintf(logs+strlen(logs),line);
+}
+
+const char *process_file()
+{
     setvbuf(stderr, NULL, _IONBF, 0); // turn off buffering in mingw
-
-//    gb_st_start = time(NULL); // program start time
-//    srand(gb_st_start);
-
-//    parameters = p;
-
-//    parameters.gb_argv0 = p->gb_argv0;
-//    parameters.gb_b_blank = p->gb_b_blank;
-//    parameters.gb_B_begin = params.gb_B_begin;
-//    parameters.gb_c_column = params.gb_c_column;
-//    parameters.gb_C_cut = params.gb_C_cut;
-//    parameters.gb_D_edge = params.gb_D_edge;
-//    parameters.gb_e_ext = params.gb_e_ext;
-//    parameters.gb_E_end = params.gb_E_end;
-//    parameters.gb_f_fontname = params.gb_f_fontname;
-//    parameters.gb_F_info_color = params.gb_F_info_color;
-//    parameters.gb_F_info_font_size = params.gb_F_info_font_size;
-//    parameters.gb_F_ts_fontname = params.gb_F_ts_fontname;
-//    parameters.gb_F_ts_color = params.gb_F_ts_color;
-//    parameters.gb_F_ts_shadow = params.gb_F_ts_shadow;
-//    parameters.gb_F_ts_font_size = params.gb_F_ts_font_size;
-//    parameters.gb_g_gap = params.gb_g_gap;
-//    parameters.gb_h_height = params.gb_h_height;
-//    parameters.gb_i_info = params.gb_i_info;
-//    parameters.gb_I_individual = params.gb_I_individual;
-//    parameters.gb_j_quality = params.gb_j_quality;
-//    parameters.gb_k_bcolor = params.gb_k_bcolor;
-//    parameters.gb_L_info_location = params.gb_L_info_location;
-//    parameters.gb_L_time_location = params.gb_L_time_location;
-//    parameters.gb_n_normal = params.gb_n_normal;
-//    parameters.gb_N_suffix = params.gb_N_suffix;
-//    parameters.gb_o_suffix = p->gb_o_suffix;
-//    parameters.gb_O_outdir = params.gb_O_outdir;
-//    parameters.gb_p_pause = params.gb_p_pause;
-//    parameters.gb_P_dontpause = params.gb_P_dontpause;
-//    parameters.gb_q_quiet = params.gb_q_quiet;
-//    parameters.gb_r_row = params.gb_r_row;
-//    parameters.gb_s_step = params.gb_s_step;
-//    parameters.gb_t_timestamp = params.gb_t_timestamp;
-//    parameters.gb_T_text = p->gb_T_text;
-//    parameters.gb_v_verbose = params.gb_v_verbose;
-//    parameters.gb_V = params.gb_V;
-//    parameters.gb_w_width = params.gb_w_width;
-//    parameters.gb_W_overwrite = params.gb_W_overwrite;
-//    parameters.gb_z_seek = params.gb_z_seek;
-//    parameters.gb_Z_nonseek = params.gb_Z_nonseek;
-
 
     /* init */
     av_register_all();
     // Register all formats and codecs
     av_log_set_level(AV_LOG_VERBOSE);
-
-    av_log(NULL, AV_LOG_VERBOSE, "mtn indir: %s\n",parameters.gb_argv0);
-    av_log(NULL, AV_LOG_VERBOSE, "title : %s\n",parameters.gb_T_text);
-    av_log(NULL, AV_LOG_VERBOSE, "double : %.2f\n",parameters.gb_b_blank);
-    av_log(NULL, AV_LOG_VERBOSE, "suffix : %s\n",parameters.gb_o_suffix);
-    av_log(NULL, AV_LOG_VERBOSE, "end : %f\n",parameters.gb_E_end);
-    av_log(NULL, AV_LOG_VERBOSE, "quality : %d\n",parameters.gb_j_quality);
-
+    // Log Callback
+    av_log_set_callback(my_log_callback);
     /* process movie files */
     make_thumbnail(parameters.gb_argv0);
-    //process_loop(1 /*- optind*/, parameters.gb_argv0 /*+ optind*/);
 
-    return 0;
+    //logs[strlen(logs)+1] = 0;
+    //sprintf(logs+strlen(logs),"\0");
+
+    av_log(NULL, AV_LOG_VERBOSE, "logs : %s", logs);
+
+    return logs;
 }
-
-//int process_file(int argc, char *argv[])
-//{
-//    parameters.gb_argv0 = path_2_file(argv[0]);
-//    setvbuf(stderr, NULL, _IONBF, 0); // turn off buffering in mingw
-
-//    gb_st_start = time(NULL); // program start time
-//    srand(gb_st_start);
-
-//    // get utf-8 argv in windows
-//    if (0 != get_windows_argv(&argc, &argv)) {
-//        av_log(NULL, AV_LOG_ERROR, "%s: cannot get command line arguments\n", parameters.gb_argv0);
-//        return -1;
-//    }
-
-//    // set locale
-//    __attribute__((unused)) char *locale = setlocale(LC_ALL, "");
-//    //av_log(NULL, AV_LOG_VERBOSE, "locale: %s\n", locale);
-
-//    /* get & check options */
-//    int parse_error = 0;
-//    int c;
-
-//    while (-1 != (c = getopt(argc, argv, "a:b:B:c:C:D:e:E:f:F:g:h:iIj:k:L:nN:o:O:pPqr:s:tT:vVw:WzZ"))) {
-//        switch (c) {
-//        double tmp_a_ratio = 0;
-//        case 'a':
-//            if (0 == get_double_opt('a', &tmp_a_ratio, optarg, 1)) { // success
-//                parameters.gb_a_ratio.num = tmp_a_ratio * 10000;
-//                parameters.gb_a_ratio.den = 10000;
-//            } else {
-//                parse_error++;
-//            }
-//            break;
-//        case 'b':
-//            parse_error += get_double_opt('b', &parameters.gb_b_blank, optarg, 0);
-//            if (parameters.gb_b_blank < .2) {
-//                av_log(NULL, LOG_INFO, "%s: -b %.2f might be too extreme; try -b .5\n", parameters.gb_argv0, parameters.gb_b_blank);
-//            }
-//            if (parameters.gb_b_blank > 1) {
-//                // turn edge detection off cuz it requires blank detection
-//                parameters.gb_D_edge = 0;
-//            }
-//            break;
-//        case 'B':
-//            parse_error += get_double_opt('B', &parameters.gb_B_begin, optarg, 0);
-//            break;
-//        case 'c':
-//            parse_error += get_int_opt('c', &parameters.gb_c_column, optarg, 1);
-//            break;
-//        case 'C':
-//            parse_error += get_double_opt('C', &parameters.gb_C_cut, optarg, 1);
-//            break;
-//        case 'D':
-//            parse_error += get_int_opt('D', &parameters.gb_D_edge, optarg, 0);
-//            if (parameters.gb_D_edge > 0
-//                && (parameters.gb_D_edge < 4 || parameters.gb_D_edge > 12)) {
-//                av_log(NULL, LOG_INFO, "%s: -D%d might be too extreme; try -D4, -D6, or -D8\n", parameters.gb_argv0,parameters.gb_D_edge);
-//            }
-//            break;
-//        case 'e':
-//            parameters.gb_e_ext = optarg;
-//            break;
-//        case 'E':
-//            parse_error += get_double_opt('E', &parameters.gb_E_end, optarg, 0);
-//            break;
-//        case 'f':
-//            parameters.gb_f_fontname = optarg;
-//            if (0 == strcmp(parameters.gb_F_ts_fontname, GB_F_FONTNAME)) {
-//                parameters.gb_F_ts_fontname = parameters.gb_f_fontname;
-//            }
-//            break;
-//        case 'F':
-//            parse_error += get_format_opt('F', optarg);
-//            break;
-//        case 'g':
-//            parse_error += get_int_opt('g', &parameters.gb_g_gap, optarg, 0);
-//            break;
-//        case 'h':
-//            parse_error += get_int_opt('h', &parameters.gb_h_height, optarg, 0);
-//            break;
-//        case 'i':
-//            parameters.gb_i_info = 0;
-//            break;
-//        case 'I':
-//            parameters.gb_I_individual = 1;
-//            break;
-//        case 'j':
-//            parse_error += get_int_opt('j', &parameters.gb_j_quality, optarg, 1);
-//            break;
-//        case 'k': // background color
-//            parse_error += get_color_opt('k', &parameters.gb_k_bcolor, optarg);
-//            break;
-//        case 'L':
-//            parse_error += get_location_opt('L', optarg);
-//            break;
-//        case 'n':
-//            parameters.gb_n_normal = 1; // normal priority
-//            break;
-//        case 'N':
-//            parameters.gb_N_suffix = optarg;
-//            break;
-//        case 'o':
-//            parameters.gb_o_suffix = optarg;
-//            break;
-//        case 'O':
-//            parameters.gb_O_outdir = optarg;
-//            rem_trailing_slash(parameters.gb_O_outdir);
-//            break;
-//        case 'p':
-//            parameters.gb_p_pause = 1; // pause before exiting
-//            break;
-//        case 'P':
-//            parameters.gb_P_dontpause = 1; // dont pause
-//            break;
-//        case 'q':
-//            parameters.gb_q_quiet = 1; //quiet
-//            break;
-//        case 'r':
-//            parse_error += get_int_opt('r', &parameters.gb_r_row, optarg, 0);
-//            break;
-//        case 's':
-//            parse_error += get_int_opt('s', &parameters.gb_s_step, optarg, 0);
-//            break;
-//        case 't':
-//            parameters.gb_t_timestamp = 0; // off
-//            break;
-//        case 'T':
-//            parameters.gb_T_text = optarg;
-//            break;
-//        case 'v':
-//            parameters.gb_v_verbose = 1; // verbose
-//            break;
-//        case 'V':
-//            parameters.gb_V = 1; // DEBUG
-//            av_log(NULL, LOG_INFO, "%s: -V is only used for debugging\n", parameters.gb_argv0);
-//            break;
-//        case 'w':
-//            parse_error += get_int_opt('w', &parameters.gb_w_width, optarg, 0);
-//            break;
-//        case 'W':
-//            parameters.gb_W_overwrite = 0;
-//            break;
-//        case 'z':
-//            parameters.gb_z_seek = 1; // always seek mode
-//            break;
-//        case 'Z':
-//            parameters.gb_Z_nonseek = 1; // always non-seek mode
-//            break;
-//        default:
-//            parse_error += 1;
-//            break;
-//        }
-//    }
-
-//    if (optind == argc) {
-//        av_log(NULL, AV_LOG_ERROR, "%s: no input files or directories specified\n", parameters.gb_argv0);
-//        parse_error += 1;
-//    }
-
-//    /* check arguments */
-//    if (parameters.gb_r_row == 0 && parameters.gb_s_step == 0) {
-//        av_log(NULL, AV_LOG_ERROR, "%s: option -r and -s cant be 0 at the same time\n", parameters.gb_argv0);
-//        parse_error += 1;
-//    }
-//    if (parameters.gb_b_blank > 1 && parameters.gb_D_edge > 0) {
-//        av_log(NULL, AV_LOG_ERROR, "%s: -D requires -b arg to be less than 1\n", parameters.gb_argv0);
-//        parse_error += 1;
-//    }
-//    if (parameters.gb_z_seek == 1 && parameters.gb_Z_nonseek == 1) {
-//        av_log(NULL, AV_LOG_ERROR, "%s: option -z and -Z cant be used together\n", parameters.gb_argv0);
-//        parse_error += 1;
-//    }
-//    if (parameters.gb_E_end > 0 && parameters.gb_C_cut > 0) {
-//        av_log(NULL, AV_LOG_ERROR, "%s: option -C and -E cant be used together\n", parameters.gb_argv0);
-//        parse_error += 1;
-//    }
-
-//    if (0 != parse_error) {
-//        usage();
-//        goto exit;
-//    }
-
-//    /* lower priority */
-//    if (1 != parameters.gb_n_normal) { // lower priority
-//#ifdef WIN32
-//        SetPriorityClass(GetCurrentProcess(), IDLE_PRIORITY_CLASS);
-//#else
-//        nice(10); // mingw doesn't have nice??
-//        //setpriority (PRIO_PROCESS, 0, PRIO_MAX/2);
-//#endif
-//    }
-
-//    /* create output directory */
-//    if (NULL != parameters.gb_O_outdir && !is_dir(parameters.gb_O_outdir)) {
-//#ifdef WIN32
-//        int ret = mkdir(parameters.gb_O_outdir);
-//#else
-//        int ret = mkdir(parameters.gb_O_outdir, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-//#endif
-//        if (0 != ret) {
-//            av_log(NULL, AV_LOG_ERROR, "\n%s: creating output directory '%s' failed: %s\n", parameters.gb_argv0, parameters.gb_O_outdir, strerror(errno));
-//            goto exit;
-//        }
-//    }
-
-//    /* init */
-//    av_register_all();          // Register all formats and codecs
-//    if (parameters.gb_v_verbose > 0) {
-//        av_log_set_level(AV_LOG_VERBOSE);
-//    } else {
-//        av_log_set_level(LOG_INFO);
-//    }
-//    //gdUseFontConfig(1); // set GD to use fontconfig patterns
-
-//    /* process movie files */
-//    process_loop(argc - optind, argv + optind);
-
-//  exit:
-//    // clean up
-//#if defined(WIN32) && defined(_UNICODE)
-//    while (--argc >= 0) {
-//        free(argv[argc]);
-//    }
-//#endif
-
-//    //av_log(NULL, AV_LOG_VERBOSE, "\n%s: total run time: %.2f s.\n", parameters.gb_argv0, difftime(time(NULL), gb_st_start));
-
-//    if (1 == parameters.gb_p_pause && 0 == parameters.gb_P_dontpause) {
-//        av_log(NULL, AV_LOG_ERROR, "\npausing... press Enter key to exit (see -P option)\n");
-//        fflush(stdout);
-//        fflush(stderr);
-//        getchar();
-//    }
-//    return 0;
-//}

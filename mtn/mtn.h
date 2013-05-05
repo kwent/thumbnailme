@@ -67,6 +67,7 @@ typedef struct thumbnail
 
 /* LIBAVUTIL_VERSION_INT is too low for VERBOSE & INFO, so we'll define our own */
 #define LOG_INFO 0
+
 /* command line options & default values */
 #define GB_A_RATIO (AVRational){0, 1}
 #define GB_B_BLANK 0.8

@@ -47,6 +47,9 @@ class ThumbnailItem : public QObject , public QListWidgetItem
     QMediaPlayer* mediaPlayer;
 
     public:
+    QString        logs;
+
+    public:
     void setFilePath(QUrl path);
     void setFilePathOutput(QUrl path);
     void setLowerTime(QTime t);
