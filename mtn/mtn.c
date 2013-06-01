@@ -2363,13 +2363,9 @@ void my_log_callback(void *ptr, int level, const char *fmt, va_list vl)
 
         va_copy(vl2, vl);
         av_log_default_callback(ptr, level, fmt, vl);
-        av_log_format_line(ptr, level, fmt, vl2, line, sizeof(line), &print_prefix);
+        av_log_format_line(ptr, level, fmt, vl, line, sizeof(line), &print_prefix);
         va_end(vl2);
 
-        //WHAT TO DO NOW...
-
-        //fputs(line, report_file);
-        //fflush(report_file);
         sprintf(logs+strlen(logs),line);
 }
 
@@ -2380,16 +2376,12 @@ const char *process_file()
     /* init */
     av_register_all();
     // Register all formats and codecs
-    av_log_set_level(AV_LOG_VERBOSE);
+    av_log_set_level(AV_LOG_ERROR);
     // Log Callback
     av_log_set_callback(my_log_callback);
     /* process movie files */
     make_thumbnail(parameters.gb_argv0);
 
-    //logs[strlen(logs)+1] = 0;
     //sprintf(logs+strlen(logs),"\0");
-
-    av_log(NULL, AV_LOG_VERBOSE, "logs : %s", logs);
-
     return logs;
 }

@@ -79,7 +79,7 @@ class ThumbnailEngine : public QObject
     public slots:
     void buildOutput();
     void deleteTemporaryFiles();
-    void detectShortDuration();
+    //void detectShortDuration();
     void run(int mode);
     void successDialogItemRemove(ThumbnailItem *item);
 

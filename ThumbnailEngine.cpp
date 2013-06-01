@@ -26,13 +26,13 @@
 #include "DockConf.h"
 #include "DockTimeLine.h"
 #include "DockThreadsPool.h"
+#include "DockThreadsLog.h"
 #include "SuccessDialog.h"
 #include "PreviewGraphicView.h"
 #include "ThumbnailItem.h"
 #include <QDebug>
 #include "ThumbnailListwidget.h"
 #include "ThumbnailRunnable.h"
-#include "VerboseWindow.h"
 
 /**
 *@brief Constructeur.
@@ -122,7 +122,7 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
     this->listInputFile =  QLinkedList <ThumbnailItem*> (listInputFile);
     this->initSuccessDialog(QLinkedList<ThumbnailItem*> (this->listInputFile));
 
-    main_window->mpDockThreadsPool->threeWidget->clear();
+    main_window->mpDockThreadsPool->treeWidget->clear();
 
     while(!this->listInputFile.isEmpty())
     {
@@ -234,20 +234,20 @@ void ThumbnailEngine::buildOutput()
     currentOutput << outputString.split(QString("\n"),QString::SkipEmptyParts);
 }
 
-/**
-*@brief Détecte si le fichier est trop court pour être traité par Mtn.
-*@brief Trop court si Mtn génère moins de 4 lignes.
-*/
-void ThumbnailEngine::detectShortDuration()
-{
-    this->main_window->mpVerboseWindow->setVerbose(currentOutput);
+///**
+//*@brief Détecte si le fichier est trop court pour être traité par Mtn.
+//*@brief Trop court si Mtn génère moins de 4 lignes.
+//*/
+//void ThumbnailEngine::detectShortDuration()
+//{
+//    this->main_window->mpDockThreadsLog->setVerbose(currentOutput);
 
-    if (currentOutput.count() <= 4)
-    {
-        this->main_window->mpVerboseWindow->setVerbose("<font color=\"red\">Error: The duration of this file seems too short.</font>");
-        emit itemTooShortDuration(this->currentItem);
-    }
-}
+//    if (currentOutput.count() <= 4)
+//    {
+//        this->main_window->mpDockThreadsLog->setVerbose("<font color=\"red\">Error: The duration of this file seems too short.</font>");
+//        emit itemTooShortDuration(this->currentItem);
+//    }
+//}
 
 /**
 *@brief Retire les items non traité de la successDialog car trop court via le signal itemTooShortDuration.
@@ -264,12 +264,7 @@ void ThumbnailEngine::successDialogItemRemove(ThumbnailItem * item)
 void ThumbnailEngine::success(ThumbnailItem* item)
 {
     qDebug() << "SUCCESS";
-    item->logs.truncate(30);
     qDebug() << "LOG FOR ITEM :" << item->logs;
-
-    QTreeWidgetItem *three_item = new QTreeWidgetItem();
-    three_item->setText(0,item->logs);
-    main_window->mpDockThreadsPool->threeWidget->addTopLevelItem(three_item);
 
     if(listInputFile.isEmpty())
     {

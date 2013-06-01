@@ -3,8 +3,8 @@
 *	Thumbnail me is a user interface for Movie thumbnailer.
 * 	Generate thumbnails from any movie is now easier !
 *
-*	@file	VerboseWindow.cpp
-*       @class  VerboseWindow
+*	@file	DockThreadsLog.cpp
+*       @class  DockThreadsLog
 *	Cette classe permet la génération du Dock "Journal" qui affiche la sortie (stdout) du processus.
 *
 *	@author Quentin Rousseau\n
@@ -18,21 +18,23 @@
 *       @date       2011-2012
 *******************************************************************************/
 
-#include "VerboseWindow.h"
+#include "DockThreadsLog.h"
 #include "MainWindow.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include "ThumbnailTreeItem.h"
 
 /**
 *@brief Constructeur.
 *@param *main_window    Fenêtre principale de Thumbnail me.
 */
-VerboseWindow::VerboseWindow(QWidget *main_window) : QDockWidget(main_window)
+DockThreadsLog::DockThreadsLog(QWidget *main_window) : QDockWidget(main_window)
 {
+    this->mainWindow = (MainWindow*) main_window;
     this->setMinimumWidth(QApplication::desktop()->screenGeometry(QApplication::desktop()->primaryScreen()).width()/4);
-    this->setObjectName("VerboseWindow");
+    this->setObjectName("DockThreadsLog");
 
     QVBoxLayout *contentLayout = new QVBoxLayout;
     QHBoxLayout *buttonsLayout = new QHBoxLayout;
@@ -68,44 +70,49 @@ VerboseWindow::VerboseWindow(QWidget *main_window) : QDockWidget(main_window)
 /**
 *@brief Destructeur.
 */
-VerboseWindow::~VerboseWindow()
+DockThreadsLog::~DockThreadsLog()
 {
 }
 
-/**
-*@brief Setteur de verbosité - La sortie du processus de mtn STDOUT est mappée et récupérée ici.
-*/
-void VerboseWindow::setVerbose(QStringList outputStringList)
-{
-    foreach(QString current ,outputStringList)
-    {
-        current = current.trimmed();
-        if (current.contains("File:") && verboseTextEdit->document()->isEmpty())
-        {
-          verboseTextEdit->append(QDateTime::currentDateTime().toString()+"\n\n"+current);
-        }
-        else if (current.contains("File:"))
-        {
-          verboseTextEdit->append("\n" + QDateTime::currentDateTime().toString()+"\n\n"+current);
-        }
-        else verboseTextEdit->append(current);
-    }
-}
+///**
+//*@brief Setteur de verbosité - La sortie du processus de mtn STDOUT est mappée et récupérée ici.
+//*/
+//void DockThreadsLog::setVerbose(QStringList outputStringList)
+//{
+//    foreach(QString current ,outputStringList)
+//    {
+//        current = current.trimmed();
+//        if (current.contains("File:") && verboseTextEdit->document()->isEmpty())
+//        {
+//          verboseTextEdit->append(QDateTime::currentDateTime().toString()+"\n\n"+current);
+//        }
+//        else if (current.contains("File:"))
+//        {
+//          verboseTextEdit->append("\n" + QDateTime::currentDateTime().toString()+"\n\n"+current);
+//        }
+//        else verboseTextEdit->append(current);
+//    }
+//}
 
 /**
 *@brief Setteur de verbosité.
-*@param string    Chaîne de caractères à ajouter.
+*@param item    ThumbnailItem à ajouter.
 */
-void VerboseWindow::setVerbose(QString string)
+void DockThreadsLog::setLog(QTreeWidgetItem *item, int column)
 {
-    verboseTextEdit->append(string);
+    ThumbnailTreeItem* tmp = (ThumbnailTreeItem*) item;
+    this->setWindowTitle(tr( "Logs" ) + ': ' + tmp->thumbnailItem->getFilePath().toString() );
+    verboseTextEdit->clear();
+    verboseTextEdit->append(QDateTime::currentDateTime().toString()+"\n");
+    verboseTextEdit->append(tmp->thumbnailItem->logs);
+    this->raise();
 }
 
 /**
 *@brief ChangeEvent.
 *@param *event Evenement.
 */
-void VerboseWindow::changeEvent(QEvent* event)
+void DockThreadsLog::changeEvent(QEvent* event)
 {
     if (event->type() == QEvent::LanguageChange)
         retranslate();
@@ -115,7 +122,7 @@ void VerboseWindow::changeEvent(QEvent* event)
 /**
 *@brief Active ou désactive le boutton "effacer" & "Copier dans le presse papier" selon le contenu du widget.
 */
-void VerboseWindow::enabledButtons()
+void DockThreadsLog::enabledButtons()
 {
     if(!verboseTextEdit->toPlainText().isEmpty())
     {
@@ -132,7 +139,7 @@ void VerboseWindow::enabledButtons()
 /**
 *@brief Copie le contenu du texte dans le presse papier.
 */
-void VerboseWindow::copyToClipboard()
+void DockThreadsLog::copyToClipboard()
 {
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(verboseTextEdit->toPlainText(),QClipboard::Clipboard);
@@ -141,7 +148,7 @@ void VerboseWindow::copyToClipboard()
 /**
 *@brief Fonction de traduction dynamique.
 */
-void VerboseWindow::retranslate()
+void DockThreadsLog::retranslate()
 {
     this->setWindowTitle( tr( "Logs" ) );
     copyToClipboardButton->setText( tr("Copy to clipboard") );

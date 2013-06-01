@@ -3,8 +3,8 @@
 *	Thumbnail me is a user interface for Movie thumbnailer.
 * 	Generate thumbnails from any movie is now easier !
 *
-*	@file	VerboseWindow.h
-*       @class  VerboseWindow
+*	@file	DockThreadsLog.h
+*       @class  DockThreadsLog
 *	Cette classe permet la génération du Dock "Journal" qui affiche la sortie (stdout) du processus.
 *
 *	@author Quentin Rousseau\n
@@ -18,24 +18,26 @@
 *       @date       2011-2012
 *******************************************************************************/
 
-#ifndef HEADER_VERBOSEWINDOW
-#define HEADER_VERBOSEWINDOW
+#ifndef DOCKTHREADSLOG_H
+#define DOCKTHREADSLOG_H
 
 #include <QTextEdit>
 #include <QPushButton>
 #include <QDockWidget>
 
 class MainWindow;
+class QTreeWidgetItem;
 
-class VerboseWindow : public QDockWidget
+class DockThreadsLog : public QDockWidget
 {
     Q_OBJECT
 
     public:
-    explicit VerboseWindow(QWidget *main_window);
-    virtual ~VerboseWindow();
+    explicit DockThreadsLog(QWidget *main_window);
+    virtual ~DockThreadsLog();
 
     private:
+    MainWindow    *mainWindow;
     QWidget       *contentWidget;
     QTextEdit     *verboseTextEdit;
     QPushButton   *clearAllButton;
@@ -47,12 +49,10 @@ class VerboseWindow : public QDockWidget
     protected:
     void changeEvent(QEvent* event);
 
-    public:
-    void setVerbose(QString string);
-    void setVerbose(QStringList outputStringList);
-
     public slots:
+    void setLog(QTreeWidgetItem *item, int column);
     void copyToClipboard();
     void enabledButtons();
 };
-#endif
+
+#endif // DOCKTHREADSLOG_H

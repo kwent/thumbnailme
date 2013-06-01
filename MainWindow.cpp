@@ -29,6 +29,7 @@
 #include "DockStyles.h"
 #include "DockTimeLine.h"
 #include "DockThreadsPool.h"
+#include "DockThreadsLog.h"
 #include "HelpWidget.h"
 #include "ImageShackLoginWidget.h"
 #include "IniManager.h"
@@ -227,7 +228,7 @@ void MainWindow::createDocks()
     mpDockConf = new DockConf(this);
     mpDockStyles = new DockStyles(this);
     mpDockTimeline = new DockTimeLine(this);
-    //mpVerboseWindow = new VerboseWindow(this);
+    mpDockThreadsLog = new DockThreadsLog(this);
     mpDockThreadsPool = new DockThreadsPool(this);
     mpPreviewGraphicView = new PreviewGraphicView(this,zoomInAction,zoomOutAction,clearSceneAction,printAction);
     mpThumbnailEngine = new ThumbnailEngine(this);
@@ -256,7 +257,9 @@ void MainWindow::createDocks()
     this->addDockWidget(Qt::LeftDockWidgetArea,   configurationDockWidget, Qt::Vertical);
     this->addDockWidget(Qt::BottomDockWidgetArea, mpDockInputOutput,       Qt::Horizontal);
     this->addDockWidget(Qt::BottomDockWidgetArea, mpDockThreadsPool,       Qt::Horizontal);
+    this->addDockWidget(Qt::BottomDockWidgetArea, mpDockThreadsLog,        Qt::Horizontal);
     this->setCentralWidget(mpPreviewGraphicView);
+    this->tabifyDockWidget(mpDockThreadsLog,mpDockThreadsPool);
 }
 
 /**
@@ -278,6 +281,7 @@ void MainWindow::createMenuConnections()
     connect( donateAction, SIGNAL(triggered()), this,SLOT(donateThumbnailme()) );
     connect( websiteAction, SIGNAL(triggered()), this,SLOT(websiteThumbnailme()) );
     connect( quitAction, SIGNAL(triggered()), this, SLOT(close()) );
+    connect( mpDockThreadsPool->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),mpDockThreadsLog, SLOT(setLog(QTreeWidgetItem*,int)));
 }
 
 /**

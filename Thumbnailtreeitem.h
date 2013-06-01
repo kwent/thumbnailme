@@ -3,9 +3,9 @@
 *	Thumbnail me is a user interface for Movie thumbnailer.
 * 	Generate thumbnails from any movie is now easier !
 *
-*	@file	DockThreadsPool.h
-*       @class  DockThreadsPool
-*	Cette classe permet la de voir les threads actifs
+*	@file	ThumbnailTreeItem.h
+*       @class  ThumbnailTreeItem
+*	QListWidget de ThumbnailItem.
 *
 *	@author Quentin Rousseau\n
 *	@note   Copyright (C) 2011-2012 Quentin Rousseau\n
@@ -13,40 +13,29 @@
 *               Site web: www.thumbnailme.com\n
 *               Email: quentin.rousseau@thumbnailme.com
 *
-*       @since      3.5
+*       @since      3.0
 *	@version    3.5
 *       @date       2011-2012
 *******************************************************************************/
 
-#ifndef DOCKTHREADSPOOL_H
-#define DOCKTHREADSPOOL_H
+#ifndef THUMBNAILTREEITEM_H
+#define THUMBNAILTREEITEM_H
 
-#include <QDockWidget>
-#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include "ThumbnailItem.h"
 
-class MainWindow;
-
-class DockThreadsPool : public QDockWidget
+class ThumbnailTreeItem : public QTreeWidgetItem
 {
-    Q_OBJECT
 
-    public:
-    explicit DockThreadsPool(QWidget *main_window);
+public:
+    explicit ThumbnailTreeItem(ThumbnailItem* thumbnailItem);
 
-    public:
-    void addThumbnailItem(ThumbnailItem* item);
+public:
+    ThumbnailItem* thumbnailItem;
 
-    private:
-    MainWindow  *main_window;
+public:
+    void setThreadStatus(QString status);
 
-    public:
-    QTreeWidget *treeWidget;
-
-    public slots:
-    void threadStarted(ThumbnailItem* item);
-    void threadFinished(ThumbnailItem* item);
-    
 };
 
-#endif // DOCKTHREADSPOOL_H
+#endif // THUMBNAILTREEITEM_H

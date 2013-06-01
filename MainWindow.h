@@ -32,13 +32,13 @@ class DockConf;
 class DockStyles;
 class DockTimeLine;
 class DockThreadsPool;
+class DockThreadsLog;
 class ImageShackLoginWidget;
 class IniManager;
 class PreviewGraphicView;
 class SettingsWidget;
 class SuccessDialog;
 class ThumbnailEngine;
-class VerboseWindow;
 class ProcessingStatusBar;
 class HelpWidget;
 
@@ -154,7 +154,7 @@ class MainWindow : public QMainWindow
     SettingsWidget          *mpSettingsWidget;
     SuccessDialog           *mpSuccessDialog;
     ThumbnailEngine         *mpThumbnailEngine;
-    VerboseWindow           *mpVerboseWindow;
+    DockThreadsLog          *mpDockThreadsLog;
     ProcessingStatusBar     *processStatusBar;
 
     public:

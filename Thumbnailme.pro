@@ -48,7 +48,6 @@ HEADERS += ThumbnailListwidget.h \
     PreviewGraphicView.h \
     SettingsWidget.h \
     SuccessDialog.h \
-    VerboseWindow.h \
     ConfigWidget.h \
     defines.h \
     DockTimeLine.h \
@@ -73,7 +72,9 @@ HEADERS += ThumbnailListwidget.h \
     mtn/fake_tchar.h \
     mtn/mtn.h \
     ThumbnailRunnable.h \
-    DockThreadsPool.h
+    DockThreadsPool.h \
+    DockThreadsLog.h \
+    ThumbnailTreeItem.h
 
 SOURCES += mtn/mtn.c \
     ThumbnailListwidget.cpp \
@@ -96,7 +97,6 @@ SOURCES += mtn/mtn.c \
     PreviewGraphicView.cpp \
     SettingsWidget.cpp \
     SuccessDialog.cpp \
-    VerboseWindow.cpp \
     ConfigWidget.cpp \
     DockTimeLine.cpp \
     HelpWidget.cpp \
@@ -114,7 +114,9 @@ SOURCES += mtn/mtn.c \
     Qxt/qxtconfigwidget.cpp \
     Qxt/qxtconfigdialog.cpp \
     ThumbnailRunnable.cpp \
-    DockThreadsPool.cpp
+    DockThreadsPool.cpp \
+    DockThreadsLog.cpp \
+    ThumbnailTreeItem.cpp
 
 FORMS += ImageShackUploadWidget.ui \
     ImageShackResultWidget.ui \

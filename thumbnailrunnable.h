@@ -30,7 +30,8 @@
 #ifdef __cplusplus
 extern "C"
  {
- extern struct params parameters; // params data & info
+ extern struct params parameters;
+ extern FILE *report_file;// params data & info
  extern const char* process_file();
  }
 #endif
@@ -64,6 +65,7 @@ class ThumbnailRunnable : public QObject, public QRunnable
 
     signals:
     void started(ThumbnailItem*);
+    void failed (ThumbnailItem*);
     void finished(ThumbnailItem*);
 };
 

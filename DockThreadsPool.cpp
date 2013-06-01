@@ -18,38 +18,44 @@
 *       @date       2011-2012
 *******************************************************************************/
 
-#include "DockThreadsPool.h"
 #include <QApplication>
 #include <QDesktopWidget>
+#include "DockThreadsPool.h"
+#include "ThumbnailTreeItem.h"
+#include <QHeaderView>
+#include "MainWindow.h"
 
-DockThreadsPool::DockThreadsPool(QWidget *parent) : QDockWidget(parent)
+DockThreadsPool::DockThreadsPool(QWidget *main_window) : QDockWidget(main_window)
 {
+    this->main_window = (MainWindow*) main_window;
     this->setMinimumWidth(QApplication::desktop()->screenGeometry(QApplication::desktop()->primaryScreen()).width()/4);
     this->setObjectName("DockThreadsPool");
     this->setWindowTitle("Tasks");
 
-    threeWidget = new QTreeWidget(this);
-    threeWidget->setColumnCount(2);
-    threeWidget->setHeaderLabels(QStringList() << "Path" << "State");
-    this->setWidget(threeWidget);
+    treeWidget = new QTreeWidget(this);
+    treeWidget->setColumnCount(2);
+    treeWidget->setHeaderLabels(QStringList() << tr("Path") << tr("State"));
+    treeWidget->header()->resizeSection(0,this->width()*2/3);
+    treeWidget->header()->resizeSection(1,this->width()/3);
+
+    this->setWidget(treeWidget);
 }
 
 void DockThreadsPool::addThumbnailItem(ThumbnailItem* item)
 {
-    QTreeWidgetItem *three_item = new QTreeWidgetItem();
-    three_item->setText(0,item->getFilePath().toString());
-    three_item->setText(1,tr("QUEUING"));
-    this->threeWidget->addTopLevelItem(three_item);
+    ThumbnailTreeItem *three_item = new ThumbnailTreeItem(item);
+    three_item->setThreadStatus(tr("QUEUED"));
+    this->treeWidget->addTopLevelItem(three_item);
 }
 
 void DockThreadsPool::threadStarted(ThumbnailItem* item)
 {
-    QList<QTreeWidgetItem*> itemFound = this->threeWidget->findItems(item->getFilePath().toString(),Qt::MatchExactly);
-    itemFound.last()->setText(1,tr("STARTED"));
+    QList<QTreeWidgetItem*> itemFound = this->treeWidget->findItems(item->getFilePath().toString(),Qt::MatchExactly);
+    ((ThumbnailTreeItem*) itemFound.last())->setThreadStatus(tr("STARTED"));
 }
 
 void DockThreadsPool::threadFinished(ThumbnailItem* item)
 {
-    QList<QTreeWidgetItem*> itemFound = this->threeWidget->findItems(item->getFilePath().toString(),Qt::MatchExactly);
-    itemFound.last()->setText(1,tr("FINISHED"));
+    QList<QTreeWidgetItem*> itemFound = this->treeWidget->findItems(item->getFilePath().toString(),Qt::MatchExactly);
+    ((ThumbnailTreeItem*) itemFound.last())->setThreadStatus(tr("FINISHED"));
 }
