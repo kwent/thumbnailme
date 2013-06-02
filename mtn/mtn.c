@@ -301,38 +301,6 @@ char *image_string(gdImagePtr ip, char *font, rgb_color color, double size, int 
 }
 
 /*
-return 0 if can save jpg
-*/
-int save_jpg(gdImagePtr ip, char *outname)
-{
-#if defined(WIN32) && defined(_UNICODE)
-    wchar_t outname_w[FILENAME_MAX];
-    UTF8_2_WC(outname_w, outname, FILENAME_MAX);
-#else
-    char *outname_w = outname;
-#endif
-
-    int done = -1;
-    FILE *fp = _tfopen(outname_w, _TEXT("wb"));
-    if (NULL == fp) {
-        goto cleanup;
-    }
-
-    errno = 0;
-    gdImageJpeg(ip, fp, parameters.gb_j_quality);  /* how to check if write was successful? */
-    if (0 != errno) { // FIXME: valid check?
-        goto cleanup;
-    }
-    done = 0; // 0 = ok
-
-  cleanup:
-    if (NULL != fp && 0 != fclose(fp)) {
-      done = -1;
-    }
-    return done;
-}
-
-/*
 pFrame must be a PIX_FMT_RGB24 frame
 */
 void FrameRGB_2_gdImage(AVFrame *pFrame, gdImagePtr ip, int width, int height)
@@ -582,59 +550,6 @@ gdImagePtr detect_edge(AVFrame *pFrame, int width, int height, float *edge, floa
         }
     }
     return ip;
-}
-
-/* for debuging */
-void save_AVFrame(AVFrame *pFrame, int src_width, int src_height, int pix_fmt, 
-    char *filename, int dst_width, int dst_height)
-{
-    AVFrame *pFrameRGB = NULL;
-    uint8_t *rgb_buffer = NULL;
-    struct SwsContext *pSwsCtx = NULL;
-    gdImagePtr ip = NULL;
-
-    pFrameRGB = avcodec_alloc_frame();
-    if (pFrameRGB == NULL) {
-        av_log(NULL, AV_LOG_ERROR, "  couldn't allocate a video frame\n");
-        goto cleanup;
-    }
-    int rgb_bufsize = avpicture_get_size(PIX_FMT_RGB24, dst_width, dst_height);
-    rgb_buffer = av_malloc(rgb_bufsize);
-    if (NULL == rgb_buffer) {
-        av_log(NULL, AV_LOG_ERROR, "  av_malloc %d bytes failed\n", rgb_bufsize);
-        goto cleanup;
-    }
-    avpicture_fill((AVPicture *) pFrameRGB, rgb_buffer, PIX_FMT_RGB24, dst_width, dst_height);
-    pSwsCtx = sws_getContext(src_width, src_height, pix_fmt,
-        dst_width, dst_height, PIX_FMT_RGB24, SWS_BILINEAR, NULL, NULL, NULL);
-    if (NULL == pSwsCtx) { // sws_getContext is not documented
-        av_log(NULL, AV_LOG_ERROR, "  sws_getContext failed\n");
-        goto cleanup;
-    }
-
-    sws_scale(pSwsCtx, (const uint8_t * const *)pFrame->data, pFrame->linesize, 0, src_height, 
-        pFrameRGB->data, pFrameRGB->linesize);
-    ip = gdImageCreateTrueColor(dst_width, dst_height);
-    if (NULL == ip) {
-        av_log(NULL, AV_LOG_ERROR, "  gdImageCreateTrueColor failed: width %d, height %d\n", dst_width, dst_height);
-        goto cleanup;
-    }
-    FrameRGB_2_gdImage(pFrameRGB, ip, dst_width, dst_height);
-    int ret = save_jpg(ip, filename);
-    if (0 != ret) {
-        av_log(NULL, AV_LOG_ERROR, "  save_jpg failed: %s\n", filename);
-        goto cleanup;
-    }
-
-  cleanup:
-    if (NULL != ip)
-        gdImageDestroy(ip);
-    if (NULL != pSwsCtx)
-        sws_freeContext(pSwsCtx); // do we need to do this?
-    if (NULL != rgb_buffer)
-        av_free(rgb_buffer);
-    if (NULL != pFrameRGB)
-        av_free(pFrameRGB);
 }
 
 /* av_pkt_dump_log()?? */
@@ -1848,22 +1763,6 @@ void make_thumbnail(char *file)
             }
         }
 
-        /* save individual shots */
-        if (1 == parameters.gb_I_individual) {
-            char time_str[15]; // FIXME
-            format_time(calc_time(found_pts, pStream->time_base, start_time), time_str, '_');
-            char individual_filename[UTF8_FILENAME_SIZE]; // FIXME
-            strcpy(individual_filename, tn.out_filename);
-            char *suffix = strstr(individual_filename, parameters.gb_o_suffix);
-            assert(NULL != suffix);
-            //sprintf(suffix, "_shot%05d.jpg", idx); // FIXME: hopefully 5 digits will be enough
-            sprintf(suffix, "_%s_%05d.jpg", time_str, idx); // FIXME: hopefully 5 digits will be enough
-            ret = save_jpg(ip, individual_filename);
-            if (0 != ret) { // error
-                av_log(NULL, AV_LOG_ERROR, "  saving individual shot #%05d to %s failed\n", idx, individual_filename);
-            }
-        }
-
         /* add picture to output image */
         thumb_add_shot(&tn, ip, idx, found_pts);
         gdImageDestroy(ip);
@@ -1908,7 +1807,16 @@ void make_thumbnail(char *file)
 
     /* save output image */
     errno = 0;
-    gdImageJpeg(tn.out_ip, out_fp, parameters.gb_j_quality);  /* FIXME: how to check if write was successful? */
+
+    if(parameters.gb_O_format == 0)
+        gdImageJpeg(tn.out_ip, out_fp, parameters.gb_j_quality);  /* FIXME: how to check if write was successful? */
+    //else if (parameters.gb_O_format == 1)
+        //gdImageBmp(tn.out_ip, out_fp);
+    else if (parameters.gb_O_format == 2)
+        gdImagePng(tn.out_ip, out_fp);
+    //else if (parameters.gb_O_format == 3)
+        //gdImageTiff(tn.out_ip, out_fp);
+
     if (0 != errno) { // FIXME: this should work?
         av_log(NULL, AV_LOG_ERROR, "  saving output image failed: %s\n", strerror(errno));
         goto cleanup;

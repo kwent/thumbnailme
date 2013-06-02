@@ -70,6 +70,7 @@ class DockConf : public QFrame
     int getColumns();
     int getEdgeDetect();
     QString getFormatFile();
+    int getFormatFileCode();
     int getGap();
     int getQuality();
     int getRows();

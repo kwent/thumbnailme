@@ -51,6 +51,7 @@ void ThumbnailRunnable::run()
     parameters.gb_z_seek    = GB_Z_SEEK;
     parameters.gb_Z_nonseek = GB_Z_NONSEEK;
     parameters.gb_s_step    = GB_S_STEP;
+    parameters.gb_O_format = main_window->mpDockConf->getFormatFileCode();
     parameters.gb_r_row     = main_window->mpDockConf->getRows();
     parameters.gb_c_column  = main_window->mpDockConf->getColumns();
     parameters.gb_w_width   = main_window->mpDockConf->getWidth();

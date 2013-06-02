@@ -91,6 +91,7 @@ typedef struct thumbnail
 #define GB_O_SUFFIX_USE_FULL 0
 #define GB_O_SUFFIX "_s.jpg"
 #define GB_O_OUTDIR NULL
+#define GB_O_FORMAT 0
 #define GB_Q_QUIET 0
 #define GB_R_ROW 0
 #define GB_S_STEP 120
@@ -131,6 +132,7 @@ typedef struct params
   char *gb_N_suffix; // info text file suffix
   char *gb_o_suffix;
   char *gb_O_outdir;
+  int gb_O_format;
   int gb_q_quiet; // 1 on; 0 off
   int gb_r_row; // 0 = as many rows as needed
   int gb_s_step; // less than 0 = every frame; 0 = step evenly to get column x row

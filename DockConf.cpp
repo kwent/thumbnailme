@@ -216,6 +216,23 @@ QString DockConf::getFormatFile()
 }
 
 /**
+*@brief  Retourne le code du format de l'image à générer (Cf mtn.h).
+*@return int. Format
+*/
+int DockConf::getFormatFileCode()
+{
+    if (formatFileComboBox->currentText() == "jpeg")
+        return 0;
+    else if(formatFileComboBox->currentText() == "bmp")
+        return 1;
+    else if(formatFileComboBox->currentText() == "png")
+        return 2;
+    else if(formatFileComboBox->currentText() == "tiff")
+        return 3;
+    else return 0;
+}
+
+/**
 *@brief Setter du nombre de colonnes.
 *@param columns    Nombre de colonnes.
 */
