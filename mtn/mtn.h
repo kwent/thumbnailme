@@ -91,12 +91,6 @@ typedef struct thumbnail
 #define GB_O_SUFFIX_USE_FULL 0
 #define GB_O_SUFFIX "_s.jpg"
 #define GB_O_OUTDIR NULL
-#ifdef WIN32
-    #define GB_P_PAUSE 1
-#else
-    #define GB_P_PAUSE 0
-#endif
-#define GB_P_DONTPAUSE 0
 #define GB_Q_QUIET 0
 #define GB_R_ROW 0
 #define GB_S_STEP 120
@@ -104,7 +98,6 @@ typedef struct thumbnail
 #define GB_T_TEXT NULL
 #define GB_V_VERBOSE 0
 #define GB_W_WIDTH 1024
-#define GB_W_OVERWRITE 1
 #define GB_Z_SEEK 0
 #define GB_Z_NONSEEK 0
 
@@ -138,8 +131,6 @@ typedef struct params
   char *gb_N_suffix; // info text file suffix
   char *gb_o_suffix;
   char *gb_O_outdir;
-  int gb_p_pause; // pause before exiting; 1 pause; 0 dont pause
-  int gb_P_dontpause; // dont pause; overide gb_p_pause
   int gb_q_quiet; // 1 on; 0 off
   int gb_r_row; // 0 = as many rows as needed
   int gb_s_step; // less than 0 = every frame; 0 = step evenly to get column x row
@@ -148,7 +139,6 @@ typedef struct params
   int gb_v_verbose; // 1 on; 0 off
   int gb_V; // 1 on; 0 off
   int gb_w_width; // 0 = column * movie width
-  int gb_W_overwrite; // 1 = overwrite; 0 = dont overwrite
   int gb_z_seek; // always use seek mode; 1 on; 0 off
   int gb_Z_nonseek; // always use non-seek mode; 1 on; 0 off
 

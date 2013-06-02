@@ -44,15 +44,20 @@ void ThumbnailRunnable::run()
     argv0Array = this->item->getFilePath().toString().toLocal8Bit();
     parameters.gb_argv0 = argv0Array.data();
 
-    parameters.gb_P_dontpause = 1;
-
+    parameters.gb_a_ratio = GB_A_RATIO;
+    parameters.gb_C_cut = GB_C_CUT;
+    parameters.gb_h_height = 0;
+    parameters.gb_I_individual = GB_I_INDIVIDUAL;
+    parameters.gb_z_seek    = GB_Z_SEEK;
+    parameters.gb_Z_nonseek = GB_Z_NONSEEK;
+    parameters.gb_s_step    = GB_S_STEP;
     parameters.gb_r_row     = main_window->mpDockConf->getRows();
     parameters.gb_c_column  = main_window->mpDockConf->getColumns();
     parameters.gb_w_width   = main_window->mpDockConf->getWidth();
     parameters.gb_g_gap     = main_window->mpDockConf->getGap();
-    parameters.gb_j_quality = 100;
+    parameters.gb_j_quality = main_window->mpDockConf->getQuality();
     parameters.gb_b_blank   = main_window->mpDockConf->getBlankSkip();
-    parameters.gb_D_edge    = main_window->mpDockConf->getEdgeDetect();
+    parameters.gb_D_edge    = GB_D_EDGE;
     parameters.gb_L_info_location = main_window->mpDockStyles->getInfoTextLocation();
     parameters.gb_L_time_location = main_window->mpDockStyles->getTimeStampLocation();
     c = main_window->mpDockStyles->getColorBackground();
@@ -67,6 +72,7 @@ void ThumbnailRunnable::run()
 
     if(main_window->mpDockStyles->isTimeStampChecked())
     {
+         parameters.gb_t_timestamp = 1;
          F_ts_fontnameArray = main_window->mpDockStyles->getFontTimeStamp(2).toLocal8Bit();
          parameters.gb_F_ts_fontname  = F_ts_fontnameArray.data();
          c = main_window->mpDockStyles->getColorTimeStamp();
@@ -108,7 +114,6 @@ void ThumbnailRunnable::run()
             o_suffixArray = QString("." + this->main_window->mpDockConf->getFormatFile()).toLocal8Bit();
             parameters.gb_o_suffix = o_suffixArray.data();
         }
-
     }
     else
     {
@@ -119,8 +124,9 @@ void ThumbnailRunnable::run()
         parameters.gb_o_suffix = o_suffixArray.data();
     }
 
-    if(main_window->mpDockStyles->isInfoTextChecked() == false)
-        parameters.gb_i_info = 1;
+    if(main_window->mpDockStyles->isInfoTextChecked())
+         parameters.gb_i_info = 1;
+    else parameters.gb_i_info = 0;
 
     if(!main_window->mpDockStyles->getTitleEdit().isEmpty())
     {
@@ -134,9 +140,7 @@ void ThumbnailRunnable::run()
         parameters.gb_E_end = this->item->getEndOmmitSecs();
     }
 
-    parameters.gb_W_overwrite = 1;
-
-    const char * logs = process_file();
+    process_file();
 
     this->item->logs = QString::fromUtf8(logs);
 

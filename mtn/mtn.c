@@ -62,9 +62,8 @@
 #include "mtn.h"
 
 /* more global variables */
-char logs[4096];
+char logs[100000];
 char *gb_version = "20121218a(j) copyright (c) 2007-2008 tuit, et al.";
-time_t gb_st_start = 0; // start time of program
 params parameters =
         {
             NULL,
@@ -95,8 +94,6 @@ params parameters =
             GB_N_SUFFIX, // info text file suffix
             GB_O_SUFFIX,
             GB_O_OUTDIR,
-            GB_P_PAUSE, // pause before exiting; 1 pause; 0 dont pause
-            GB_P_DONTPAUSE, // dont pause; overide gb_p_pause
             GB_Q_QUIET, // 1 on; 0 off
             GB_R_ROW, // 0 = as many rows as needed
             GB_S_STEP, // less than 0 = every frame; 0 = step evenly to get column x row
@@ -105,38 +102,11 @@ params parameters =
             GB_V_VERBOSE, // 1 on; 0 off
             GB_V_VERBOSE, // 1 on; 0 off
             GB_W_WIDTH, // 0 = column * movie width
-            GB_W_OVERWRITE, // 1 = overwrite; 0 = dont overwrite
             GB_Z_SEEK, // always use seek mode; 1 on; 0 off
             GB_Z_NONSEEK // always use non-seek mode; 1 on; 0 off
         };
 
 /* misc functions */
-
-/* strrstr not in mingw
-*/
-char *strlaststr (char *haystack, char *needle)
-{
-    // If needle is an empty string, the function returns haystack. -- from glibc doc
-    if (0 == strlen(needle)) {
-        return haystack;
-    }
-
-    char *start = haystack;
-    char *found = NULL;
-    char *prev = NULL;
-    while ((found = strstr(start, needle)) != NULL) {
-        prev = found;
-        start++;
-    }
-    return prev;
-}
-
-char *format_color(rgb_color col)
-{
-    static char buf[7]; // FIXME
-    sprintf(buf, "%02X%02X%02X", col.r, col.g, col.b);
-    return buf; // FIXME
-}
 
 void format_time(double duration, char *str, char sep)
 {
@@ -158,7 +128,7 @@ char *format_size(int64_t size, char *unit)
     static char buf[20]; // FIXME
 
     if (size < 1024) {
-       // sprintf(buf, "%"PRId64" %s", size, unit);
+        sprintf(buf, "%"PRId64" %s", size, unit);
     } else if (size < 1024*1024) {
         sprintf(buf, "%.2f Ki%s", size/1024.0, unit);
     } else if (size < 1024*1024*1024) {
@@ -208,84 +178,6 @@ char *strcpy_va(char *dst, int n, ...)
     }
     va_end(ap);
     return dst;
-}
-
-/* 
-return 1 if file is a regular file
-return 0 if fail or is not 
-*/
-int is_reg(char *file)
-{
-#if defined(WIN32) && defined(_UNICODE)
-    wchar_t file_w[FILENAME_MAX];
-    UTF8_2_WC(file_w, file, FILENAME_MAX);
-#else
-    char *file_w = file;
-#endif
-
-    struct _stat buf;
-    if (0 != _tstat(file_w, &buf)) {
-        return 0;
-    }
-    return S_ISREG(buf.st_mode);
-}
-
-/* 
-return 1 if file is a regular file and modified time >= st_time
-return 0 if fail or is not 
-*/
-int is_reg_newer(char *file, time_t st_time)
-{
-#if defined(WIN32) && defined(_UNICODE)
-    wchar_t file_w[FILENAME_MAX];
-    UTF8_2_WC(file_w, file, FILENAME_MAX);
-#else
-    char *file_w = file;
-#endif
-
-    struct _stat buf;
-    if (0 != _tstat(file_w, &buf)) {
-        return 0;
-    }
-    return S_ISREG(buf.st_mode) && (difftime(buf.st_mtime, st_time) >= 0);
-}
-
-/* 
-return 1 if file is a directory
-return 0 if fail or is not a directory
-FIXME: /c under msys is not a directory. why?
-*/
-int is_dir(char *file)
-{
-#if defined(WIN32) && defined(_UNICODE)
-    wchar_t file_w[FILENAME_MAX];
-    UTF8_2_WC(file_w, file, FILENAME_MAX);
-#else
-    char *file_w = file;
-#endif
-
-    struct _stat buf;
-    if (0 != _tstat(file_w, &buf)) {
-        return 0;
-    }
-    return S_ISDIR(buf.st_mode);
-}
-
-/*
-*/
-char *rem_trailing_slash(char *str)
-{
-#ifdef WIN32
-    // mingw doesn't seem to be happy about trailing '/' or '\\'
-    // strip trailing '/' or '\\' that might get added by shell filename completion for directories
-    int last_index = strlen(str) - 1;
-    // we need last '/' or '\\' for root drive "c:\"
-    while (last_index > 2 && 
-        ('/' == str[last_index] || '\\' == str[last_index])) {
-        str[last_index--] = '\0';
-    }
-#endif
-    return str;
 }
 
 /* mtn */
@@ -754,9 +646,9 @@ void dump_packet(AVPacket *p, AVStream * ps)
     pkt->pts can be AV_NOPTS_VALUE if the video format has B frames, so it is 
     better to rely on pkt->dts if you do not decompress the payload.
     */
-    av_log(NULL, AV_LOG_VERBOSE, "***dump_packet: pos:%"PRId64"\n", p->pos);
-    av_log(NULL, AV_LOG_VERBOSE, "pts tb: %"PRId64", dts tb: %"PRId64", duration tb: %d\n",
-        p->pts, p->dts, p->duration);
+    //av_log(NULL, AV_LOG_VERBOSE, "***dump_packet: pos:%"PRId64"\n", p->pos);
+    //av_log(NULL, AV_LOG_VERBOSE, "pts tb: %"PRId64", dts tb: %"PRId64", duration tb: %d\n",
+    //    p->pts, p->dts, p->duration);
     av_log(NULL, AV_LOG_VERBOSE, "pts s: %.2f, dts s: %.2f, duration s: %.2f\n",
         p->pts * av_q2d(ps->time_base), p->dts * av_q2d(ps->time_base), 
         p->duration * av_q2d(ps->time_base)); // pts can be AV_NOPTS_VALUE 
@@ -783,8 +675,8 @@ void dump_index_entries(AVStream * p)
         //assert(cur_ts > 0);
         diff += cur_ts - prev_ts;
         if (i < 20) { // show only first 20
-            av_log(NULL, AV_LOG_VERBOSE, "    i: %d, pos: %"PRId64", timestamp tb: %"PRId64", timestamp s: %.2f, flags: %d, size: %d, min_distance: %d\n", 
-                i, e->pos, e->timestamp, e->timestamp * av_q2d(p->time_base), e->flags, e->size, e->min_distance);
+            //av_log(NULL, AV_LOG_VERBOSE, "    i: %d, pos: %"PRId64", timestamp tb: %"PRId64", timestamp s: %.2f, flags: %d, size: %d, min_distance: %d\n",
+             //   i, e->pos, e->timestamp, e->timestamp * av_q2d(p->time_base), e->flags, e->size, e->min_distance);
         }
         prev_ts = cur_ts;
     }
@@ -795,8 +687,8 @@ void dump_stream(AVStream * p)
 {
     av_log(NULL, AV_LOG_VERBOSE, "***dump_stream, time_base: %d / %d\n", 
         p->time_base.num, p->time_base.den);
-    av_log(NULL, AV_LOG_VERBOSE, "cur_dts tb?: %"PRId64", start_time tb: %"PRId64", duration tb: %"PRId64", nb_frames: %"PRId64"\n",
-        p->cur_dts, p->start_time, p->duration, p->nb_frames);
+    //av_log(NULL, AV_LOG_VERBOSE, "cur_dts tb?: %"PRId64", start_time tb: %"PRId64", duration tb: %"PRId64", nb_frames: %"PRId64"\n",
+        //p->cur_dts, p->start_time, p->duration, p->nb_frames);
     // get funny results here. use format_context's.
     av_log(NULL, AV_LOG_VERBOSE, "cur_dts s?: %.2f, start_time s: %.2f, duration s: %.2f\n",
         p->cur_dts * av_q2d(p->time_base), p->start_time * av_q2d(p->time_base), 
@@ -965,8 +857,8 @@ void dump_format_context(AVFormatContext *p, int __attribute__((unused)) index, 
     // dont show scaling info at this time because we dont have the proper sample_aspect_ratio
     av_log(NULL, LOG_INFO, get_stream_info(p, url, 0, GB_A_RATIO)); 
 
-    av_log(NULL, AV_LOG_VERBOSE, "start_time av: %"PRId64", duration av: %"PRId64", file_size: %"PRId64"\n",
-        p->start_time, p->duration, avio_size(p->pb));
+    //av_log(NULL, AV_LOG_VERBOSE, "start_time av: %"PRId64", duration av: %"PRId64", file_size: %"PRId64"\n",
+    //    p->start_time, p->duration, avio_size(p->pb));
     av_log(NULL, AV_LOG_VERBOSE, "start_time s: %.2f, duration s: %.2f\n",
         (double) p->start_time / AV_TIME_BASE, (double) p->duration / AV_TIME_BASE);
 
@@ -1046,7 +938,7 @@ int our_get_buffer(struct AVCodecContext *c, AVFrame *pic) {
   uint64_t *pts = av_malloc(sizeof(uint64_t));
   *pts = gb_video_pkt_pts;
   pic->opaque = pts;
-  av_log(NULL, AV_LOG_VERBOSE, "*coping gb_video_pkt_pts: %"PRId64" to opaque\n", gb_video_pkt_pts);
+  //av_log(NULL, AV_LOG_VERBOSE, "*coping gb_video_pkt_pts: %"PRId64" to opaque\n", gb_video_pkt_pts);
   return ret;
 }
 
@@ -1114,7 +1006,7 @@ int read_and_decode(AVFormatContext *pFormatCtx, int video_index,
         //dump_codec_context(pCodecCtx);
 
         // Save global pts to be stored in pFrame in first call
-        av_log(NULL, AV_LOG_VERBOSE, "*saving gb_video_pkt_pts: %"PRId64"\n", packet.pts);
+        //av_log(NULL, AV_LOG_VERBOSE, "*saving gb_video_pkt_pts: %"PRId64"\n", packet.pts);
         gb_video_pkt_pts = packet.pts;
 
         // Decode video frame
@@ -1180,7 +1072,7 @@ int read_and_decode(AVFormatContext *pFormatCtx, int video_index,
         (pFrame->repeat_pict > 0) ? "**r**" : "", pFrame->key_frame, pFrame->pict_type);
     if(NULL != pFrame->opaque && AV_NOPTS_VALUE != *(uint64_t *) pFrame->opaque) {
         //av_log(NULL, AV_LOG_VERBOSE, "*pts: %.2f, value in opaque: %"PRId64"\n", pts, *(uint64_t *) pFrame->opaque);
-        av_log(NULL, AV_LOG_VERBOSE, "*value in opaque: %"PRId64"\n", *(uint64_t *) pFrame->opaque);
+        //av_log(NULL, AV_LOG_VERBOSE, "*value in opaque: %"PRId64"\n", *(uint64_t *) pFrame->opaque);
     }
     dump_stream(pStream);
     dump_codec_context(pCodecCtx);
@@ -1294,7 +1186,7 @@ int really_seek(AVFormatContext *pFormatCtx, int index, int64_t timestamp, int f
     /* then we try seeking to any (non key) frame AVSEEK_FLAG_ANY */
     ret = av_seek_frame(pFormatCtx, index, timestamp, flags | AVSEEK_FLAG_ANY);
     if (ret >= 0) { // success
-        av_log(NULL, LOG_INFO, "AVSEEK_FLAG_ANY: timestamp: %"PRId64"\n", timestamp); // DEBUG
+        //av_log(NULL, LOG_INFO, "AVSEEK_FLAG_ANY: timestamp: %"PRId64"\n", timestamp); // DEBUG
         return ret;
     }
 
@@ -1317,38 +1209,11 @@ int really_seek(AVFormatContext *pFormatCtx, int index, int64_t timestamp, int f
     }
     if (duration > 0) {
         int64_t byte_pos = av_rescale(timestamp, avio_size(pFormatCtx->pb), duration_tb);
-        av_log(NULL, LOG_INFO, "AVSEEK_FLAG_BYTE: byte_pos: %"PRId64", timestamp: %"PRId64", file_size: %"PRId64", duration_tb: %"PRId64"\n", byte_pos, timestamp, avio_size(pFormatCtx->pb), duration_tb);
+        //av_log(NULL, LOG_INFO, "AVSEEK_FLAG_BYTE: byte_pos: %"PRId64", timestamp: %"PRId64", file_size: %"PRId64", duration_tb: %"PRId64"\n", byte_pos, timestamp, avio_size(pFormatCtx->pb), duration_tb);
         return av_seek_frame(pFormatCtx, index, byte_pos, AVSEEK_FLAG_BYTE);
     }
 
     return -1;
-}
-
-/* 
-modify name so that it'll (hopefully) be unique
-by inserting a unique string before suffix.
-if unum is != 0, it'll be used
-returns the unique number
-*/
-int make_unique_name(char *name, char *suffix, int unum)
-{
-    // tmpnam() in mingw always return names which start with \ -- unuseable.
-    // so we'll use random number instead.
-
-    char unique[FILENAME_MAX];
-    if (unum == 0) {
-        unum = rand();
-    }
-    sprintf(unique, "_%d", unum);
-
-    char *found = strlaststr(name, suffix);
-    if (NULL == found || found == name) {
-        strcat(name, unique); // this shouldn't happen
-    } else {
-        strcat(unique, found);
-        strcpy(found, unique);
-    }
-    return unum;
 }
 
 /*
@@ -1366,6 +1231,7 @@ void make_thumbnail(char *file)
     thumbnail tn; // thumbnail data & info
     thumb_new(&tn);
     // shot sh; // shot info
+
     shot fill_buffer[parameters.gb_c_column-1]; // skipped shots to fill the last row
     for (i=0; i<parameters.gb_c_column-1; i++) {
         fill_buffer[i].ip = NULL;
@@ -1420,27 +1286,7 @@ void make_thumbnail(char *file)
             strcpy(suffix, parameters.gb_N_suffix);
         }
     }
-    // if output files exist and modified time >= program start time,
-    // we'll not overwrite and use a new name
-    int unum = 0;
-    if (is_reg_newer(tn.out_filename, gb_st_start)) {
-        unum = make_unique_name(tn.out_filename, parameters.gb_o_suffix, unum);
-        av_log(NULL, LOG_INFO, "%s: output file already exists. using: %s\n", parameters.gb_argv0, tn.out_filename);
-    }
-    if (NULL != parameters.gb_N_suffix && is_reg_newer(tn.info_filename, gb_st_start)) {
-        unum = make_unique_name(tn.info_filename,parameters. gb_N_suffix, unum);
-        av_log(NULL, LOG_INFO, "%s: info file already exists. using: %s\n", parameters.gb_argv0, tn.info_filename);
-    }
-    if (0 == parameters.gb_W_overwrite) { // dont overwrite mode
-        if (is_reg(tn.out_filename)) {
-            av_log(NULL, LOG_INFO, "%s: output file %s already exists. omitted.\n", parameters.gb_argv0, tn.out_filename);
-            goto cleanup;
-        }
-        if (NULL != parameters.gb_N_suffix && is_reg(tn.info_filename)) {
-            av_log(NULL, LOG_INFO, "%s: info file %s already exists. omitted.\n", parameters.gb_argv0, tn.info_filename);
-            goto cleanup;
-        }
-    }
+
 #if defined(WIN32) && defined(_UNICODE)
     wchar_t out_filename_w[FILENAME_MAX];
     UTF8_2_WC(out_filename_w, tn.out_filename, FILENAME_MAX);
@@ -1809,8 +1655,8 @@ void make_thumbnail(char *file)
             goto eof;
         }
         format_time(calc_time(eff_target, pStream->time_base, start_time), time_tmp, ':');
-        av_log(NULL, AV_LOG_VERBOSE, "\n***eff_target tb: %"PRId64", eff_target s:%.2f (%s), prevshot_pts: %"PRId64"\n", 
-            eff_target, calc_time(eff_target, pStream->time_base, start_time), time_tmp, prevshot_pts);
+        //av_log(NULL, AV_LOG_VERBOSE, "\n***eff_target tb: %"PRId64", eff_target s:%.2f (%s), prevshot_pts: %"PRId64"\n",
+        //    eff_target, calc_time(eff_target, pStream->time_base, start_time), time_tmp, prevshot_pts);
 
         /* jump to next shot */
         //struct timeval dstart; // DEBUG
@@ -1883,9 +1729,9 @@ void make_thumbnail(char *file)
       non_seek_too_long:
 
         nb_shots++;
-        av_log(NULL, AV_LOG_VERBOSE, "shot %d: found_: %"PRId64" (%.2fs), eff_: %"PRId64" (%.2fs), dtime: %.3f\n", 
-            idx, found_pts, calc_time(found_pts, pStream->time_base, start_time), 
-            eff_target, calc_time(eff_target, pStream->time_base, start_time), decode_time);
+        //av_log(NULL, AV_LOG_VERBOSE, "shot %d: found_: %"PRId64" (%.2fs), eff_: %"PRId64" (%.2fs), dtime: %.3f\n",
+        //    idx, found_pts, calc_time(found_pts, pStream->time_base, start_time),
+        //    eff_target, calc_time(eff_target, pStream->time_base, start_time), decode_time);
         av_log(NULL, AV_LOG_VERBOSE, "approx. decoded frames/s %.2f\n", tn.step * 30 / decode_time); // DEBUG
         /*
         char debug_filename[2048]; // DEBUG
@@ -1949,8 +1795,8 @@ void make_thumbnail(char *file)
             // keep trying until getting close to next step
             seek_evade = evade_step * evade_try / av_q2d(pStream->time_base);
             if (seek_evade < (tn.step - evade_step) / av_q2d(pStream->time_base)) { // FIXME
-                av_log(NULL, AV_LOG_VERBOSE, "  * blank or no edge * try #%d: seeking forward seek_evade: %"PRId64" (%.2f s)\n", 
-                    evade_try, seek_evade, seek_evade * av_q2d(pStream->time_base));
+                //av_log(NULL, AV_LOG_VERBOSE, "  * blank or no edge * try #%d: seeking forward seek_evade: %"PRId64" (%.2f s)\n",
+                //    evade_try, seek_evade, seek_evade * av_q2d(pStream->time_base));
                 goto continue_cleanup;
             }
 
@@ -2031,7 +1877,7 @@ void make_thumbnail(char *file)
         direction = 0;
         evade_try = 0;
         prevshot_pts = found_pts;
-        av_log(NULL, AV_LOG_VERBOSE, "found_pts bottom: %"PRId64"\n", found_pts);
+        //av_log(NULL, AV_LOG_VERBOSE, "found_pts bottom: %"PRId64"\n", found_pts);
     
       continue_cleanup: // cleaning up before continuing the loop
         prevfound_pts = found_pts;
@@ -2123,162 +1969,6 @@ void make_thumbnail(char *file)
     av_log(NULL, AV_LOG_VERBOSE, "make_thumbnail: done\n");
 }
 
-/* modified from glibc
-*/
-int alphasort(const void *a, const void *b)
-{
-    return strcoll(*(const char **) a, *(const char **) b);
-    //return strcasecmp(*(const char **) a, *(const char **) b);
-}
-
-/* modified from glibc
-*/
-int alphacasesort(const void *a, const void *b)
-{
-    //return strcoll(*(const char **) a, *(const char **) b);
-    return strcasecmp(*(const char **) a, *(const char **) b);
-}
-
-/*
-return 1 if filename has one of the predefined extensions
-*/
-int check_extension(char *filename)
-{
-    static char *movie_ext[] = {
-        "3gp", "3g2", "asf", "avi", "avs", "dat", "divx", "dsm", "evo", "flv", 
-        "m1v", "m2ts", "m2v", "m4a", "mj2", "mjpg", "mjpeg", "mkv", "mov", 
-        "moov", "mp4", "mpg", "mpeg", "mpv", "nut", "ogg", "ogm", "qt", "rm", 
-        "rmvb", "swf", "ts", "vob", "wmv", "xvid"
-    }; // FIXME: static
-    static int sorted = 0; // 1 = sorted
-
-    static const int nb_ext = sizeof(movie_ext) / sizeof(*movie_ext);
-    if (0 == sorted) {
-        qsort(movie_ext, nb_ext, sizeof(*movie_ext), alphacasesort);
-        sorted = 1;
-    }
-
-    char *ext = strrchr(filename, '.');
-    if (NULL == ext) {
-        return 0;
-    }
-    ext += 1;
-    if (NULL == bsearch(&ext, movie_ext, nb_ext, sizeof(*movie_ext), alphacasesort)) {
-        return 0;
-    }
-    if (NULL != strstr(filename, "uTorrentPartFile")) {
-        return 0;
-    }
-    return 1;
-}
-
-void process_loop(int n, char **files);
-
-/* modified from glibc's scandir -- mingw doesn't have scandir
-*/
-void process_dir(char *dir)
-{
-#if defined(WIN32) && defined(_UNICODE)
-    wchar_t dir_w[FILENAME_MAX];
-    UTF8_2_WC(dir_w, dir, FILENAME_MAX);
-#else
-    char *dir_w = dir;
-#endif
-
-    _TDIR *dp = _topendir(dir_w);
-    if (NULL == dp) {
-        av_log(NULL, AV_LOG_ERROR, "\n%s: opendir failed: %s\n", dir, strerror(errno));
-        return;
-    }
-
-    /* read directory & sort */
-    struct _tdirent *d;
-    char **v = NULL;
-    size_t cnt = 0, vsize = 0;
-    while (1) {
-        errno = 0;
-        d = _treaddir(dp);
-        if (NULL == d) {
-            if (0 != errno) { // is this check good?
-                av_log(NULL, AV_LOG_ERROR, "\n%s: readdir failed: %s\n", dir, strerror(errno));
-                goto cleanup;
-            }
-            break;
-        }
-
-        if (_tcscmp(d->d_name, _TEXT(".")) == 0 || _tcscmp(d->d_name, _TEXT("..")) == 0) {
-            continue;
-        }
-
-#if defined(WIN32) && defined(_UNICODE)
-        char d_name_utf8[UTF8_FILENAME_SIZE];
-        WC_2_UTF8(d_name_utf8, d->d_name, UTF8_FILENAME_SIZE);
-#else
-        char *d_name_utf8 = d->d_name;
-#endif
-
-        char child_utf8[UTF8_FILENAME_SIZE];
-        strcpy_va(child_utf8, 3, dir, "/", d_name_utf8);
-
-        if (1 != is_dir(child_utf8) && 1 != check_extension(child_utf8)) {
-            continue;
-        }
-
-        if (cnt == vsize) {
-            char **new;
-            if (vsize == 0)
-                vsize = 50;
-            else
-                vsize *= 2;
-            new = realloc(v, vsize * sizeof(*v));
-            if (new == NULL) {
-                // mingw doesn't seem to set errno for memory functions
-                av_log(NULL, AV_LOG_ERROR, "\n%s: realloc failed: %s\n", dir, strerror(errno));
-                goto cleanup;
-            }
-            v = new;
-        }
-
-        char *vnew = malloc(strlen(child_utf8) + 1); // for '\0'
-        if (vnew == NULL) {
-            av_log(NULL, AV_LOG_ERROR, "\n%s: malloc failed: %s\n", dir, strerror(errno));
-            goto cleanup;
-        }
-        strcpy(vnew, child_utf8);
-        v[cnt++] = vnew;
-        //av_log(NULL, LOG_INFO, "process_dir added: %s\n", v[cnt-1]); // DEBUG
-    }
-    qsort(v, cnt, sizeof(*v), alphasort);
-
-    /* process dirs & files */
-    process_loop(cnt, v);
-
-  cleanup:
-    while (cnt > 0)
-        free(v[--cnt]);
-    free(v);
-    _tclosedir(dp);
-}
-
-/*
-*/
-void process_loop(int n, char **files)
-{
-    int i;
-    for (i = 0; i < n; i++) {
-        av_log(NULL, AV_LOG_VERBOSE, "process_loop: %s\n", files[i]);
-        rem_trailing_slash(files[i]); //
-
-        if (is_dir(files[i])) { // directory
-            //av_log(NULL, LOG_INFO, "process_loop: %s is a DIR\n", files[i]); // DEBUG
-            process_dir(files[i]);
-        } else { // not a directory
-            //av_log(NULL, LOG_INFO, "process_loop: %s is not a DIR\n", files[i]); // DEBUG
-            make_thumbnail(files[i]);
-        }
-    }
-}
-
 // copied & modified from mingw-runtime-3.13's init.c
 typedef struct {
   int newmode;
@@ -2318,8 +2008,6 @@ void usage()
     av_log(NULL, AV_LOG_ERROR, "  -N info_suffix : save info text to a file with suffix\n");
     av_log(NULL, AV_LOG_ERROR, "  -o %s : output suffix\n", GB_O_SUFFIX);
     av_log(NULL, AV_LOG_ERROR, "  -O directory : save output files in the specified directory\n");
-    av_log(NULL, AV_LOG_ERROR, "  -p : pause before exiting; default on in win32\n");
-    av_log(NULL, AV_LOG_ERROR, "  -P : dont pause before exiting; override -p\n");
     //av_log(NULL, AV_LOG_ERROR, "  -q : to be done\n"); // quiet mode
     av_log(NULL, AV_LOG_ERROR, "  -r %d : # of rows; >0:override -s\n", GB_R_ROW);
     av_log(NULL, AV_LOG_ERROR, "  -s %d : time step between each shot\n", GB_S_STEP);
@@ -2362,24 +2050,17 @@ void my_log_callback(void *ptr, int level, const char *fmt, va_list vl)
     static int print_prefix = 1;
 
     va_copy(vl2, vl);
-    if(strlen(fmt) > 0)
-    {
-        va_copy(vl2, vl);
-        av_log_default_callback(ptr, level, fmt, vl);
-        av_log_format_line(ptr, level, fmt, vl2, line, sizeof(line), &print_prefix);
-        va_end(vl2);
-        sprintf(logs+strlen(logs),line);
-    }
+    av_log_default_callback(ptr, level, fmt, vl);
+    av_log_format_line(ptr, level, fmt, vl2, line, sizeof(line), &print_prefix);
+    va_end(vl2);
+    sprintf(logs+strlen(logs),line);
 }
 
-const char *process_file()
+void process_file()
 {
     memset(logs,'\0',sizeof logs);
 
     setvbuf(stderr, NULL, _IONBF, 0); // turn off buffering in mingw
-
-    gb_st_start = time(NULL); // program start time
-    srand(gb_st_start);
 
     // set locale
     __attribute__((unused)) char *locale = setlocale(LC_ALL, "");
@@ -2392,6 +2073,4 @@ const char *process_file()
     av_log_set_callback(my_log_callback);
     /* process movie files */
     make_thumbnail(parameters.gb_argv0);
-
-    return logs;
 }
