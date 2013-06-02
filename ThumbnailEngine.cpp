@@ -119,9 +119,10 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
     this->main_window->mpDockTimeline->setDisabled(true);
 
     //Init
-    this->listInputFile =  QLinkedList <ThumbnailItem*> (listInputFile);
+    this->listInputFile = QLinkedList <ThumbnailItem*> (listInputFile);
 
     main_window->mpDockThreadsPool->treeWidget->clear();
+    main_window->mpDockThreadsPool->raise();
 
     foreach(ThumbnailItem*currentItem , this->listInputFile)
     {
@@ -142,8 +143,16 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
         pool->start(task);
     }
 
-    this->initSuccessDialog(QLinkedList<ThumbnailItem*> (listInputFile));
-    this->success(listInputFile.first());
+    while(true)
+    {
+        if(pool->activeThreadCount() == 0)
+        {
+            this->initSuccessDialog(QLinkedList<ThumbnailItem*> (listInputFile));
+            this->success(listInputFile.first());
+            break;
+        }
+    }
+
 }
 
 /**
@@ -200,18 +209,18 @@ void ThumbnailEngine::initSuccessDialog(QLinkedList <ThumbnailItem*> listInputFi
 */
 void ThumbnailEngine::deleteTemporaryFiles()
 {
-//    QDir tmpFolder = QDir::tempPath();
-//    QStringList filters;
-//    filters << "*" + DEFAULT_TMP_EXTENSION;
-//    tmpFolder.setNameFilters(filters);
+    QDir tmpFolder = QDir::tempPath();
+    QStringList filters;
+    filters << "*" + DEFAULT_TMP_EXTENSION;
+    tmpFolder.setNameFilters(filters);
 
-//    QFileInfoList temporaryFiles = tmpFolder.entryInfoList();
+    QFileInfoList temporaryFiles = tmpFolder.entryInfoList();
 
-//    while (!temporaryFiles.isEmpty())
-//    {
-//        QFile::remove(temporaryFiles.first().absoluteFilePath());
-//        temporaryFiles.removeFirst();
-//    }
+    while (!temporaryFiles.isEmpty())
+    {
+        QFile::remove(temporaryFiles.first().absoluteFilePath());
+        temporaryFiles.removeFirst();
+    }
 }
 
 /**
@@ -270,29 +279,25 @@ void ThumbnailEngine::successDialogItemRemove(ThumbnailItem * item)
 */
 void ThumbnailEngine::success(ThumbnailItem* item)
 {
-    qDebug() << "SUCCESS";
-    qDebug() << "LOG FOR ITEM :" << item->logs;
 
-    if(listInputFile.isEmpty())
-    {
-    //1 Re Enable Docks
-        this->main_window->mpDockInputOutput->setEnabled(true);
+    qDebug() << absoluteFilePathOutput(QDir::tempPath(),item->getFilePath().toString(),DEFAULT_TMP_EXTENSION);
+//1 Re Enable Docks
+    this->main_window->mpDockInputOutput->setEnabled(true);
 
-        if(this->main_window->mpDockTimeline->getCurrentItem() != NULL && this->main_window->mpDockTimeline->getCurrentItem()->isReadable())
-          this->main_window->mpDockTimeline->setEnabled(true);
+    if(this->main_window->mpDockTimeline->getCurrentItem() != NULL && this->main_window->mpDockTimeline->getCurrentItem()->isReadable())
+      this->main_window->mpDockTimeline->setEnabled(true);
 
-    //2 Preview
-        QString suffix = settings->value("Extras/outputSuffix").toString();
+//2 Preview
+    QString suffix = settings->value("Extras/outputSuffix").toString();
 
-        if (modeConversion == SIMPLEMOD && !main_window->mpDockInputOutput->isSameSourceChecked())
-            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(main_window->mpDockInputOutput->getPathOutput(),item->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
-        else if (modeConversion == SIMPLEMOD && main_window->mpDockInputOutput->isSameSourceChecked())
-            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::toNativeSeparators(QFileInfo(item->getFilePath().toString()).canonicalPath()),item->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
-        else if (modeConversion == PREVIEWMOD)
-            main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::tempPath(),item->getFilePath().toString(),DEFAULT_TMP_EXTENSION));
+    if (modeConversion == SIMPLEMOD && !main_window->mpDockInputOutput->isSameSourceChecked())
+        main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(main_window->mpDockInputOutput->getPathOutput(),item->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
+    else if (modeConversion == SIMPLEMOD && main_window->mpDockInputOutput->isSameSourceChecked())
+        main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::toNativeSeparators(QFileInfo(item->getFilePath().toString()).canonicalPath()),item->getFilePath().toString(),suffix,main_window->mpDockConf->getFormatFile()));
+    else if (modeConversion == PREVIEWMOD)
+        main_window->mpPreviewGraphicView->setPreview(absoluteFilePathOutput(QDir::tempPath(),item->getFilePath().toString(),DEFAULT_TMP_EXTENSION));
 
-    //3 Show SuccessDialog
-        if(modeConversion == SIMPLEMOD && main_window->mpSuccessDialog->getListWidget()->count() != 0)
-            main_window->mpSuccessDialog->exec();
-    }
+//3 Show SuccessDialog
+    if(modeConversion == SIMPLEMOD && main_window->mpSuccessDialog->getListWidget()->count() != 0)
+        main_window->mpSuccessDialog->exec();
 }

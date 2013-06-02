@@ -37,8 +37,6 @@ ThumbnailRunnable::ThumbnailRunnable(MainWindow *main_window, ThumbnailItem *ite
 
 void ThumbnailRunnable::run()
 {
-    qDebug() << "Hello from thread " << QThread::currentThread();
-
     emit started(this->item);
 
     QColor c;
@@ -47,10 +45,9 @@ void ThumbnailRunnable::run()
     parameters.gb_argv0 = argv0Array.data();
 
     parameters.gb_P_dontpause = 1;
-    parameters.gb_c_column  = main_window->mpDockConf->getColumns();
 
-    parameters.gb_c_column  = main_window->mpDockConf->getColumns();
     parameters.gb_r_row     = main_window->mpDockConf->getRows();
+    parameters.gb_c_column  = main_window->mpDockConf->getColumns();
     parameters.gb_w_width   = main_window->mpDockConf->getWidth();
     parameters.gb_g_gap     = main_window->mpDockConf->getGap();
     parameters.gb_j_quality = 100;
