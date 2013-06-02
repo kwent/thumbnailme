@@ -62,7 +62,7 @@
 #include "mtn.h"
 
 /* more global variables */
-char logs[100000];
+char logs[4096];
 char *gb_version = "20121218a(j) copyright (c) 2007-2008 tuit, et al.";
 time_t gb_st_start = 0; // start time of program
 params parameters =
@@ -2374,6 +2374,8 @@ void my_log_callback(void *ptr, int level, const char *fmt, va_list vl)
 
 const char *process_file()
 {
+    memset(logs,'\0',sizeof logs);
+
     setvbuf(stderr, NULL, _IONBF, 0); // turn off buffering in mingw
 
     gb_st_start = time(NULL); // program start time

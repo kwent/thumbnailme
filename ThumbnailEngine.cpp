@@ -120,23 +120,30 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
 
     //Init
     this->listInputFile =  QLinkedList <ThumbnailItem*> (listInputFile);
-    this->initSuccessDialog(QLinkedList<ThumbnailItem*> (this->listInputFile));
 
     main_window->mpDockThreadsPool->treeWidget->clear();
 
+    foreach(ThumbnailItem*currentItem , this->listInputFile)
+    {
+        qApp->processEvents();
+        main_window->mpDockThreadsPool->addThumbnailItem(currentItem);
+    }
+
     while(!this->listInputFile.isEmpty())
     {
+        qApp->processEvents();
         currentItem = this->listInputFile.takeFirst();
+        main_window->mpDockThreadsPool->setWindowTitle(QString("Tasks processed: %1/%2").arg(listInputFile.count() - this->listInputFile.count()).arg(listInputFile.count()));
         ThumbnailRunnable *task = new ThumbnailRunnable(this->main_window, currentItem, settings->value("Extras/outputSuffix").toString() , this->modeConversion);
-        task->setAutoDelete(false);
-
-        main_window->mpDockThreadsPool->setWindowTitle(QString("Threads actifs: %1").arg(pool->activeThreadCount()));
-        main_window->mpDockThreadsPool->addThumbnailItem(currentItem);
-        connect(task, SIGNAL(started(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadStarted(ThumbnailItem*)), Qt::QueuedConnection);
-        connect(task, SIGNAL(finished(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadFinished(ThumbnailItem*)), Qt::QueuedConnection);
-        connect(task, SIGNAL(finished(ThumbnailItem*)), this, SLOT(success(ThumbnailItem*)), Qt::QueuedConnection);
+        task->setAutoDelete(true);
+        connect(task, SIGNAL(started(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadStarted(ThumbnailItem*)));
+        connect(task, SIGNAL(finished(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadFinished(ThumbnailItem*)));
+        pool->waitForDone();
         pool->start(task);
     }
+
+    this->initSuccessDialog(QLinkedList<ThumbnailItem*> (listInputFile));
+    this->success(listInputFile.first());
 }
 
 /**

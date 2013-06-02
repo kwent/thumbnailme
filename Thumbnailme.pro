@@ -9,8 +9,6 @@ MOC_DIR = ./tmp/moc
 OBJECTS_DIR = ./tmp/objects
 
 RC_FILE += icon.rc
-CONFIG += release
-CONFIG += debug
 
 INCLUDEPATH += mtn\ffmpeg\include
 INCLUDEPATH += mtn\gd-2.0.34-win32\include

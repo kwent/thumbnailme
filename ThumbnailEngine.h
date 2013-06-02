@@ -69,7 +69,7 @@ class ThumbnailEngine : public QObject
 
     private slots:
     void initSuccessDialog(QLinkedList <ThumbnailItem*> listInputFile);
-    void success(ThumbnailItem*item);
+    void success(ThumbnailItem *item);
 
     public:
     QString  absoluteFilePathOutput(QString pathOutput, QString absoluteOutputPath,QString suffix,QString format = QString());
