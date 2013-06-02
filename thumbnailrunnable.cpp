@@ -82,7 +82,6 @@ void ThumbnailRunnable::run()
 
     if(this->modeConversion == ThumbnailEngine::SIMPLEMOD && !main_window->mpDockInputOutput->isSameSourceChecked())
     {
-        qDebug() << "SIMPLE";
         O_outdir = main_window->mpDockInputOutput->getPathOutput().toLocal8Bit();
         parameters.gb_O_outdir = O_outdir.data();
 
@@ -116,7 +115,6 @@ void ThumbnailRunnable::run()
     }
     else
     {
-        qDebug() << "PREVIEW";
         O_outdir = QDir::tempPath().toLocal8Bit();
         parameters.gb_O_outdir = O_outdir.data();
 
@@ -139,12 +137,11 @@ void ThumbnailRunnable::run()
         parameters.gb_E_end = this->item->getEndOmmitSecs();
     }
 
+    parameters.gb_W_overwrite = 1;
+
     const char * logs = process_file();
 
     this->item->logs = QString::fromUtf8(logs);
 
-    qDebug() << "LOGS OUTPUT RUNNABLE" << this->item->logs;
-
-    //printf("RUNNABLE QPRINTABLE: %s", qPrintable(toto));
     emit finished(this->item);
 }

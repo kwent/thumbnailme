@@ -62,7 +62,7 @@
 #include "mtn.h"
 
 /* more global variables */
-char logs[4096];
+char logs[100000];
 char *gb_version = "20121218a(j) copyright (c) 2007-2008 tuit, et al.";
 time_t gb_st_start = 0; // start time of program
 params parameters =
@@ -158,7 +158,7 @@ char *format_size(int64_t size, char *unit)
     static char buf[20]; // FIXME
 
     if (size < 1024) {
-        sprintf(buf, "%"PRId64" %s", size, unit);
+       // sprintf(buf, "%"PRId64" %s", size, unit);
     } else if (size < 1024*1024) {
         sprintf(buf, "%.2f Ki%s", size/1024.0, unit);
     } else if (size < 1024*1024*1024) {
@@ -2357,31 +2357,39 @@ void usage()
 
 void my_log_callback(void *ptr, int level, const char *fmt, va_list vl)
 {
-        va_list vl2;
-        char line[1024];
-        static int print_prefix = 1;
+    va_list vl2;
+    char line[1024];
+    static int print_prefix = 1;
 
+    va_copy(vl2, vl);
+    if(strlen(fmt) > 0)
+    {
         va_copy(vl2, vl);
         av_log_default_callback(ptr, level, fmt, vl);
-        av_log_format_line(ptr, level, fmt, vl, line, sizeof(line), &print_prefix);
+        av_log_format_line(ptr, level, fmt, vl2, line, sizeof(line), &print_prefix);
         va_end(vl2);
-
         sprintf(logs+strlen(logs),line);
+    }
 }
 
 const char *process_file()
 {
     setvbuf(stderr, NULL, _IONBF, 0); // turn off buffering in mingw
 
+    gb_st_start = time(NULL); // program start time
+    srand(gb_st_start);
+
+    // set locale
+    __attribute__((unused)) char *locale = setlocale(LC_ALL, "");
+
     /* init */
     av_register_all();
     // Register all formats and codecs
-    av_log_set_level(AV_LOG_ERROR);
+    av_log_set_level(LOG_INFO);
     // Log Callback
     av_log_set_callback(my_log_callback);
     /* process movie files */
     make_thumbnail(parameters.gb_argv0);
 
-    //sprintf(logs+strlen(logs),"\0");
     return logs;
 }

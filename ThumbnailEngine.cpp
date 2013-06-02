@@ -193,18 +193,18 @@ void ThumbnailEngine::initSuccessDialog(QLinkedList <ThumbnailItem*> listInputFi
 */
 void ThumbnailEngine::deleteTemporaryFiles()
 {
-    QDir tmpFolder = QDir::tempPath();
-    QStringList filters;
-    filters << "*" + DEFAULT_TMP_EXTENSION;
-    tmpFolder.setNameFilters(filters);
+//    QDir tmpFolder = QDir::tempPath();
+//    QStringList filters;
+//    filters << "*" + DEFAULT_TMP_EXTENSION;
+//    tmpFolder.setNameFilters(filters);
 
-    QFileInfoList temporaryFiles = tmpFolder.entryInfoList();
+//    QFileInfoList temporaryFiles = tmpFolder.entryInfoList();
 
-    while (!temporaryFiles.isEmpty())
-    {
-        QFile::remove(temporaryFiles.first().absoluteFilePath());
-        temporaryFiles.removeFirst();
-    }
+//    while (!temporaryFiles.isEmpty())
+//    {
+//        QFile::remove(temporaryFiles.first().absoluteFilePath());
+//        temporaryFiles.removeFirst();
+//    }
 }
 
 /**
