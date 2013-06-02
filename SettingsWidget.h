@@ -63,6 +63,7 @@ class SettingsWidget : public QxtConfigDialog
     void updatePathsFontsIni();
     void updateNeverAskSaveConfigOnExitIni(bool checked);
     void updateNeverLoadLastConfigurationIni(bool checked);
+    void updateCoresCountToProcess(int count);
     void updateOpenGlGraphicViewIni(bool checked);
     void updateOutputPrefixIni(QString suffix);
     void updateProxyIni(bool checked);

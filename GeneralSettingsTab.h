@@ -26,6 +26,7 @@
 #include <QCheckBox>
 #include <QSettings>
 #include <QLineEdit>
+#include <QSpinBox>
 #include "Qtcolorpicker/qtcolorpicker.h"
 
 class GeneralSettingsTab : public QWidget
@@ -49,6 +50,8 @@ class GeneralSettingsTab : public QWidget
     QCheckBox     *neverLoadLastConfiguration;
     QCheckBox     *outputSuffixCheckBox;
     QLineEdit     *outputSuffixLineEdit;
+    QLabel        *threadsCountForProcessingLabel;
+    QSpinBox      *threadsCountForProcessingSpinBox;
 
     private:
     void retranslate();
@@ -59,6 +62,7 @@ class GeneralSettingsTab : public QWidget
     public:
     QColor  getColorBackgroundPreviewGraphicView();
     QString getOutputSuffixLineEdit();
+    int     getCoresCountToProcess();
 
     bool    isActiveOpenGlGraphicViewCheckBoxChecked();
     bool    isAnimatedPixmapChecked();

@@ -54,18 +54,27 @@ GeneralSettingsTab::GeneralSettingsTab()
     /*Animate Pixmap checkbox*/
     animatedPixmapCheckBox = new QCheckBox(tr("Animate pixmap while rendering"));
 
+    /* Core processing */
+    threadsCountForProcessingLabel = new QLabel(this);
+
+    threadsCountForProcessingSpinBox = new QSpinBox(this);
+    threadsCountForProcessingSpinBox->setAccessibleName("TEST");
+    threadsCountForProcessingSpinBox->setMinimum(1);
+    threadsCountForProcessingSpinBox->setMaximum(QThread::idealThreadCount());
     //Mise en place des layout
     generalGroupBox = new QGroupBox(this);
 
     QGridLayout *generalGroupBoxLayout = new QGridLayout(this);
         generalGroupBoxLayout->addWidget(neverAskSaveConfigOnExit,0,0,1,3);
         generalGroupBoxLayout->addWidget(neverLoadLastConfiguration,1,0,1,3);
-        generalGroupBoxLayout->addWidget(outputSuffixCheckBox,2,0);
-        generalGroupBoxLayout->addWidget(outputSuffixLineEdit,2,1);
-        generalGroupBoxLayout->addWidget(animatedPixmapCheckBox,3,0,1,2);
-        generalGroupBoxLayout->addWidget(activeOpenGlGraphicViewCheckBox,4,0,1,2);
-        generalGroupBoxLayout->addWidget(backgroundColorPreviewGraphicViewLabel,5,0);
-        generalGroupBoxLayout->addWidget(backgroundColorPicker,5,1,1,2);
+        generalGroupBoxLayout->addWidget(threadsCountForProcessingLabel,2,0);
+        generalGroupBoxLayout->addWidget(threadsCountForProcessingSpinBox,2,1,1,2);
+        generalGroupBoxLayout->addWidget(outputSuffixCheckBox,3,0);
+        generalGroupBoxLayout->addWidget(outputSuffixLineEdit,3,1);
+        generalGroupBoxLayout->addWidget(animatedPixmapCheckBox,4,0,1,2);
+        generalGroupBoxLayout->addWidget(activeOpenGlGraphicViewCheckBox,5,0,1,2);
+        generalGroupBoxLayout->addWidget(backgroundColorPreviewGraphicViewLabel,6,0);
+        generalGroupBoxLayout->addWidget(backgroundColorPicker,6,1,1,2);
         generalGroupBox->setLayout(generalGroupBoxLayout);
 
    QHBoxLayout *layoutPrincipal = new QHBoxLayout(this);
@@ -106,6 +115,14 @@ void GeneralSettingsTab::initializeWidget()
     if (settings->value("Extras/neverLoadLastConfiguration").toBool())
          neverLoadLastConfiguration->setCheckState(Qt::Checked);
     else neverLoadLastConfiguration->setCheckState(Qt::Unchecked);
+
+    //Core count Initialisation
+    if (settings->value("Extras/coresToProcessCount").isNull())
+    {
+        settings->setValue("Extras/coresToProcessCount",QThread::idealThreadCount());
+        threadsCountForProcessingSpinBox->setValue(QThread::idealThreadCount());
+    }
+    else threadsCountForProcessingSpinBox->setValue(settings->value("Extras/coresToProcessCount").toInt());
 
     //OutputSuffix Initialisation
 	if (!settings->value("Extras/outputSuffix").toString().isEmpty())
@@ -215,6 +232,16 @@ QColor GeneralSettingsTab::getColorBackgroundPreviewGraphicView()
 }
 
 /**
+*@brief  Retourne le nombre de coeurs à utiliser pour traiter les images".
+*@return int - Nombre de coeurs.
+*/
+int GeneralSettingsTab::getCoresCountToProcess()
+{
+    return threadsCountForProcessingSpinBox->value();
+}
+
+
+/**
 *@brief  Fonction annulation - Réaffecte les paramètres d'origine.
 */
 void GeneralSettingsTab::reject()
@@ -241,6 +268,7 @@ void GeneralSettingsTab::retranslate()
     generalGroupBox->setTitle( tr("General Settings") );
     neverAskSaveConfigOnExit->setText( tr("Never ask me to save my configuration on exit") );
     neverLoadLastConfiguration->setText( tr("Don't load the last configuration on startup") );
+    threadsCountForProcessingLabel->setText( tr("Maximum threads count for processing") + " : " );
     backgroundColorPreviewGraphicViewLabel->setText( tr("Background color of preview window") + " : " );
     outputSuffixCheckBox->setText( tr("Output suffix:") );
     activeOpenGlGraphicViewCheckBox->setText( tr("Activate openGL to preview thumbnails") );

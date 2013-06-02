@@ -106,6 +106,8 @@ void SettingsWidget::applySettings()
 
         updateNeverLoadLastConfigurationIni(generalTab->isNeverLoadLastConfigurationChecked());
 
+        updateCoresCountToProcess(generalTab->getCoresCountToProcess());
+
         if (generalTab->isOutputSuffixCheckBoxChecked())
             updateOutputPrefixIni(generalTab->getOutputSuffixLineEdit());
         else updateOutputPrefixIni(QString());
@@ -215,6 +217,17 @@ void SettingsWidget::updateNeverLoadLastConfigurationIni(bool checked)
          settings->setValue("neverLoadLastConfiguration","true");
     else settings->setValue("neverLoadLastConfiguration","false");
 
+    settings->endGroup();
+}
+
+/**
+*@brief Vrai: Le chargement du fichier de configuration de la dernière session ne sera pas chargé.
+*@param int    Nombre de coeurs.
+*/
+void SettingsWidget::updateCoresCountToProcess(int count)
+{
+    settings->beginGroup("Extras");
+    settings->setValue("coresToProcessCount",count);
     settings->endGroup();
 }
 

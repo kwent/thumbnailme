@@ -42,10 +42,10 @@ ThumbnailEngine::ThumbnailEngine(MainWindow *main_window)
 {
     this->main_window = main_window;
     this->currentItem = 0;
-    pool = new QThreadPool(this);
-    pool->setMaxThreadCount(QThread::idealThreadCount());
     settings = new QSettings(QSettings::IniFormat,DEFAULT_PATH_INI,APPLICATION_NAME,DEFAULT_FILE_INI,this);
-    connect( this, SIGNAL(itemTooShortDuration (ThumbnailItem *)), this , SLOT(successDialogItemRemove(ThumbnailItem *)) );
+    pool = new QThreadPool(this);
+    pool->setMaxThreadCount(settings->value("Extras/coresToProcessCount").toInt());
+    //connect( this, SIGNAL(itemTooShortDuration (ThumbnailItem *)), this , SLOT(successDialogItemRemove(ThumbnailItem *)) );
 }
 
 /**
@@ -134,17 +134,18 @@ void ThumbnailEngine::launchProcess(QLinkedList <ThumbnailItem*> listInputFile)
     {
         qApp->processEvents();
         currentItem = this->listInputFile.takeFirst();
-        main_window->mpDockThreadsPool->setWindowTitle(QString("Tasks processed: %1/%2").arg(listInputFile.count() - this->listInputFile.count()).arg(listInputFile.count()));
+        main_window->mpDockThreadsPool->setWindowTitle(QString("Tasks processed: %1/%2 - Active threads : %3").arg(listInputFile.count() - this->listInputFile.count()).arg(listInputFile.count()).arg(pool->activeThreadCount()));
         ThumbnailRunnable *task = new ThumbnailRunnable(this->main_window, currentItem, settings->value("Extras/outputSuffix").toString() , this->modeConversion);
         task->setAutoDelete(true);
         connect(task, SIGNAL(started(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadStarted(ThumbnailItem*)));
         connect(task, SIGNAL(finished(ThumbnailItem*)), main_window->mpDockThreadsPool, SLOT(threadFinished(ThumbnailItem*)));
-        pool->waitForDone();
+        //pool->waitForDone();
         pool->start(task);
     }
 
     while(true)
     {
+        qApp->processEvents();
         if(pool->activeThreadCount() == 0)
         {
             this->initSuccessDialog(QLinkedList<ThumbnailItem*> (listInputFile));

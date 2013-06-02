@@ -31,7 +31,7 @@
 extern "C"
  {
  extern struct params parameters;
- extern char logs[100000];
+ extern char logs[1000000];
  extern const char* process_file();
  }
 #endif

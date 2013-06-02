@@ -62,7 +62,7 @@
 #include "mtn.h"
 
 /* more global variables */
-char logs[100000];
+char logs[1000000];
 char *gb_version = "20121218a(j) copyright (c) 2007-2008 tuit, et al.";
 params parameters =
         {
