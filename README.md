@@ -134,15 +134,15 @@
 
 - **EN** - ENGLISH - [Rousseau Quentin](mailto:quentin.rousseau@thumbnailme.com)
 - **FR** - FRENCH - [Rousseau Quentin](mailto:quentin.rousseau@thumbnailme.com)
-- **CZ** - CZECH - [Jiri Kol](maav@seznam.cz)
-- **DE** - DEUTSCH - [Stephan Pfetten](stephan_de@yahoo.com)
-- **ES** - ESPAGNOL - [Antonio José Berenguer](anbever@gmail.com) 
-- **HR** - CROATIAN - [Ivan Knez](kivan346@gmail.com)
-- **HU** - HUNGARIAN - [ZityiSoft Team](zityisoft@gmail.com)
-- **IT** - ITALIAN - [Samuele Pilleri](sammypillo96@gmail.com)
-- **PT** - PORTUGESE - [Da Silva Philippe](contact@philippedasilva.fr)
-- **CN** - CHINESE - [Qinlin Zha](quilin.zha@telecom-bretagne.eu)
-- **RU** - RUSSIAN - [Dmitry Bochkov](translation@ukr.net)
+- **CZ** - CZECH - [Jiri Kol](mailto:maav@seznam.cz)
+- **DE** - DEUTSCH - [Stephan Pfetten](mailto:stephan_de@yahoo.com)
+- **ES** - ESPAGNOL - [Antonio José Berenguer](mailto:anbever@gmail.com) 
+- **HR** - CROATIAN - [Ivan Knez](mailto:kivan346@gmail.com)
+- **HU** - HUNGARIAN - [ZityiSoft Team](mailto:zityisoft@gmail.com)
+- **IT** - ITALIAN - [Samuele Pilleri](mailto:sammypillo96@gmail.com)
+- **PT** - PORTUGESE - [Da Silva Philippe](mailto:contact@philippedasilva.fr)
+- **CN** - CHINESE - [Qinlin Zha](mailto:quilin.zha@telecom-bretagne.eu)
+- **RU** - RUSSIAN - [Dmitry Bochkov](mailto:translation@ukr.net)
 
 # Licence
 
