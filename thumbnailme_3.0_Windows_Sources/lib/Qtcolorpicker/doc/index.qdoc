@@ -1,0 +1,39 @@
+/*!
+	\page index.html
+	\title Color Picker
+
+    	\section1 Description
+	
+            A widget that lets the user select colors from a grid of
+            predefined colors.
+        
+
+	
+        
+
+    	
+	\section1 Classes
+	    \list
+	 \i  QtColorPicker\endlist
+	
+    
+
+    	
+
+    	
+    		\section1 Tested platforms
+		\list
+		\i Qt 4.4, 4.5 / Windows XP / MSVC.NET 2005
+		    \i Qt 4.4, 4.5 / Linux / gcc
+		    \i Qt 4.4, 4.5 / MacOS X 10.5 / gcc
+		    \endlist
+
+    	
+
+	
+		\section1 Screenshots
+
+    		\img colorpicker1.png
+		    \img colorpicker2.png
+		    
+	*/

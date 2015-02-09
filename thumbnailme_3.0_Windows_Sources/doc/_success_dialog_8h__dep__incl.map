@@ -1,0 +1,31 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$_main_window_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="2104,83,2371,112"/>
+<area shape="rect" id="node57" href="$_thumbnail_engine_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="3703,160,3996,189"/>
+<area shape="rect" id="node73" href="$_success_dialog_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="3237,83,3531,112"/>
+<area shape="rect" id="node5" href="$_dock_conf_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="2828,160,3079,189"/>
+<area shape="rect" id="node10" href="$_dock_input_output_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="3103,160,3393,189"/>
+<area shape="rect" id="node15" href="$_dock_styles_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="3417,160,3679,189"/>
+<area shape="rect" id="node20" href="$_image_shack_login_widget_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="352,160,691,189"/>
+<area shape="rect" id="node25" href="$_image_shack_upload_widget_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="381,237,741,267"/>
+<area shape="rect" id="node27" href="$_ini_manager_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1337,160,1593,189"/>
+<area shape="rect" id="node32" href="$_settings_widget_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="649,315,932,344"/>
+<area shape="rect" id="node51" href="$_preview_graphic_view_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1617,160,1927,189"/>
+<area shape="rect" id="node62" href="$_verbose_window_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1951,160,2239,189"/>
+<area shape="rect" id="node68" href="$main_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="2263,160,2497,189"/>
+<area shape="rect" id="node70" href="$_main_window_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="2521,160,2804,189"/>
+<area shape="rect" id="node7" href="$_dock_conf_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="2821,237,3085,267"/>
+<area shape="rect" id="node13" href="$_dock_input_output_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="3109,237,3413,267"/>
+<area shape="rect" id="node18" href="$_dock_styles_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="3437,237,3712,267"/>
+<area shape="rect" id="node23" href="$_image_shack_login_widget_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="5,237,357,267"/>
+<area shape="rect" id="node30" href="$_general_settings_tab_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1523,237,1829,267"/>
+<area shape="rect" id="node39" href="$_languages_settings_tab_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="840,237,1165,267"/>
+<area shape="rect" id="node44" href="$_network_settings_tab_8h.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1189,237,1499,267"/>
+<area shape="rect" id="node49" href="$_ini_manager_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1853,237,2123,267"/>
+<area shape="rect" id="node37" href="$_general_settings_tab_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1665,315,1988,344"/>
+<area shape="rect" id="node35" href="$_settings_widget_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="643,392,939,421"/>
+<area shape="rect" id="node42" href="$_languages_settings_tab_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="956,315,1295,344"/>
+<area shape="rect" id="node47" href="$_network_settings_tab_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="1319,315,1641,344"/>
+<area shape="rect" id="node54" href="$_preview_graphic_view_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="2147,237,2472,267"/>
+<area shape="rect" id="node60" href="$_thumbnail_engine_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="3736,237,4043,267"/>
+<area shape="rect" id="node65" href="$_verbose_window_8cpp.html" title="Thumbnail me 3.0 Thumbnail me is a user interface for Movie thumbnailer. Generate thumbnails from any..." alt="" coords="2496,237,2797,267"/>
+</map>

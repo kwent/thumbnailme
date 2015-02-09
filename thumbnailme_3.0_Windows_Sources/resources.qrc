@@ -1,0 +1,61 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sprites/apps.png</file>
+        <file>sprites/deutsch.png</file>
+        <file>sprites/english.png</file>
+        <file>sprites/fonts.png</file>
+        <file>sprites/french.png</file>
+        <file>sprites/openrecent.png</file>
+        <file>sprites/picture clipping.png</file>
+        <file>sprites/quit.png</file>
+        <file>sprites/save.png</file>
+        <file>sprites/settings.png</file>
+        <file>sprites/spanish.png</file>
+        <file>sprites/thumbnailer.png</file>
+        <file>sprites/recycle-bin-full.png</file>
+        <file>sprites/openfolder.png</file>
+        <file>sprites/languages.png</file>
+        <file>sprites/network-driver-connected.png</file>
+        <file>sprites/run.png</file>
+        <file>sprites/print.png</file>
+        <file>sprites/zoomIn.png</file>
+        <file>sprites/zoomOut.png</file>
+        <file>sprites/add.png</file>
+        <file>sprites/remove.png</file>
+        <file>sprites/help.png</file>
+        <file>sprites/uploading.gif</file>
+        <file>sprites/cancel.png</file>
+        <file>sprites/preview.png</file>
+        <file>sprites/donate.png</file>
+        <file>sprites/openconf.png</file>
+        <file>sprites/imageShack.png</file>
+        <file>sprites/thumbnails-folder.png</file>
+        <file>sprites/uploading-ImageShack.gif</file>
+        <file>system_translators/qt_fr.qm</file>
+        <file>system_translators/qt_de.qm</file>
+        <file>system_translators/qt_es.qm</file>
+        <file>sprites/refresh_fonts.gif</file>
+        <file>sprites/columns.png</file>
+        <file>sprites/row.png</file>
+        <file>sprites/imageShack_frog.png</file>
+        <file>sprites/splash.png</file>
+        <file>sprites/about.png</file>
+        <file>sprites/dutch.png</file>
+        <file>system_translators/qt_nl.qm</file>
+        <file>system_translators/qt_it.qm</file>
+        <file>sprites/italian.png</file>
+        <file>sprites/czech.png</file>
+        <file>sprites/arrow_down.png</file>
+        <file>sprites/arrow_up.png</file>
+        <file>sprites/hungarian.png</file>
+        <file>system_translators/qt_hu.qm</file>
+        <file>sprites/croatian.png</file>
+        <file>sprites/portugese.png</file>
+        <file>system_translators/qt_pt.qm</file>
+        <file>sprites/text clipping.png</file>
+        <file>system_translators/qt_cn.qm</file>
+        <file>sprites/chinese.png</file>
+        <file>sprites/russian.png</file>
+        <file>system_translators/qt_ru.qm</file>
+    </qresource>
+</RCC>

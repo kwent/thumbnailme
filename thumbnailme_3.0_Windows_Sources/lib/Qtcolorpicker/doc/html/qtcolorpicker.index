@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE QDOCINDEX>
+<INDEX url="" title="Qt Solutions: Color Picker Documentation" version="">
+    <namespace access="public" threadsafety="unspecified" status="commendable" name="" href="" location="" module="">
+        <class access="public" threadsafety="unspecified" status="commendable" name="QtColorPicker" href="qtcolorpicker.html" location="qtcolorpicker.h" bases="QPushButton" module="">
+            <property access="public" threadsafety="unspecified" status="commendable" name="colorDialog" fullname="QtColorPicker::colorDialog" href="qtcolorpicker.html#colorDialog-prop" location="qtcolorpicker.h" type="bool">
+                <getter name="colorDialogEnabled"/>
+                <setter name="setColorDialogEnabled"/>
+            </property>
+            <function access="public" threadsafety="unspecified" status="commendable" name="QtColorPicker" fullname="QtColorPicker::QtColorPicker" href="qtcolorpicker.html#QtColorPicker" location="qtcolorpicker.h" virtual="non" meta="constructor" const="false" static="false" overload="false" type="" signature="QtColorPicker(QWidget * parent, int cols, bool enableColorDialog)">
+                <parameter left="QWidget *" right="" name="parent" default="0"/>
+                <parameter left="int" right="" name="cols" default="-1"/>
+                <parameter left="bool" right="" name="enableColorDialog" default="true"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="~QtColorPicker" fullname="QtColorPicker::~QtColorPicker" href="qtcolorpicker.html#dtor.QtColorPicker" location="qtcolorpicker.h" virtual="non" meta="destructor" const="false" static="false" overload="false" type="" signature="~QtColorPicker()"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="insertColor" fullname="QtColorPicker::insertColor" href="qtcolorpicker.html#insertColor" location="qtcolorpicker.h" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="insertColor(const QColor &amp; color, const QString &amp; text, int index)">
+                <parameter left="const QColor &amp;" right="" name="color" default=""/>
+                <parameter left="const QString &amp;" right="" name="text" default="QString::null"/>
+                <parameter left="int" right="" name="index" default="-1"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="currentColor" fullname="QtColorPicker::currentColor" href="qtcolorpicker.html#currentColor" location="qtcolorpicker.h" virtual="non" meta="plain" const="true" static="false" overload="false" type="QColor" signature="currentColor() const"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="color" fullname="QtColorPicker::color" href="qtcolorpicker.html#color" location="qtcolorpicker.h" virtual="non" meta="plain" const="true" static="false" overload="false" type="QColor" signature="color(int index) const">
+                <parameter left="int" right="" name="index" default=""/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="setColorDialogEnabled" fullname="QtColorPicker::setColorDialogEnabled" href="qtcolorpicker.html#colorDialog-prop" location="qtcolorpicker.cpp" virtual="non" meta="plain" const="false" static="false" overload="false" associated-property="colorDialog" type="void" signature="setColorDialogEnabled(bool enabled)">
+                <parameter left="bool" right="" name="enabled" default=""/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="colorDialogEnabled" fullname="QtColorPicker::colorDialogEnabled" href="qtcolorpicker.html#colorDialog-prop" location="qtcolorpicker.cpp" virtual="non" meta="plain" const="true" static="false" overload="false" associated-property="colorDialog" type="bool" signature="colorDialogEnabled() const"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="setStandardColors" fullname="QtColorPicker::setStandardColors" href="qtcolorpicker.html#setStandardColors" location="qtcolorpicker.h" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="setStandardColors()"/>
+            <function access="public" threadsafety="unspecified" status="commendable" name="getColor" fullname="QtColorPicker::getColor" href="qtcolorpicker.html#getColor" location="qtcolorpicker.h" virtual="non" meta="plain" const="false" static="true" overload="false" type="QColor" signature="getColor(const QPoint &amp; point, bool allowCustomColors)">
+                <parameter left="const QPoint &amp;" right="" name="point" default=""/>
+                <parameter left="bool" right="" name="allowCustomColors" default="true"/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="setCurrentColor" fullname="QtColorPicker::setCurrentColor" href="qtcolorpicker.html#setCurrentColor" location="qtcolorpicker.h" virtual="non" meta="slot" const="false" static="false" overload="false" type="void" signature="setCurrentColor(const QColor &amp; color)">
+                <parameter left="const QColor &amp;" right="" name="color" default=""/>
+            </function>
+            <function access="public" threadsafety="unspecified" status="commendable" name="colorChanged" fullname="QtColorPicker::colorChanged" href="qtcolorpicker.html#colorChanged" location="qtcolorpicker.h" virtual="non" meta="signal" const="false" static="false" overload="false" type="void" signature="colorChanged(const QColor &amp; color)">
+                <parameter left="const QColor &amp;" right="" name="color" default=""/>
+            </function>
+        </class>
+        <page access="public" status="commendable" name="index.html" href="index.html" subtype="page" title="Color Picker" fulltitle="Color Picker" subtitle="" location="index.qdoc">
+            <contents name="description" title="Description" level="1"/>
+            <contents name="classes" title="Classes" level="1"/>
+            <contents name="tested-platforms" title="Tested platforms" level="1"/>
+            <contents name="screenshots" title="Screenshots" level="1"/>
+        </page>
+    </namespace>
+</INDEX>

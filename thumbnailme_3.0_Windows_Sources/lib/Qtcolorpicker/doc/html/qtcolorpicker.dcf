@@ -1,0 +1,25 @@
+<!DOCTYPE DCF>
+<DCF ref="index.html" icon="qtcolorpicker.png" imagedir="../../gif" title="Qt Solutions: Color Picker Documentation">
+<section ref="classes.html" title="Classes">
+    <section ref="qtcolorpicker.html" title="QtColorPicker Class Reference">
+        <keyword ref="qtcolorpicker.html">QtColorPicker</keyword>
+        <keyword ref="qtcolorpicker.html#colorDialog-prop">colorDialog</keyword>
+        <keyword ref="qtcolorpicker.html#colorDialog-prop">colorDialogEnabled</keyword>
+        <keyword ref="qtcolorpicker.html#colorDialog-prop">setColorDialogEnabled</keyword>
+        <keyword ref="qtcolorpicker.html#color">color</keyword>
+        <keyword ref="qtcolorpicker.html#colorChanged">colorChanged</keyword>
+        <keyword ref="qtcolorpicker.html#currentColor">currentColor</keyword>
+        <keyword ref="qtcolorpicker.html#getColor">getColor</keyword>
+        <keyword ref="qtcolorpicker.html#insertColor">insertColor</keyword>
+        <keyword ref="qtcolorpicker.html#setCurrentColor">setCurrentColor</keyword>
+        <keyword ref="qtcolorpicker.html#setStandardColors">setStandardColors</keyword>
+        <section ref="qtcolorpicker-members.html" title="List of all members"/>
+    </section>
+</section>
+<section ref="overviews.html" title="Overviews">
+    <section ref="index.html" title="Color Picker">
+        <keyword ref="index.html">Color Picker</keyword>
+    </section>
+</section>
+<section ref="examples.html" title="Tutorial &amp; Examples"/>
+</DCF>

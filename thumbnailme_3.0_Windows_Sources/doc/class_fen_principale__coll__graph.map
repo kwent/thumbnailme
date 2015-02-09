@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$class_image_shack_login_widget.html" title="ImageShackLoginWidget" alt="" coords="7,21,172,51"/>
+<area shape="rect" id="node4" href="$class_dock_styles.html" title="DockStyles" alt="" coords="45,75,133,104"/>
+<area shape="rect" id="node6" href="$class_preview_graphic_view.html" title="PreviewGraphicView" alt="" coords="20,128,159,157"/>
+<area shape="rect" id="node8" href="$class_help_widget.html" title="HelpWidget" alt="" coords="45,181,133,211"/>
+<area shape="rect" id="node10" href="$class_thumbnail_engine.html" title="ThumbnailEngine" alt="" coords="29,235,149,264"/>
+<area shape="rect" id="node12" href="$class_dock_input_output.html" title="DockInputOutput" alt="" coords="31,288,148,317"/>
+<area shape="rect" id="node14" href="$class_verbose_window.html" title="VerboseWindow" alt="" coords="32,341,147,371"/>
+<area shape="rect" id="node16" href="$class_dock_conf.html" title="DockConf" alt="" coords="51,395,128,424"/>
+<area shape="rect" id="node18" href="$class_settings_widget.html" title="SettingsWidget" alt="" coords="35,448,144,477"/>
+<area shape="rect" id="node20" href="$class_success_dialog.html" title="SuccessDialog" alt="" coords="35,501,144,531"/>
+<area shape="rect" id="node22" href="$class_ini_manager.html" title="IniManager" alt="" coords="47,555,132,584"/>
+<area shape="rect" id="node24" href="$class_dock_time_line.html" title="DockTimeLine" alt="" coords="37,608,141,637"/>
+</map>

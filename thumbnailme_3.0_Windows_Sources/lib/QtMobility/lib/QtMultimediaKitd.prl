@@ -1,0 +1,5 @@
+QMAKE_PRL_BUILD_DIR = D:/Thumbnail/Ressources/libraries/qt-mobility-opensource-src-1.2.0/src/multimedia
+QMAKE_PRO_INPUT = multimedia.pro
+QMAKE_PRL_TARGET = QtMultimediaKitd
+QMAKE_PRL_CONFIG = incredibuild_xge lex yacc warn_on debug uic resources incremental_off windows debug DebugBuild Debug build_pass qt warn_on link_prl copy_dir_files debug_and_release debug_and_release_target precompile_header debug shared stl exceptions rtti mmx 3dnow sse sse2 debug DebugBuild Debug build_pass debug debug_and_release build_all middleware create_prl debug DebugBuild Debug build_pass no_autoqmake dll shared moc thread opengl
+QMAKE_PRL_VERSION = 1

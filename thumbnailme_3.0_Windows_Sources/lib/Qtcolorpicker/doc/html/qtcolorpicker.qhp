@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+    <namespace>com.nokia.qtsolutions.qtcolorpicker_2.6</namespace>
+    <virtualFolder>qdoc</virtualFolder>
+    <customFilter name="Qt Solutions: Color Picker">
+        <filterAttribute>qt</filterAttribute>
+        <filterAttribute>qtcolorpicker</filterAttribute>
+        <filterAttribute>solutions</filterAttribute>
+    </customFilter>
+    <filterSection>
+        <filterAttribute>qt</filterAttribute>
+        <filterAttribute>qtcolorpicker</filterAttribute>
+        <filterAttribute>solutions</filterAttribute>
+        <toc>
+            <section ref="index.html" title="Qt Solutions: Color Picker Documentation">
+                <section ref="index.html" title="Color Picker"/>
+            </section>
+        </toc>
+        <keywords>
+            <keyword name="Color Picker" id="Color Picker" ref="index.html"/>
+            <keyword name="QtColorPicker" id="QtColorPicker" ref="qtcolorpicker.html"/>
+            <keyword name="color" id="QtColorPicker::color" ref="qtcolorpicker.html#color"/>
+            <keyword name="colorChanged" id="QtColorPicker::colorChanged" ref="qtcolorpicker.html#colorChanged"/>
+            <keyword name="colorDialog" id="QtColorPicker::colorDialog" ref="qtcolorpicker.html#colorDialog-prop"/>
+            <keyword name="colorDialogEnabled" id="QtColorPicker::colorDialogEnabled" ref="qtcolorpicker.html#colorDialog-prop"/>
+            <keyword name="currentColor" id="QtColorPicker::currentColor" ref="qtcolorpicker.html#currentColor"/>
+            <keyword name="getColor" id="QtColorPicker::getColor" ref="qtcolorpicker.html#getColor"/>
+            <keyword name="insertColor" id="QtColorPicker::insertColor" ref="qtcolorpicker.html#insertColor"/>
+            <keyword name="setColorDialogEnabled" id="QtColorPicker::setColorDialogEnabled" ref="qtcolorpicker.html#colorDialog-prop"/>
+            <keyword name="setCurrentColor" id="QtColorPicker::setCurrentColor" ref="qtcolorpicker.html#setCurrentColor"/>
+            <keyword name="setStandardColors" id="QtColorPicker::setStandardColors" ref="qtcolorpicker.html#setStandardColors"/>
+            <keyword name="~QtColorPicker" id="QtColorPicker::~QtColorPicker" ref="qtcolorpicker.html#dtor.QtColorPicker"/>
+        </keywords>
+        <files>
+            <file>index.html</file>
+            <file>images/colorpicker2.png</file>
+            <file>qtcolorpicker.html</file>
+            <file>images/colorpicker1.png</file>
+            <file>images/colorpicker2.png</file>
+            <file>classic.css</file>
+            <file>images/qt-logo.png</file>
+            <file>images/colorpicker1.png</file>
+        </files>
+    </filterSection>
+</QtHelpProject>
